@@ -14,6 +14,7 @@ int main(int argc, char **argv) {
 	cout << "Hello World!!" << endl;
 
 	mainMouse(argc, argv);
+	//mainQuadrado();
 
 	return (0);
 }
