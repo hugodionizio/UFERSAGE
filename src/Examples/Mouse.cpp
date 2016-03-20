@@ -98,7 +98,9 @@ void init(void) {
 // glutKeyboardFunc
 
 void testeMouse(int button, int state, int x, int y) {
+
 	if (button == GLUT_RIGHT_BUTTON)
+//		cout << "Testando botões do mouse..." << endl;
 		if(state == GLUT_UP) {
 			newDisplay();
 			glutPostRedisplay();

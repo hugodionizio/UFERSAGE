@@ -9,7 +9,7 @@
 #define TRABALHOUNIDI_QUADRADO_QUADRADO_H_
 
 
-void mainQuadrado(int, char **);
+void mainQuadradoTrabalho(int, char **);
 
 
 #endif /* TRABALHOUNIDI_QUADRADO_QUADRADO_H_ */
