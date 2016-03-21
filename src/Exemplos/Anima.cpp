@@ -43,12 +43,13 @@ void DesenhaAnima(void) {
 
 	// Desenha um quadrado preenchido com a cor corrente
 	glBegin(GL_QUADS);
-	glVertex2i(x1, y1 + rsize);
-	glVertex2i(x1, y1);
-	// Especifica que a cor corrente � azul
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex2i(x1 + rsize, y1);
-	glVertex2i(x1 + rsize, y1 + rsize);
+		glVertex2i(x1, y1 + rsize);
+		glVertex2i(x1, y1);
+
+		// Especifica que a cor corrente � azul
+		glColor3f(0.0f, 0.0f, 1.0f);
+		glVertex2i(x1 + rsize, y1);
+		glVertex2i(x1 + rsize, y1 + rsize);
 	glEnd();
 
 	// Executa os comandos OpenGL
