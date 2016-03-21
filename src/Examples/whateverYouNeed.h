@@ -26,7 +26,7 @@
 # include <GL/glut.h>
 # include <GL/glui.h>
 //# include <GL/internal/glcore.h>
-
+# include <math.h>
 #endif
 
 #endif /* SRC_EXAMPLES_WHATEVERYOUNEED_H_ */

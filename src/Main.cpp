@@ -31,7 +31,6 @@ int main(int argc, char **argv) {
 
 	std::cout << "Hello World!!" << std::endl;
 	std::cout << "Hello OpenGL!" << std::endl;
-	std::cout << "Vortex..." << std::endl;
 
 //	mainExemploCallbacks(argc, argv);
 //	mainChunkOpenGL(argc, argv);
@@ -41,6 +40,10 @@ int main(int argc, char **argv) {
 //	mainPolys(argc, argv);
 //	mainVarray(argc, argv);
 //	mainMVArray(argc, argv);
+//	mainCube(argc, argv);
+//	mainModel(argc, argv);
+	mainClip(argc, argv);
+
 //	mainPrimeiroPrograma(argc, argv);
 //	mainQuadrado(argc, argv);
 //	mainAnima(argc, argv);
@@ -50,7 +53,7 @@ int main(int argc, char **argv) {
 //	mainIluminacao(argc, argv);
 //	mainMouse(argc, argv);
 
-	mainVortex(argc, argv);
+//	mainVortex(argc, argv);
 
 	return (0);
 }

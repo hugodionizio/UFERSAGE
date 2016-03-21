@@ -16,6 +16,9 @@ int mainLines(int argc, char** argv);
 int mainPolys(int argc, char** argv);
 int mainVarray(int argc, char **argv);
 int mainMVArray(int argc, char **argv);
+int mainCube(int argc, char **argv);
+int mainModel(int argc, char **argv);
+int mainClip(int argc, char **argv);
 
 int mainVortex(int argc, char **argv);
 
