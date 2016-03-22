@@ -34,6 +34,7 @@ int main(int argc, char **argv) {
 
 //	mainExemploCallbacks(argc, argv);
 //	mainChunkOpenGL(argc, argv);
+
 //	mainHello(argc, argv);
 //	mainDouble(argc, argv);
 //	mainLines(argc, argv);
@@ -42,7 +43,15 @@ int main(int argc, char **argv) {
 //	mainMVArray(argc, argv);
 //	mainCube(argc, argv);
 //	mainModel(argc, argv);
-	mainClip(argc, argv);
+//	mainClip(argc, argv);
+//	mainPlanet(argc, argv);
+//	mainRobot(argc, argv);
+//	mainUnProject(argc, argv);
+//	mainSmooth(argc, argv);
+//	mainLight(argc, argv);
+//	mainMoveLight(argc, argv);
+//	mainMaterial(argc, argv);
+	mainColorMat(argc, argv);
 
 //	mainPrimeiroPrograma(argc, argv);
 //	mainQuadrado(argc, argv);

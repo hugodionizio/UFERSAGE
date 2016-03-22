@@ -34,4 +34,6 @@ int mainMVArray(int argc, char **argv) {
 
 //	void glMultiDrawElements(unsigned int, int *, unsigned int, const void * *, int)
 	glMultiDrawElements(mode, count2, type, indices, primcount);
+
+	return 0;
 }

@@ -15,7 +15,7 @@
 
 using namespace std;
 
-void display(void) {
+void displayMouse(void) {
 	float i = 0;
 	float R = 1;
 	/*
@@ -48,7 +48,7 @@ void display(void) {
 	glutSwapBuffers();
 }
 
-void newDisplay(void) {
+void newDisplayMouse(void) {
 	float i = 0;
 	float R = 1;
 	/*
@@ -81,7 +81,7 @@ void newDisplay(void) {
 	glutSwapBuffers();
 }
 
-void init(void) {
+void initMouse(void) {
 	/* selecionar cor de limpeza (fundo)
 	 *
 	 */
@@ -102,7 +102,7 @@ void testeMouse(int button, int state, int x, int y) {
 	if (button == GLUT_RIGHT_BUTTON)
 //		cout << "Testando botões do mouse..." << endl;
 		if(state == GLUT_UP) {
-			newDisplay();
+			newDisplayMouse();
 			glutPostRedisplay();
 		}
 }
@@ -121,9 +121,9 @@ int mainMouse(int argc, char** argv) {
 	glutInitWindowSize(250, 250);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("Olá OpenGL");
-	init();
+	initMouse();
 	glutMouseFunc(testeMouse);
-	glutDisplayFunc(display);
+	glutDisplayFunc(displayMouse);
 	glutMainLoop();
 	return 0; /* ISO C requer "main" para retornar int */
 }
