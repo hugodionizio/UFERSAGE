@@ -1,10 +1,25 @@
-#include <vector>
+#include <AL/al.h>
+#include <AL/alc.h>
 #include <time.h>
-#include <GL/glut.h>
-#include <al.h>
-#include <alc.h>
-
-#include <Windows.h>
+#ifdef WINDOWS
+# include <windows.h>
+# include <gl/wglew.h>
+# include <gl/glut.h>
+# include <gl/glui.h>
+#else
+# include <GL/glew.h>
+# include <GL/freeglut.h>
+# include <GL/gl.h>
+# include <GL/glext.h>
+# include <GL/glu.h>
+# include <GL/glut.h>
+# include <GL/glui.h>
+# include <math.h>
+#endif
+#include <cstdio>
+#include <cstdlib>
+#include <iterator>
+#include <vector>
 
 class Simon
 {

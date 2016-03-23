@@ -32,6 +32,7 @@ int main(int argc, char **argv) {
 	std::cout << "Hello World!!" << std::endl;
 	std::cout << "Hello OpenGL!" << std::endl;
 
+// Unidade I
 //	mainExemploCallbacks(argc, argv);
 //	mainChunkOpenGL(argc, argv);
 
@@ -51,7 +52,7 @@ int main(int argc, char **argv) {
 //	mainLight(argc, argv);
 //	mainMoveLight(argc, argv);
 //	mainMaterial(argc, argv);
-	mainColorMat(argc, argv);
+//	mainColorMat(argc, argv);
 
 //	mainPrimeiroPrograma(argc, argv);
 //	mainQuadrado(argc, argv);
@@ -62,6 +63,19 @@ int main(int argc, char **argv) {
 //	mainIluminacao(argc, argv);
 //	mainMouse(argc, argv);
 
+// Unidade II
+//	mainAlpha(argc, argv);
+//	mainAlpha3D(argc, argv);
+//	mainAARGB(argc, argv);
+//	mainAAIndex(argc, argv);
+//	mainFog(argc, argv);
+//	mainFogIndex(argc, argv);
+//	mainPolyOff(argc, argv);
+//	mainTorus(argc, argv);
+//	mainList(argc, argv);
+//	mainStroke(argc, argv);
+
+//	Adicionais
 //	mainVortex(argc, argv);
 
 	return (0);

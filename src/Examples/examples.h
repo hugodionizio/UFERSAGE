@@ -8,26 +8,38 @@
 #ifndef SRC_EXAMPLES_EXAMPLES_H_
 #define SRC_EXAMPLES_EXAMPLES_H_
 
-
+// Unidade I
 int mainChunkOpenGL(int, char**);
 int mainHello(int, char**);
-int mainDouble(int argc, char** argv);
-int mainLines(int argc, char** argv);
-int mainPolys(int argc, char** argv);
-int mainVarray(int argc, char **argv);
-int mainMVArray(int argc, char **argv);
-int mainCube(int argc, char **argv);
-int mainModel(int argc, char **argv);
-int mainClip(int argc, char **argv);
-int mainPlanet(int argc, char** argv);
-int mainRobot(int argc, char** argv);
-int mainUnProject(int argc, char** argv);
-int mainSmooth(int argc, char** argv);
-int mainLight(int argc, char** argv);
-int mainMoveLight(int argc, char** argv);
-int mainMaterial(int argc, char** argv);
-int mainColorMat(int argc, char** argv);
+int mainDouble(int, char**);
+int mainLines(int, char**);
+int mainPolys(int, char**);
+int mainVarray(int, char**);
+int mainMVArray(int, char**);
+int mainCube(int, char**);
+int mainModel(int, char**);
+int mainClip(int, char**);
+int mainPlanet(int, char**);
+int mainRobot(int, char**);
+int mainUnProject(int, char**);
+int mainSmooth(int, char**);
+int mainLight(int, char**);
+int mainMoveLight(int, char**);
+int mainMaterial(int, char**);
+int mainColorMat(int, char**);
 
-int mainVortex(int argc, char **argv);
+// Unidade II
+int mainAlpha(int, char**);
+int mainAlpha3D(int, char**);
+int mainAARGB(int, char**);
+int mainAAIndex(int, char**);
+int mainFog(int, char**);
+int mainFogIndex(int, char**);
+int mainPolyOff(int, char**);
+int mainTorus(int, char**);
+int mainList(int, char**);
+int mainStroke(int, char**);
+
+int mainVortex(int, char**);
 
 #endif /* SRC_EXAMPLES_EXAMPLES_H_ */
