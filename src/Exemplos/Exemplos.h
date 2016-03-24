@@ -8,7 +8,14 @@
 #ifndef EXEMPLOS_MOUSE_H_
 #define EXEMPLOS_MOUSE_H_
 
-int mainExemploCallbacks(int argc, char** argv);
+// Exercícios
+int mainAula01(int, char**);
+int mainMouse(int, char **);
+
+// Exemplo (Professor Leandro Souza)
+int mainExemploCallbacks(int, char**);
+
+// Exemplos (Manssour)
 int mainPrimeiroPrograma(int, char **);
 int mainQuadrado(int, char **);
 int mainAnima(int, char **);
@@ -17,7 +24,5 @@ int mainMenu(int, char **);
 int mainTeaPot3D(int, char **);
 int mainIluminacao(int, char **);
 
-int mainMouse(int, char **);
-void testeMouse(int, int, int, int);
 
 #endif /* EXEMPLOS_MOUSE_H_ */

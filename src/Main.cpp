@@ -9,7 +9,7 @@
 
 #include "Examples/examples.h"
 #include "Exemplos/Exemplos.h"
-#include "TrabalhoUnidI/Quadrado/Quadrado.h"
+#include "TrabalhoUnidI/TrabalhoUnidI.h"
 
 using namespace std;
 
@@ -18,7 +18,21 @@ int main(int argc, char **argv) {
 	cout << "Hello OpenGL!" << endl;
 
 // Unidade I
+//	Exercícios
+//	mainAula01(argc, argv);
+//	mainMouse(argc, argv);
+
+//	Exemplo (Professor Leandro Souza)
 //	mainExemploCallbacks(argc, argv);
+
+// Exemplos (Manssour)
+//	mainPrimeiroPrograma(argc, argv);
+//	mainQuadrado(argc, argv);
+//	mainAnima(argc, argv);
+//	mainInteracao(argc, argv);
+//	mainMenu(argc, argv);
+//	mainTeaPot3D(argc, argv);
+//	mainIluminacao(argc, argv);
 
 // Examples (redbook)
 //	mainChunkOpenGL(argc, argv);
@@ -40,20 +54,31 @@ int main(int argc, char **argv) {
 //	mainMaterial(argc, argv);
 //	mainColorMat(argc, argv);
 
-// Exemplos (Manssour)
-//	mainPrimeiroPrograma(argc, argv);
-//	mainQuadrado(argc, argv);
-//	mainAnima(argc, argv);
-//	mainInteracao(argc, argv);
-//	mainMenu(argc, argv);
-//	mainTeaPot3D(argc, argv);
-//	mainIluminacao(argc, argv);
-//	mainMouse(argc, argv);
+// Questão do Quadrado (Questão 2 - Parte 1)
+//	mainQuestaoQuadrado(argc, argv);
 
-// Trabalho 1
-	mainQuestaoQuadrado(argc, argv);
+// Questão da Rasterização (Questão 1 - Parte 2)
+//	mainLinhaSimples(argc, argv);
+//	mainLinhaIncremental(argc, argv);
+//	mainLinhaBresenham(argc, argv);
+//	mainCirculoEquacao(argc, argv);
+//	mainCirculoCoordPolar(argc, argv);
+//	mainCirculoBresenham(argc, argv);
+//	mainParabolaEquação(argc, argv);
+//	mainParabolaIncremental(argc, argv);
+//	mainExpoenteIncremental(argc, argv);
+
+// Questão do Menu (Questão 2 - Parte 2)
+//	mainQuestaoMenu(argc, argv);
+
+// Questão das Transformações (Questão 3 - Parte 2)
+//	mainTransformacoes(argc, argv);
+
+// Questão do Quadrado (Questão 4 - Parte 2)
+//	mainProtecaoTela(argc, argv);
 
 // Unidade II
+// Examples (redbook)
 //	mainAlpha(argc, argv);
 //	mainAlpha3D(argc, argv);
 //	mainAARGB(argc, argv);
@@ -76,6 +101,7 @@ int main(int argc, char **argv) {
 //	mainDof(argc, argv);
 
 // Unidade III
+// Examples (redbook)
 //	mainTess(argc, argv);
 //	mainQuadric(argc, argv);
 //	mainBezCurve(argc, argv);

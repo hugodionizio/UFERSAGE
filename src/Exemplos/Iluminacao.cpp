@@ -3,6 +3,7 @@
 // de objetos 3D com a inser��o de uma fonte de luz.
 // Este c�digo est� baseado nos exemplos dispon�veis no livro 
 // "OpenGL SuperBible", 2nd Edition, de Richard S. e Wright Jr.
+#include <GL/glew.h>
 
 #ifdef WINDOWS
 # include <windows.h>
