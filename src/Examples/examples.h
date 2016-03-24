@@ -39,6 +39,30 @@ int mainPolyOff(int, char**);
 int mainTorus(int, char**);
 int mainList(int, char**);
 int mainStroke(int, char**);
+int mainDrawf(int, char**);
+int mainFont(int, char**);
+int mainImage(int, char**);
+int mainChecker(int, char**);
+int mainTexSub(int, char**);
+int mainMipMap(int, char**);
+int mainTexBind(int, char**);
+int mainTexGen(int, char**);
+int mainStencil(int, char**);
+int mainDof(int, char**);
+
+// Unidade III
+int mainTess(int, char**);
+int mainQuadric(int, char**);
+int mainBezCurve(int, char**);
+int mainBezSurf(int, char**);
+int mainBezMesh(int, char**);
+int mainTextureSurf(int, char**);
+int mainSurface(int, char**);
+int mainPickSquare(int, char**);
+int mainTrim(int, char**);
+int mainSelect(int, char**);
+int mainPickDepth(int, char**);
+int mainFeedback(int, char**);
 
 int mainVortex(int, char**);
 

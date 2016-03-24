@@ -11,31 +11,17 @@
 #include "Exemplos/Exemplos.h"
 #include "TrabalhoUnidI/Quadrado/Quadrado.h"
 
+using namespace std;
+
 int main(int argc, char **argv) {
-	  const int nrolls = 10000; // number of experiments
-	  const int nstars = 95;    // maximum number of stars to distribute
-
-	  std::default_random_engine generator;
-	  std::uniform_int_distribution<int> distribution(0,9);
-
-	  int p[10]={};
-
-	  for (int i=0; i<nrolls; ++i) {
-	    int number = distribution(generator);
-	    ++p[number];
-	  }
-
-	  std::cout << "uniform_int_distribution (0,9):" << std::endl;
-	  for (int i=0; i<10; ++i)
-	    std::cout << i << ": " << std::string(p[i]*nstars/nrolls,'*') << std::endl;
-
-	std::cout << "Hello World!!" << std::endl;
-	std::cout << "Hello OpenGL!" << std::endl;
+	cout << "Hello World!!" << endl;
+	cout << "Hello OpenGL!" << endl;
 
 // Unidade I
 //	mainExemploCallbacks(argc, argv);
-//	mainChunkOpenGL(argc, argv);
 
+// Examples (redbook)
+//	mainChunkOpenGL(argc, argv);
 //	mainHello(argc, argv);
 //	mainDouble(argc, argv);
 //	mainLines(argc, argv);
@@ -54,6 +40,7 @@ int main(int argc, char **argv) {
 //	mainMaterial(argc, argv);
 //	mainColorMat(argc, argv);
 
+// Exemplos (Manssour)
 //	mainPrimeiroPrograma(argc, argv);
 //	mainQuadrado(argc, argv);
 //	mainAnima(argc, argv);
@@ -62,6 +49,9 @@ int main(int argc, char **argv) {
 //	mainTeaPot3D(argc, argv);
 //	mainIluminacao(argc, argv);
 //	mainMouse(argc, argv);
+
+// Trabalho 1
+	mainQuestaoQuadrado(argc, argv);
 
 // Unidade II
 //	mainAlpha(argc, argv);
@@ -74,6 +64,30 @@ int main(int argc, char **argv) {
 //	mainTorus(argc, argv);
 //	mainList(argc, argv);
 //	mainStroke(argc, argv);
+//	mainDrawf(argc, argv);
+//	mainFont(argc, argv);
+//	mainImage(argc, argv);
+//	mainChecker(argc, argv);
+//	mainTexSub(argc, argv);
+//	mainMipMap(argc, argv);
+//	mainTexBind(argc, argv);
+//	mainTexGen(argc, argv);
+//	mainStencil(argc, argv); // ???
+//	mainDof(argc, argv);
+
+// Unidade III
+//	mainTess(argc, argv);
+//	mainQuadric(argc, argv);
+//	mainBezCurve(argc, argv);
+//	mainBezSurf(argc, argv);
+//	mainBezMesh(argc, argv);
+//	mainTextureSurf(argc, argv);
+//	mainSurface(argc, argv);
+//	mainPickSquare(argc, argv);
+//	mainTrim(argc, argv);
+//	mainSelect(argc, argv);
+//	mainPickDepth(argc, argv);
+//	mainFeedback(argc, argv); // ???
 
 //	Adicionais
 //	mainVortex(argc, argv);
