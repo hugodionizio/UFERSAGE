@@ -54,6 +54,7 @@ int main(int argc, char **argv) {
 //	mainMaterial(argc, argv);
 //	mainColorMat(argc, argv);
 
+// Trabalho I - Unidade I
 // Questão do Quadrado (Questão 2 - Parte 1)
 //	mainQuestaoQuadrado(argc, argv);
 
@@ -61,21 +62,23 @@ int main(int argc, char **argv) {
 //	mainLinhaSimples(argc, argv);
 //	mainLinhaIncremental(argc, argv);
 //	mainLinhaBresenham(argc, argv);
-//	mainCirculoEquacao(argc, argv);
-//	mainCirculoCoordPolar(argc, argv);
-//	mainCirculoBresenham(argc, argv);
-//	mainParabolaEquação(argc, argv);
-//	mainParabolaIncremental(argc, argv);
-//	mainExpoenteIncremental(argc, argv);
+	mainCirculoEquacao(argc, argv);
+	mainCirculoCoordPolar(argc, argv);
+	mainCirculoBresenham(argc, argv);
+	mainParabolaEquacao(argc, argv);
+	mainParabolaIncremental(argc, argv);
+	mainExpoenteIncremental(argc, argv);
 
 // Questão do Menu (Questão 2 - Parte 2)
-//	mainQuestaoMenu(argc, argv);
+	mainQuestaoMenu(argc, argv);
 
 // Questão das Transformações (Questão 3 - Parte 2)
-//	mainTransformacoes(argc, argv);
+	mainTransformacoes(argc, argv);
 
 // Questão do Quadrado (Questão 4 - Parte 2)
-//	mainProtecaoTela(argc, argv);
+	mainProtecaoTela(argc, argv);
+// Fim da Unidade I
+
 
 // Unidade II
 // Examples (redbook)
@@ -99,6 +102,8 @@ int main(int argc, char **argv) {
 //	mainTexGen(argc, argv);
 //	mainStencil(argc, argv); // ???
 //	mainDof(argc, argv);
+// Fim da Unidade II
+
 
 // Unidade III
 // Examples (redbook)
@@ -114,6 +119,8 @@ int main(int argc, char **argv) {
 //	mainSelect(argc, argv);
 //	mainPickDepth(argc, argv);
 //	mainFeedback(argc, argv); // ???
+// Fim da Unidade III
+
 
 //	Adicionais
 //	mainVortex(argc, argv);

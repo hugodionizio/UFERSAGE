@@ -249,7 +249,7 @@ int mainQuestaoMenu(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(350, 300);
 	glutInitWindowPosition(10, 10);
-	glutCreateWindow("Exemplo de Menu e Exibi��o de Caracteres");
+	glutCreateWindow("Menu de Geometrias");
 	glutDisplayFunc(DesenhaQuestaoMenu);
 	glutReshapeFunc(AlteraTamJanQuestaoMenu);
 	glutMotionFunc(MovMouseBotaoPressQuestMenu);

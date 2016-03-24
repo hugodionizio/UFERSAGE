@@ -132,7 +132,7 @@ int mainProtecaoTela(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(400, 350);
 	glutInitWindowPosition(10, 10);
-	glutCreateWindow("Anima");
+	glutCreateWindow("Proteção de Tela");
 	glutDisplayFunc(DesenhaProtecaoTela);
 	glutReshapeFunc(AlteraTamanhoJanelaProtecaoTela);
 	glutTimerFunc(33, TimerProtecaoTela, 1);

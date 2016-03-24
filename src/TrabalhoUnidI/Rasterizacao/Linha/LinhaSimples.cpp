@@ -25,31 +25,31 @@ void displayLinhaSimples(void) {
 	 * a) Rasterização de linhas dados os pontos inicial e final
 	 *	- Algoritmo Simples
 	 */
-	glColor3f(1.0, 1.0, 0.0);
+	glColor3f(1.0, 0.0, 0.0);
 	glBegin(GL_POINTS);
-	glColor3f(1.0, 1.0, 0.0);
-	// y = ax + b
-	for (x = -1; x < 1; x+=0.0001) {
-		glVertex3f(x, a*x+b, 0.0);
-	}
+		glColor3f(1.0, 0.0, 0.0);
+		// y = ax + b
+		for (x = -1; x < 1; x+=0.0001) {
+			glVertex3f(x, a*x+b, 0.0);
+		}
 	glEnd();
 
 	glColor3f(0.0, 1.0, 0.0);
 	glBegin(GL_POINTS);
-	glColor3f(0.0, 1.0, 0.0);
-	// y = -ax + b
-	for (x = -1; x < 1; x+=0.0001) {
-		glVertex3f(x, -a*x+b, 0.0);
-	}
+		glColor3f(0.0, 1.0, 0.0);
+		// y = -ax + b
+		for (x = -1; x < 1; x+=0.0001) {
+			glVertex3f(x, -a*x+b, 0.0);
+		}
 	glEnd();
 
 	glColor3f(0.0, 0.0, 1.0);
 	glBegin(GL_POINTS);
-	glColor3f(0.0, 0.0, 1.0);
-	// y = ax
-	for (x = -1; x < 1; x+=0.0001) {
-		glVertex3f(x, a*x, 0.0);
-	}
+		glColor3f(0.0, 0.0, 1.0);
+		// y = ax
+		for (x = -1; x < 1; x+=0.0001) {
+			glVertex3f(x, a*x, 0.0);
+		}
 	glEnd();
 	/*
 	 * Sem pausa!

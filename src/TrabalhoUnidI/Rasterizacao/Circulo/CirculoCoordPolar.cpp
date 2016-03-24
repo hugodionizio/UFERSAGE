@@ -71,7 +71,7 @@ int mainCirculoCoordPolar(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(250, 250);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Equação do Círculo");
+	glutCreateWindow("Círculo com Coordenadas Polares");
 	initCirculoCoordPolar();
 	glutDisplayFunc(displayCirculoCoordPolar);
 	glutMainLoop();

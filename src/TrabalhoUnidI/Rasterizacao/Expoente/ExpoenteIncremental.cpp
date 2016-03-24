@@ -90,7 +90,7 @@ int mainExpoenteIncremental(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(250, 250);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Linha Simples");
+	glutCreateWindow("ExpoenteIncremental");
 	initExpoenteIncremental();
 	glutDisplayFunc(displayExpoenteIncremental);
 	glutMainLoop();

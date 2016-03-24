@@ -64,7 +64,7 @@ void displayParabolaEquacao(void) {
 	glutSwapBuffers();
 }
 
-void initLinhaSimples(void) {
+void initParabolaEquacao(void) {
 	/* selecionar cor de limpeza (fundo)
 	 *
 	 */
@@ -85,13 +85,13 @@ void initLinhaSimples(void) {
  * Registrar função de chamada de retorno para gráficos na tela.
  * Entrar como laço principal e eventos d processo.
  */
-int mainLinhaSimples(int argc, char** argv) {
+int mainParabolaEquacao(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(250, 250);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Linha Simples");
-	initLinhaSimples();
+	glutCreateWindow("Equação da Parábola");
+	initParabolaEquacao();
 	glutDisplayFunc(displayParabolaEquacao);
 	glutMainLoop();
 	return 0; /* ISO C requer "main" para retornar int */

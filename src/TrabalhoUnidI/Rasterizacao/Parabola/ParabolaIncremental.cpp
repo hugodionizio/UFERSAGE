@@ -17,7 +17,7 @@
 #include <GL/glut.h>
 #include <math.h>
 
-void displayLinhaSimples(void) {
+void displayParabolaIncremental(void) {
 	float a = 2;
 	float x = 0;
 	float b = -.3;
@@ -64,7 +64,7 @@ void displayLinhaSimples(void) {
 	glutSwapBuffers();
 }
 
-void initLinhaSimples(void) {
+void initParabolaIncremental(void) {
 	/* selecionar cor de limpeza (fundo)
 	 *
 	 */
@@ -85,14 +85,14 @@ void initLinhaSimples(void) {
  * Registrar função de chamada de retorno para gráficos na tela.
  * Entrar como laço principal e eventos d processo.
  */
-int mainLinhaSimples(int argc, char** argv) {
+int mainParabolaIncremental(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(250, 250);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Linha Simples");
-	initLinhaSimples();
-	glutDisplayFunc(displayLinhaSimples);
+	glutCreateWindow("Parábola Incremental");
+	initParabolaIncremental();
+	glutDisplayFunc(displayParabolaIncremental);
 	glutMainLoop();
 	return 0; /* ISO C requer "main" para retornar int */
 }
