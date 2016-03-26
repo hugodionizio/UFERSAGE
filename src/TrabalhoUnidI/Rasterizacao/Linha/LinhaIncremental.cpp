@@ -15,11 +15,23 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include <math.h>
+#include <iostream>
+
+#define LARGURA_JANELA 250
+#define ALTURA_JANELA 250
+#define XMAXIMO (LARGURA_JANELA/2)
+#define YMAXIMO	(ALTURA_JANELA/2)
+
+using namespace std;
 
 void displayLinhaIncremental(void) {
-	float a = 2;
-	float x = 0;
-	float b = -.3;
+	float x0 = 1, y0 = 1, x1 = 120, y1 = 50, x, y, m;
+
+	x0 = x0 / XMAXIMO;
+	y0 = y0 / YMAXIMO;
+	x1 = x1 / XMAXIMO;
+	y1 = y1 / YMAXIMO;
+	m = (y1 - y0) / (x1 - x0);
 
 	/*
 	 * Limpar todos os pixels
@@ -30,32 +42,22 @@ void displayLinhaIncremental(void) {
 	 * a) Rasterização de linhas dados os pontos inicial e final
 	 *	- Algoritmo Incremental
 	 */
-	glColor3f(1.0, 1.0, 0.0);
+	cout << "Algoritmo Incremental da Reta (verde):" << endl;
+	x = x0;
+	y = y0;
+	float yinc;
+	glColor3f(0.0, 1.0, 0.0);
 	glBegin(GL_POINTS);
-		glColor3f(1.0, 1.0, 0.0);
-		// y = ax + b
-		for (x = -1; x < 1; x+=0.0001) {
-			glVertex3f(x, a*x+b, 0.0);
-		}
+		glColor3f(0.0, 1.0, 0.0);
+		do {
+			yinc = floor(0.4f *(y + 0.5)) / YMAXIMO;
+			glVertex3f(x, yinc, 0.0);
+			cout << x << ", " << yinc << endl;
+			x = x + 0.4f / XMAXIMO;
+			y = y + m;
+		} while (x <= x1);
 	glEnd();
 
-	glColor3f(0.0, 1.0, 1.0);
-	glBegin(GL_POINTS);
-		glColor3f(0.0, 1.0, 1.0);
-		// y = -ax + b
-		for (x = -1; x < 1; x+=0.0001) {
-			glVertex3f(x, -a*x+b, 0.0);
-		}
-	glEnd();
-
-	glColor3f(1.0, 0.0, 1.0);
-	glBegin(GL_POINTS);
-		glColor3f(1.0, 0.0, 1.0);
-		// y = ax
-		for (x = -1; x < 1; x+=0.0001) {
-			glVertex3f(x, a*x, 0.0);
-		}
-	glEnd();
 	/*
 	 * Sem pausa!
 	 * Iniciar processo com rotinas OpenGL de buffer

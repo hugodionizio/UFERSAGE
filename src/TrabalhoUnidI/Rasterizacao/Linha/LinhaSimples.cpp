@@ -10,11 +10,24 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include <math.h>
+#include <iostream>
+
+#define LARGURA_JANELA 250
+#define ALTURA_JANELA 250
+#define XMAXIMO (LARGURA_JANELA/2)
+#define YMAXIMO	(ALTURA_JANELA/2)
+
+using namespace std;
+
 
 void displayLinhaSimples(void) {
-	float a = 2;
-	float x = 0;
-	float b = -.3;
+	float x0 = 1, y0 = 1, x1 = 120, y1 = 50, x, y, m;
+
+	x0 = x0 / XMAXIMO;
+	y0 = y0 / YMAXIMO;
+	x1 = x1 / XMAXIMO;
+	y1 = y1 / YMAXIMO;
+	m = (y1 - y0) / (x1 - x0);
 
 	/*
 	 * Limpar todos os pixels
@@ -25,32 +38,18 @@ void displayLinhaSimples(void) {
 	 * a) Rasterização de linhas dados os pontos inicial e final
 	 *	- Algoritmo Simples
 	 */
+	cout << "Algoritmo Simples da Reta (vermelho):" << endl;
 	glColor3f(1.0, 0.0, 0.0);
 	glBegin(GL_POINTS);
-		glColor3f(1.0, 0.0, 0.0);
-		// y = ax + b
-		for (x = -1; x < 1; x+=0.0001) {
-			glVertex3f(x, a*x+b, 0.0);
-		}
+	glColor3f(1.0, 0.0, 0.0);
+	for (x = x0; x < x1; x += 0.4f / XMAXIMO) {
+		y = y0 + floor(((XMAXIMO + YMAXIMO) / 2) * m * (x - x0) + .5)
+						/ ((XMAXIMO + YMAXIMO) / 2);
+		cout << x << ", " << y << endl;
+		glVertex3f(x, y, 0.0);
+	}
 	glEnd();
 
-	glColor3f(0.0, 1.0, 0.0);
-	glBegin(GL_POINTS);
-		glColor3f(0.0, 1.0, 0.0);
-		// y = -ax + b
-		for (x = -1; x < 1; x+=0.0001) {
-			glVertex3f(x, -a*x+b, 0.0);
-		}
-	glEnd();
-
-	glColor3f(0.0, 0.0, 1.0);
-	glBegin(GL_POINTS);
-		glColor3f(0.0, 0.0, 1.0);
-		// y = ax
-		for (x = -1; x < 1; x+=0.0001) {
-			glVertex3f(x, a*x, 0.0);
-		}
-	glEnd();
 	/*
 	 * Sem pausa!
 	 * Iniciar processo com rotinas OpenGL de buffer
@@ -82,9 +81,9 @@ void initLinhaSimples(void) {
 int mainLinhaSimples(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(250, 250);
+	glutInitWindowSize(LARGURA_JANELA, ALTURA_JANELA);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Linha Simples");
+	glutCreateWindow("Linha Simples ou Imediato");
 	initLinhaSimples();
 	glutDisplayFunc(displayLinhaSimples);
 	glutMainLoop();

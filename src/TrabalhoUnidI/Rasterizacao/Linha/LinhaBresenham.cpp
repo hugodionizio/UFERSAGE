@@ -15,11 +15,23 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include <math.h>
+#include <iostream>
+
+#define LARGURA_JANELA 250
+#define ALTURA_JANELA 250
+#define XMAXIMO (LARGURA_JANELA/2)
+#define YMAXIMO	(ALTURA_JANELA/2)
+
+using namespace std;
 
 void displayLinhaBresenham(void) {
-	float a = 2;
-	float x = 0;
-	float b = -.3;
+	float x0 = 1, y0 = 1, x1 = 120, y1 = 50, x, y, m;
+
+	x0 = x0 / XMAXIMO;
+	y0 = y0 / YMAXIMO;
+	x1 = x1 / XMAXIMO;
+	y1 = y1 / YMAXIMO;
+	m = (y1 - y0) / (x1 - x0);
 
 	/*
 	 * Limpar todos os pixels
@@ -30,31 +42,47 @@ void displayLinhaBresenham(void) {
 	 * a) Rasterização de linhas dados os pontos inicial e final
 	 *	- Algoritmo de Bresenham
 	 */
-	glColor3f(1.0, 1.0, 1.0);
+	cout << "Algoritmo do Ponto Médio ou Midpoint de Bresenham da Reta (azul):" << endl;
+	glColor3f(0.0, 0.0, 1.0);
 	glBegin(GL_POINTS);
-		glColor3f(1.0, 1.0, 1.0);
-		// y = ax + b
-		for (x = -1; x < 1; x+=0.0001) {
-			glVertex3f(x, a*x+b, 0.0);
-		}
-	glEnd();
+		glColor3f(0.0, 0.0, 1.0);
+		// 1. Receba os dois vértices do segmento de reta \
+			e armazene o vértice mais à esquerda como sendo \
+			o ponto (x0, y0)
+		// 3. Calcule as constantes delta(x), delta(y), \
+			2*delta(y) - 2*delta(x), e obtenha o parâmetro \
+			de decisão inicial p0 = 2*delta(y) - 2*delta(x)
+			float dx = x1 - x0;
+			float dy = y1 - y0;
+			float d = 2*dy - dx;
+			float incrE = 2*dy;
+			float incrNE = 2*(dy - dx);
+			x = x0;
+			y = y0;
 
-	glColor3f(1.0, 0.0, 0.0);
-	glBegin(GL_POINTS);
-		glColor3f(1.0, 0.0, 0.0);
-		// y = -ax + b
-		for (x = -1; x < 1; x+=0.0001) {
-			glVertex3f(x, -a*x+b, 0.0);
-		}
-	glEnd();
+		// 2. Pinta pixel (x0, y0)
+			glVertex3f(x, y, 0.0);
+			cout << x << ", " << y << endl;
 
-	glColor3f(1.0, 0.0, 1.0);
-	glBegin(GL_POINTS);
-		glColor3f(1.0, 0.0, 1.0);
-		// y = ax
-		for (x = -1; x < 1; x+=0.0001) {
-			glVertex3f(x, a*x, 0.0);
-		}
+			// 5. Repita o passo 4*delta(x) vezes
+			while (x < x1) {
+				// 4. Para cada xk ao longo da reta, começando com \
+					k = 0, faça o seguinte teste: \
+					- Se pk < 0, Pinta pixel(xk+1, yk) e \
+					p(k+1) = pk + 2*delta(y) \
+					- Caso contrário, Pinta pixel(xk + 1, yk + 1) e \
+					p(k+1) = 2*delta(y)- 2*delta(x)
+				if(d<=0) {
+					d+=incrE;
+					x += (0.4f / XMAXIMO);
+				} else {
+					d+=incrNE;
+					x += (0.4f / XMAXIMO);
+					y += (0.4f / YMAXIMO);
+				}
+				glVertex3f(x, y, 0.0);
+				cout << x << ", " << y << endl;
+			}
 	glEnd();
 	/*
 	 * Sem pausa!

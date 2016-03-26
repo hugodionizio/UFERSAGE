@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
 // Questão da Rasterização (Questão 1 - Parte 2)
 //	mainLinhaSimples(argc, argv);
 //	mainLinhaIncremental(argc, argv);
-//	mainLinhaBresenham(argc, argv);
+	mainLinhaBresenham(argc, argv);
 	mainCirculoEquacao(argc, argv);
 	mainCirculoCoordPolar(argc, argv);
 	mainCirculoBresenham(argc, argv);
