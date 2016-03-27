@@ -12,7 +12,7 @@
 
 void displayCirculoEquacao(void) {
 	float i = 0;
-	float R = 1;
+	float R = 1.0f;
 	/*
 	 * Limpar todos os pixels
 	 */
@@ -27,7 +27,7 @@ void displayCirculoEquacao(void) {
 	glColor3f(1.0, 1.0, 0.0);
 	// y1 = sqrt(R^2-x^2)
 	// y2 = -sqrt(R^2-x^2)
-	for (i = -1; i < 1; i+=0.0001) {
+	for (i = -1; i <= 1; i+=0.00001) {
 		glVertex3f(i, sqrt(R*R-i*i), 0.0);
 		glVertex3f(i, -sqrt(R*R-i*i), 0.0);
 	}

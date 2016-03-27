@@ -5,11 +5,6 @@
  *      Author: hugo
  */
 
-/*
- * b) Rasterização de cículos, dado o raio de entrada.
- * - Utilizando o algoritmo de Bresenham.
- */
-
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -25,13 +20,14 @@ void displayCirculoBresenham(void) {
 
 	/*
 	 * b) Rasterização de cículos, dado o raio de entrada.
-	 * - Utilizando equação do círculo.
+	 * - Utilizando o algoritmo de Bresenham.
 	 */
 	glColor3f(1.0, 1.0, 0.0);
 	glBegin(GL_POINTS);
 	glColor3f(1.0, 1.0, 0.0);
-	// y1 = sqrt(R^2-x^2)
-	// y2 = -sqrt(R^2-x^2)
+	// 1. Receba o valor do raio r e as coordenadas do centro (xc, yc)\
+		e obtenha o primeiro ponto de um círculo centrado na origem:\
+		(x0, y0) = (0, r)
 	for (i = -1; i < 1; i+=0.0001) {
 		glVertex3f(i, sqrt(R*R-i*i), 0.0);
 		glVertex3f(i, -sqrt(R*R-i*i), 0.0);
@@ -71,7 +67,7 @@ int mainCirculoBresenham(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(250, 250);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Círculo com Algoritmo de Bresenham");
+	glutCreateWindow("Midpoint Circle ou Círculo com Algoritmo de Bresenham");
 	initCirculoBresenham();
 	glutDisplayFunc(displayCirculoBresenham);
 	glutMainLoop();

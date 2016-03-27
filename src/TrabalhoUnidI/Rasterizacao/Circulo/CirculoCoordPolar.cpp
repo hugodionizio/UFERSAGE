@@ -5,11 +5,6 @@
  *      Author: hugo
  */
 
-/*
- * b) Rasterização de cículos, dado o raio de entrada.
- * - Utilizando coordenadas polares.
- */
-
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -18,6 +13,7 @@
 void displayCirculoCoordPolar(void) {
 	float i = 0;
 	float R = 1;
+	float theta = 0;
 	/*
 	 * Limpar todos os pixels
 	 */
@@ -25,16 +21,17 @@ void displayCirculoCoordPolar(void) {
 
 	/*
 	 * b) Rasterização de cículos, dado o raio de entrada.
-	 * - Utilizando equação do círculo.
+	 * - Utilizando coordenadas polares.
 	 */
 	glColor3f(1.0, 1.0, 0.0);
 	glBegin(GL_POINTS);
 	glColor3f(1.0, 1.0, 0.0);
-	// y1 = sqrt(R^2-x^2)
-	// y2 = -sqrt(R^2-x^2)
-	for (i = -1; i < 1; i+=0.0001) {
-		glVertex3f(i, sqrt(R*R-i*i), 0.0);
-		glVertex3f(i, -sqrt(R*R-i*i), 0.0);
+	// x = xc + R*cos(theta)
+	// y1 = yc + R*sin(theta)
+	// y2 = -(yc + R*sin(theta))
+	for (theta = 180; theta >= 0; theta-=.005) {
+		glVertex3f(R*cos(theta), R*sin(theta), 0.0);
+		glVertex3f(R*cos(theta), -R*sin(theta), 0.0);
 	}
 	glEnd();
 
