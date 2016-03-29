@@ -5,11 +5,6 @@
  *      Author: hugo
  */
 
-/*
- * c) Implemente a rasterização de uma parábola da forma y = a*x*x + b*x + c, em que a, b e c são
-	parâmetros reais (dados um x inicial e um x final).
-	- Utilizando a equação da parábola
- */
 
 #include <GL/glew.h>
 #include <GL/gl.h>
@@ -18,9 +13,12 @@
 #include <math.h>
 
 void displayParabolaEquacao(void) {
-	float a = 2;
-	float x = 0;
-	float b = -.3;
+	float a = 1;
+	float x0 = -1;
+	float x1 = 1;
+	float x = x0;
+	float b = 0;
+	float c = 0;
 
 	/*
 	 * Limpar todos os pixels
@@ -28,33 +26,37 @@ void displayParabolaEquacao(void) {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	/*
-	 * a) Rasterização de linhas dados os pontos inicial e final
-	 *	- Algoritmo Simples
+	 * c) Implemente a rasterização de uma parábola da forma y = a*x*x + b*x + c, em que a, b e c são
+		parâmetros reais (dados um x inicial e um x final).
+		- Utilizando a equação da parábola
 	 */
-	glColor3f(1.0, 1.0, 0.0);
+	glColor3f(1.0, 0.0, 0.0); // Vermelho
 	glBegin(GL_POINTS);
-	glColor3f(1.0, 1.0, 0.0);
-	// y = ax + b
-	for (x = -1; x < 1; x+=0.0001) {
-		glVertex3f(x, a*x+b, 0.0);
+	glColor3f(1.0, 0.0, 0.0);
+	for (x = x0; x <= x1; x+=0.0001) {
+		glVertex3f(x, a*x*x+b*x+c, 0.0);
 	}
 	glEnd();
 
-	glColor3f(0.0, 1.0, 0.0);
+	a = 2;
+	b = -2;
+	c = -.5;
+	glColor3f(0.0, 1.0, 0.0); // Verde
 	glBegin(GL_POINTS);
 	glColor3f(0.0, 1.0, 0.0);
-	// y = -ax + b
-	for (x = -1; x < 1; x+=0.0001) {
-		glVertex3f(x, -a*x+b, 0.0);
+	for (x = x0; x <= x1; x+=0.0001) {
+		glVertex3f(x, a*x*x+b*x+c, 0.0);
 	}
 	glEnd();
 
-	glColor3f(0.0, 0.0, 1.0);
+	a = .5;
+	b = .25;
+	c = 0;
+	glColor3f(0.0, 0.0, 1.0); // Azul
 	glBegin(GL_POINTS);
 	glColor3f(0.0, 0.0, 1.0);
-	// y = ax
-	for (x = -1; x < 1; x+=0.0001) {
-		glVertex3f(x, a*x, 0.0);
+	for (x = x0; x <= x1; x+=0.0001) {
+		glVertex3f(x, a*x*x+b*x+c, 0.0);
 	}
 	glEnd();
 	/*
@@ -68,7 +70,7 @@ void initParabolaEquacao(void) {
 	/* selecionar cor de limpeza (fundo)
 	 *
 	 */
-	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glClearColor(1.0, 1.0, 1.0, 0.0);
 
 	/* Inicializar valores de visualização
 	 *

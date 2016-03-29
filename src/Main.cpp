@@ -64,10 +64,10 @@ int main(int argc, char **argv) {
 //	mainLinhaBresenham(argc, argv);
 //	mainCirculoEquacao(argc, argv);
 //	mainCirculoCoordPolar(argc, argv);
-	mainCirculoBresenham(argc, argv);
-	mainParabolaEquacao(argc, argv);
-	mainParabolaIncremental(argc, argv);
-	mainExpoenteIncremental(argc, argv);
+//	mainCirculoBresenham(argc, argv);
+//	mainParabolaEquacao(argc, argv);
+//	mainParabolaIncremental(argc, argv);
+//	mainExpoenteIncremental(argc, argv);
 
 // Questão do Menu (Questão 2 - Parte 2)
 	mainQuestaoMenu(argc, argv);
