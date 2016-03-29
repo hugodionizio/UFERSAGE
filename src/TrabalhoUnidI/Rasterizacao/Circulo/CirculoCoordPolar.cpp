@@ -10,6 +10,14 @@
 #include <GL/glut.h>
 #include <math.h>
 
+#include <iostream>
+using namespace std;
+
+#define LARGURA_JANELA 250
+#define ALTURA_JANELA 250
+#define XMAXIMO (LARGURA_JANELA/2)
+#define YMAXIMO	(ALTURA_JANELA/2)
+
 void displayCirculoCoordPolar(void) {
 	float i = 0;
 	float R = 1;
@@ -32,6 +40,8 @@ void displayCirculoCoordPolar(void) {
 	for (theta = 180; theta >= 0; theta-=.005) {
 		glVertex3f(R*cos(theta), R*sin(theta), 0.0);
 		glVertex3f(R*cos(theta), -R*sin(theta), 0.0);
+		cout << "[" << R*cos(theta) << ", " << R*sin(theta) << "] [";
+		cout << R*cos(theta) << ", " << -R*sin(theta) << "]" << endl;
 	}
 	glEnd();
 
@@ -66,7 +76,7 @@ void initCirculoCoordPolar(void) {
 int mainCirculoCoordPolar(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(250, 250);
+	glutInitWindowSize(LARGURA_JANELA, ALTURA_JANELA);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("Círculo com Coordenadas Polares");
 	initCirculoCoordPolar();
