@@ -29,37 +29,44 @@
 #endif
 #include <string.h>
 #include <stdio.h>
+#include <ft2build.h>
+#include <freetype2/freetype.h>
+#include <config/ftheader.h>
+#include <FTGL/ftgl.h>
+#include <FTGL/FTGLPixmapFont.h>
+#include "Menu.h"
 
 // Constantes
-#define QUADRADO 1
-#define TRIANGULO 2
-#define LOSANGO   3
+enum {
+	QUADRADO = 1,
+	TRIANGULO,
+	LOSANGO,
+	PENTAGONO,
+	HEXAGONO
+};
 
-// Vari�veis
+// Variáveis
 char textoQuestaoMenu[30];
 GLfloat win_questao_menu, rQuestaoMenu, gQuestaoMenu, bQuestaoMenu;
 GLint view_w_questao_menu, view_h_questao_menu, primitivaQuestaoMenu;
 
-// Fun��o que desenha um quadrado
-void DesenhaQuadradoQuestaoMenu(void) {
-	glBegin(GL_QUADS);
-	glVertex2f(-25.0f, -25.0f);
-	glVertex2f(-25.0f, 25.0f);
-	glVertex2f(25.0f, 25.0f);
-	glVertex2f(25.0f, -25.0f);
-	glEnd();
+int testeFTGL () {
+	// Create a pixmap font from a TrueType file.
+	FTGLPixmapFont font("/home/user/Arial.ttf");
+
+	// If something went wrong, bail out.
+	if(font.Error())
+	    return -1;
+
+	// Set the font size and render a small text.
+	font.FaceSize(72);
+	font.Render("Hello World!");
+
+	return 0;
 }
 
-// Fun��o que desenha um tri�ngulo
-void DesenhaTrianguloQuestaoMenu(void) {
-	glBegin(GL_TRIANGLES);
-	glVertex2f(-25.0f, -25.0f);
-	glVertex2f(0.0f, 25.0f);
-	glVertex2f(25.0f, -25.0f);
-	glEnd();
-}
 
-// Fun��o que desenha um losango
+// Função que desenha um losango
 void DesenhaLosangoQuestaoMenu(void) {
 	glBegin(GL_POLYGON);
 	glVertex2f(-25.0f, 0.0f);
@@ -72,7 +79,7 @@ void DesenhaLosangoQuestaoMenu(void) {
 // Desenha um texto na janela GLUT
 void DesenhaTextoQuestaoMenu(char *string) {
 	glPushMatrix();
-	// Posi��o no universo onde o texto ser� colocado
+	// Posição no universo onde o texto será colocado
 	glRasterPos2f(-win_questao_menu, win_questao_menu - (win_questao_menu * 0.08));
 	// Exibe caracter a caracter
 	while (*string)
@@ -80,7 +87,7 @@ void DesenhaTextoQuestaoMenu(char *string) {
 	glPopMatrix();
 }
 
-// Fun��o callback chamada para fazer o desenho
+// Função callback chamada para fazer o desenho
 void DesenhaQuestaoMenu(void) {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -89,6 +96,8 @@ void DesenhaQuestaoMenu(void) {
 
 	// Define a cor corrente
 	glColor3f(rQuestaoMenu, gQuestaoMenu, bQuestaoMenu);
+
+	testeFTGL();
 
 	// Desenha uma primitiva
 	switch (primitivaQuestaoMenu) {
@@ -101,18 +110,24 @@ void DesenhaQuestaoMenu(void) {
 	case LOSANGO:
 		DesenhaLosangoQuestaoMenu();
 		break;
+	case PENTAGONO:
+		DesenhaPentagonoQuestaoMenu();
+		break;
+	case HEXAGONO:
+		DesenhaHexagonoQuestaoMenu();
+		break;
 	}
 
-	// Exibe a posi��o do mouse na janela
+	// Exibe a posição do mouse na janela
 	glColor3f(1.0f, 1.0f, 1.0f);
 	DesenhaTextoQuestaoMenu(textoQuestaoMenu);
 
 	glutSwapBuffers();
 }
 
-// Inicializa par�metros de rendering
+// Inicializa parâmetros de rendering
 void InicializaQuestaoMenu(void) {
-	// Define a cor de fundo da janela de visualiza��o como preta
+	// Define a cor de fundo da janela de visualização como preta
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	win_questao_menu = 150.0f;
 	primitivaQuestaoMenu = QUADRADO;
@@ -122,9 +137,9 @@ void InicializaQuestaoMenu(void) {
 	strcpy(textoQuestaoMenu, "(0,0)");
 }
 
-// Fun��o callback chamada quando o tamanho da janela � alterado
+// Função callback chamada quando o tamanho da janela é alterado
 void AlteraTamJanQuestaoMenu(GLsizei w, GLsizei h) {
-	// Especifica as dimens�es da Viewport
+	// Especifica as dimensões da Viewport
 	glViewport(0, 0, w, h);
 	view_w_questao_menu = w;
 	view_h_questao_menu = h;
@@ -135,21 +150,21 @@ void AlteraTamJanQuestaoMenu(GLsizei w, GLsizei h) {
 	gluOrtho2D(-win_questao_menu, win_questao_menu, -win_questao_menu, win_questao_menu);
 }
 
-// Fun��o callback chamada sempre que o mouse � movimentado
-// sobre a janela GLUT com um bot�o pressionado
+// Função callback chamada sempre que o mouse é movimentado
+// sobre a janela GLUT com um botão pressionado
 void MovMouseBotaoPressQuestMenu(int x, int y) {
 	sprintf(textoQuestaoMenu, "Botao pressionado (%d,%d)", x, y);
 	glutPostRedisplay();
 }
 
-// Fun��o callback chamada sempre que o mouse � movimentado
+// Função callback chamada sempre que o mouse é movimentado
 // sobre a janela GLUT
 void MoveMouseQuestaoMenu(int x, int y) {
 	sprintf(textoQuestaoMenu, "(%d,%d)", x, y);
 	glutPostRedisplay();
 }
 
-// Fun��o callback chamada para gerenciar eventos do teclado
+// Função callback chamada para gerenciar eventos do teclado
 // para teclas especiais, tais como F1, PgDn e Home
 void TeclasEspeciaisQuestaoMenu(int key, int x, int y) {
 	if (key == GLUT_KEY_UP) {
@@ -171,7 +186,7 @@ void TeclasEspeciaisQuestaoMenu(int key, int x, int y) {
 	glutPostRedisplay();
 }
 
-// Gerenciamento do menu com as op��es de cores
+// Gerenciamento do menu com as opções de cores
 void QuestaoMenuCor(int op) {
 	switch (op) {
 	case 0:
@@ -193,7 +208,7 @@ void QuestaoMenuCor(int op) {
 	glutPostRedisplay();
 }
 
-// Gerenciamento do menu com as op��es de cores
+// Gerenciamento do menu com as opções de cores
 void QuestaoMenuPrimitiva(int op) {
 	switch (op) {
 	case 0:
@@ -205,6 +220,11 @@ void QuestaoMenuPrimitiva(int op) {
 	case 2:
 		primitivaQuestaoMenu = LOSANGO;
 		break;
+	case 3:
+		primitivaQuestaoMenu = PENTAGONO;
+		break;
+	case 4:
+		primitivaQuestaoMenu = HEXAGONO;
 	}
 	glutPostRedisplay();
 }
@@ -224,8 +244,10 @@ void CriaQuestaoMenu() {
 
 	submenu2 = glutCreateMenu(QuestaoMenuPrimitiva);
 	glutAddMenuEntry("Quadrado", 0);
-	glutAddMenuEntry("Triângulo", 1);
+	glutAddMenuEntry("Triangulo", 1);
 	glutAddMenuEntry("Losango", 2);
+	glutAddMenuEntry("Penta'gono", 3);
+	glutAddMenuEntry("Hexagono", 4);
 
 	menu = glutCreateMenu(QuestaoMenuPrincipal);
 	glutAddSubMenu("Cor", submenu1);
@@ -234,7 +256,7 @@ void CriaQuestaoMenu() {
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
-// Fun��o callback chamada para gerenciar eventos do mouse
+// Função callback chamada para gerenciar eventos do mouse
 void GerenciaMouseQuestaoMenu(int button, int state, int x, int y) {
 	if (button == GLUT_RIGHT_BUTTON)
 		if (state == GLUT_DOWN)
@@ -245,6 +267,7 @@ void GerenciaMouseQuestaoMenu(int button, int state, int x, int y) {
 
 // Programa Principal
 int mainQuestaoMenu(int argc, char** argv) {
+
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(350, 300);
