@@ -70,7 +70,7 @@ int main(int argc, char **argv) {
 //	mainExpoenteIncremental(argc, argv);
 
 // Questão do Menu (Questão 2 - Parte 2)
-	mainQuestaoMenu(argc, argv);
+//	mainQuestaoMenu(argc, argv);
 
 // Questão das Transformações (Questão 3 - Parte 2)
 	mainTransformacoes(argc, argv);

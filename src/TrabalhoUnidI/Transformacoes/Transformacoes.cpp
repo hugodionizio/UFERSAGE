@@ -15,7 +15,11 @@
 #include <GL/freeglut_std.h>
 #include <GL/glu.h>
 
+// Variáveis globais
 static int spin = 0;
+GLfloat win_questao_transformacoes, rQuestaoTransformacoes, gQuestaoTransformacoes, bQuestaoTransformacoes;
+GLint view_w_questao_transformacoes, view_h_questao_transformacoes, primitivaQuestaoTransformacoes;
+
 
 /*  Initialize material property, light source, lighting model,
  *  and depth buffer.
@@ -91,6 +95,19 @@ void keyboardTransformacoes(unsigned char key, int x, int y)
    }
 }
 
+// Função callback chamada para gerenciar eventos do teclado
+// para teclas especiais, tais como F1, PgDn e Home
+void TeclasEspeciaisQuestaoTransformacoes(int key, int x, int y) {
+	if (key == GLUT_KEY_UP) {
+        spin = (spin + 30) % 360;
+	}
+	if (key == GLUT_KEY_DOWN) {
+        spin = (spin - 30) % 360;
+	}
+	glutPostRedisplay();
+}
+
+
 int mainTransformacoes(int argc, char** argv)
 {
    glutInit(&argc, argv);
@@ -103,6 +120,7 @@ int mainTransformacoes(int argc, char** argv)
    glutReshapeFunc(reshapeTransformacoes);
    glutMouseFunc(mouseTransformacoes);
    glutKeyboardFunc(keyboardTransformacoes);
+   glutSpecialFunc(TeclasEspeciaisQuestaoTransformacoes);
    glutMainLoop();
    return 0;
 }
