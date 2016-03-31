@@ -5,6 +5,9 @@
  *      Author: hugo
  */
 
+#include <GL/glew.h>
+#include <GL/glui.h>
+
 #include <iostream>
 
 using namespace std;
@@ -45,6 +48,18 @@ int mainMalha (int argc, char **argv) {
 	Malha m1;
 
 	criarMalha(&m1, 0, 0, 0, 0, 0, 0);
+
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(400, 350);
+	glutInitWindowPosition(10, 10);
+	glutCreateWindow("Malha");
+//	glutDisplayFunc(DesenhaQuadradoInterativo);
+//	glutReshapeFunc(AlteraTamanhoJanela);
+//	glutKeyboardFunc(alteraCorObjetoTeclado);
+//	glutMouseFunc(testeBotaoMouse);
+//	Inicializa();
+	glutMainLoop();
 
 	return (0);
 }

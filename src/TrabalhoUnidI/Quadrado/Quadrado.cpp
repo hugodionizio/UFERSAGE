@@ -167,4 +167,6 @@ int mainQuestaoQuadrado(int argc, char** argv) {
 	glutMouseFunc(testeBotaoMouse);
 	Inicializa();
 	glutMainLoop();
+
+	return (0);
 }

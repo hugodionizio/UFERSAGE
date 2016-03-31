@@ -106,7 +106,7 @@ int main(int argc, char **argv) {
 // Fim da Unidade II
 
 // Trabalho 2 - Unidade II
-//	mainMalha(argc, argv);
+	mainMalha(argc, argv);
 
 // Unidade III
 // Examples (redbook)

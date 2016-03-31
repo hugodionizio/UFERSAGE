@@ -8,7 +8,7 @@
 #ifndef TRABALHOUNIDII_H_
 #define TRABALHOUNIDII_H_
 
-void mainMalha (int, char **);
+int mainMalha (int, char **);
 
 
 #endif /* TRABALHOUNIDII_H_ */
