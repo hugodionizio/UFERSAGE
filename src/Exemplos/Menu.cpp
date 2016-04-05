@@ -20,6 +20,7 @@
 #include <stdio.h>
 #include "Exemplos.h"
 #include "../Examples/examples.h"
+#include "../TrabalhoUnidII/TrabalhoUnidII.h"
 
 // Constantes
 //#define QUADRADO 1
@@ -272,6 +273,9 @@ void DesenhaMenu(void) {
 	case FEEDBACK:
 		displayFeedback();
 		break;
+	case MALHA_PLY:
+		desenharMalha();
+		break;
 	}
 
 	// Exibe a posição do mouse na janela
@@ -382,8 +386,9 @@ void MenuCor(int op) {
 }
 
 // Gerenciamento do menu com as opções de exemplos
-void MenuExemplos(int op) {
-	if (op < NUM_EXAMPLES && op != NUM_PRIM_EXEMPLOS && op != PRIMITIVAS) {
+void MenuImplementacoes(int op) {
+	if (op < NUM_QUESTOES && op != NUM_PRIM_EXEMPLOS &&
+			op != PRIMITIVAS && op != NUM_EXAMPLES) {
 		primitiva = op;
 	}
 	glutPostRedisplay();
@@ -409,7 +414,15 @@ void MenuExemplosUnidadeII(int op) {
 void MenuExemplosUnidadeIII(int op) {
 }
 
-// Gerenciamento do menu principal           
+// Gerenciamento do menu com as opções de exemplos
+void MenuTrabalhos(int op) {
+	if (op < NUM_QUESTOES && op > NUM_EXAMPLES) {
+		primitiva = op;
+	}
+	glutPostRedisplay();
+}
+
+// Gerenciamento do menu principal
 void MenuPrincipal(int op) {
 	if (op < NUM_PRIM_EXEMPLOS || (op > PRIMITIVAS && op < NUM_EXAMPLES)) {
 		primitiva = op;
@@ -419,14 +432,14 @@ void MenuPrincipal(int op) {
 // Criação do Menu
 void CriaMenu() {
 	int menu, submenu1, submenu2, menuRedBook, menuUnidadeI, menuUnidadeII,
-			menuUnidadeIII;
+			menuUnidadeIII, menuTrabalhos;
 
 	submenu1 = glutCreateMenu(MenuCor);
 	glutAddMenuEntry("Vermelho", VERMELHO);
 	glutAddMenuEntry("Verde", VERDE);
 	glutAddMenuEntry("Azul", AZUL);
 
-	submenu2 = glutCreateMenu(MenuExemplos);
+	submenu2 = glutCreateMenu(MenuImplementacoes);
 	glutAddMenuEntry("Quadrado", QUADRADO);
 	glutAddMenuEntry("Triângulo", TRIANGULO);
 	glutAddMenuEntry("Losango", LOSANGO);
@@ -491,7 +504,11 @@ void CriaMenu() {
 	glutAddSubMenu("Unidade II", menuUnidadeII);
 	glutAddSubMenu("Unidade III", menuUnidadeIII);
 
+	menuTrabalhos = glutCreateMenu(MenuTrabalhos);
+	glutAddMenuEntry("Malha Ply", MALHA_PLY);
+
 	menu = glutCreateMenu(MenuPrincipal);
+	glutAddSubMenu("Trabalhos", menuTrabalhos);
 	glutAddMenuEntry("Primeiro Programa", PRIMEIRO_PROGRAMA);
 	glutAddMenuEntry("Anima", ANIMA);
 	glutAddMenuEntry("Interação", INTERACAO);
