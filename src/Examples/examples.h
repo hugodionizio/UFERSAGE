@@ -87,4 +87,40 @@ void displayMoveLight(void);
 void displayMaterial(void);
 void displayColorMat(void);
 
+// Unidade II
+void displayAlpha(void);
+void displayAlpha3D(void);
+void displayAARGB(void);
+void displayAAIndex(void);
+void displayFog(void);
+void displayFogIndex(void);
+void displayPolyOff(void);
+void displayTorus(void);
+void displayList(void);
+void displayStroke(void);
+void displayDrawf(void);
+void displayFont(void);
+void displayImage(void);
+void displayChecker(void);
+void displayTexSub(void);
+void displayMipMap(void);
+void displayTexBind(void);
+void displayTexGen(void);
+void displayStencil(void);
+void displayDof(void);
+
+// Unidade III
+void displayTess(void);
+void displayQuadric(void);
+void displayBezCurve(void);
+void displayBezSurf(void);
+void displayBezMesh(void);
+void displayTextureSurf(void);
+void displaySurface(void);
+void displayPickSquare(void);
+void displayTrim(void);
+void displaySelect(void);
+void displayPickDepth(void);
+void displayFeedback(void);
+
 #endif /* SRC_EXAMPLES_EXAMPLES_H_ */

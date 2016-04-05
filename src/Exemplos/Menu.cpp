@@ -1,7 +1,7 @@
 // Menu.c - Isabel H. Manssour
 // Um programa OpenGL simples que exemplifica
 // como exibir textos e utilizar menus e funções
-// callback para verificar a movimenta��o do 
+// callback para verificar a movimentação do
 // mouse na janela GLUT.
 // Este c�digo est� baseado nos exemplos 
 // dispon�veis no livro "OpenGL SuperBible", 
@@ -26,6 +26,7 @@
 //#define TRIANGULO 2
 //#define LOSANGO   3
 enum Exemplo {
+	// Unidade I
 	// Exemplos (Manssour)
 	PRIMEIRO_PROGRAMA,
 	ANIMA,
@@ -58,6 +59,45 @@ enum Exemplo {
 	MOVELIGHT,
 	MATERIAL,
 	COLORMAT,
+	EXAMPLES_I,
+
+	// Unidade II
+	ALPHA,
+	ALPHA3D,
+	AARGB,
+	AAINDEX,
+	FOG,
+	FOGINDEX,
+	POLYOFF,
+	TORUS,
+	LIST,
+	STROKE,
+	DRAWF,
+	FONT,
+	IMAGE,
+	CHECKER,
+	TEXSUB,
+	MIPMAP,
+	TEXBIND,
+	TEXGEN,
+	STENCIL,
+	DOF,
+	EXAMPLES_II,
+
+	// Unidade III
+	TESS,
+	QUADRIC,
+	BEZCURVE,
+	BEZSURF,
+	BEZMESH,
+	TEXTURESURF,
+	SURFACE,
+	PICKSQUARE,
+	TRIM,
+	SELECT,
+	PICKDEPTH,
+	FEEDBACK,
+	EXAMPLES_III,
 	NUM_EXAMPLES
 };
 
@@ -105,7 +145,7 @@ void DesenhaLosangoMenu(void) {
 // Desenha um texto na janela GLUT
 void DesenhaTextoMenu(char *string) {
 	glPushMatrix();
-	// Posi��o no universo onde o texto ser� colocado
+	// Posição no universo onde o texto ser� colocado
 	glRasterPos2f(-win_menu + win_menu,
 			win_menu - (win_menu * 0.08) + OFFSET_Y / 1.2);
 	// Exibe caracter a caracter
@@ -152,7 +192,7 @@ void DesenhaMenu(void) {
 		DesenhaIluminacao();
 		break;
 
-	// Examples (redbook)
+		// Examples (redbook)
 	case CHUNKOPENGL:
 		displayChunkOpenGL();
 		break;
@@ -207,18 +247,118 @@ void DesenhaMenu(void) {
 	case COLORMAT:
 		displayColorMat();
 		break;
+
+		// Unidade II
+	case ALPHA:
+		displayAlpha();
+		break;
+	case ALPHA3D:
+		displayAlpha3D();
+		break;
+	case AARGB:
+		displayAARGB();
+		break;
+	case AAINDEX:
+		displayAAIndex();
+		break;
+	case FOG:
+		displayFog();
+		break;
+	case FOGINDEX:
+		displayFogIndex();
+		break;
+	case POLYOFF:
+		displayPolyOff(); // ???
+		break;
+	case TORUS:
+		displayTorus();
+		break;
+	case LIST:
+		displayList();
+		break;
+	case STROKE:
+		displayStroke();
+		break;
+	case DRAWF:
+		displayDrawf();
+		break;
+	case FONT:
+		displayFont();
+		break;
+	case IMAGE:
+		displayImage();
+		break;
+	case CHECKER:
+		displayChecker();
+		break;
+	case TEXSUB:
+		displayTexSub(); // ???
+		break;
+	case MIPMAP:
+		displayMipMap();
+		break;
+	case TEXBIND:
+		displayTexBind(); // ??
+		break;
+	case TEXGEN:
+		displayTexGen();
+		break;
+	case STENCIL:
+		displayStencil();
+		break;
+	case DOF:
+		displayDof();
+		break;
+
+		// Unidade III
+	case TESS:
+		displayTess();
+		break;
+	case QUADRIC:
+		displayQuadric();
+		break;
+	case BEZCURVE:
+		displayBezCurve();
+		break;
+	case BEZSURF:
+		displayBezSurf();
+		break;
+	case BEZMESH:
+		displayBezMesh();
+		break;
+	case TEXTURESURF:
+		displayTextureSurf();
+		break;
+	case SURFACE:
+		displaySurface();
+		break;
+	case PICKSQUARE:
+		displayPickSquare();
+		break;
+	case TRIM:
+		displayTrim();
+		break;
+	case SELECT:
+		displaySelect();
+		break;
+	case PICKDEPTH:
+		displayPickDepth();
+		break;
+	case FEEDBACK:
+		displayFeedback();
+		break;
 	}
 
-	// Exibe a posi��o do mouse na janela
+	// Exibe a posição do mouse na janela
 	glColor3f(1.0f, 1.0f, 1.0f);
 	DesenhaTextoMenu(texto);
 
 	glutSwapBuffers();
 }
 
-// Inicializa par�metros de rendering
+// Inicializa parâmetros de rendering
 void InicializaMenu(void) {
-	// Define a cor de fundo da janela de visualiza��o como preta
+	// Define a cor de fundo da janela de visualização como preta
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	win_menu = 150.0f;
 	primitiva = PRIMEIRO_PROGRAMA;
@@ -318,7 +458,7 @@ void MenuCor(int op) {
 
 // Gerenciamento do menu com as opções de exemplos
 void MenuExemplos(int op) {
-	if (op < NUM_EXEMPLOS && op != NUM_PRIM_EXEMPLOS && op != PRIMITIVAS) {
+	if (op < NUM_EXAMPLES && op != NUM_PRIM_EXEMPLOS && op != PRIMITIVAS) {
 		primitiva = op;
 	}
 	glutPostRedisplay();
@@ -332,20 +472,29 @@ void MenuExemplosRedBook(int op) {
 	glutPostRedisplay();
 }
 
-// Gerenciamento do menu com as opções de exemplos
+// Gerenciamento do menu com as opções de exemplos da Unidade I
 void MenuExemplosUnidadeI(int op) {
+}
+
+// Gerenciamento do menu com as opções de exemplos da Unidade II
+void MenuExemplosUnidadeII(int op) {
+}
+
+// Gerenciamento do menu com as opções de exemplos da Unidade III
+void MenuExemplosUnidadeIII(int op) {
 }
 
 // Gerenciamento do menu principal           
 void MenuPrincipal(int op) {
-	if (op < NUM_PRIM_EXEMPLOS || (op > PRIMITIVAS && op < NUM_EXEMPLOS)) {
+	if (op < NUM_PRIM_EXEMPLOS || (op > PRIMITIVAS && op < NUM_EXAMPLES)) {
 		primitiva = op;
 	}
 }
 
-// Criacao do Menu
+// Criação do Menu
 void CriaMenu() {
-	int menu, submenu1, submenu2, submenu3, menuUnidadeI;
+	int menu, submenu1, submenu2, menuRedBook, menuUnidadeI, menuUnidadeII,
+			menuUnidadeIII;
 
 	submenu1 = glutCreateMenu(MenuCor);
 	glutAddMenuEntry("Vermelho", VERMELHO);
@@ -357,7 +506,7 @@ void CriaMenu() {
 	glutAddMenuEntry("Triângulo", TRIANGULO);
 	glutAddMenuEntry("Losango", LOSANGO);
 
-	submenu3 = glutCreateMenu(MenuExemplosRedBook);
+	menuUnidadeI = glutCreateMenu(MenuExemplosRedBook);
 	glutAddMenuEntry("ChunkOpenGL", CHUNKOPENGL);
 	glutAddMenuEntry("Hello", HELLO);
 	glutAddMenuEntry("Double", DOUBLE);
@@ -374,11 +523,48 @@ void CriaMenu() {
 	glutAddMenuEntry("Smooth", SMOOTH);
 	glutAddMenuEntry("Light", LIGHT);
 	glutAddMenuEntry("MoveLight", MOVELIGHT);
-	glutAddMenuEntry("Material", MATERIAL);
 	glutAddMenuEntry("ColorMat", COLORMAT);
 
-	menuUnidadeI = glutCreateMenu(MenuExemplosUnidadeI);
-	glutAddSubMenu("Unidade I", submenu3);
+	menuUnidadeII = glutCreateMenu(MenuExemplosRedBook);
+	glutAddMenuEntry("Alpha",ALPHA);
+	glutAddMenuEntry("Alpha3D",ALPHA3D);
+	glutAddMenuEntry("AARGB",AARGB);
+	glutAddMenuEntry("AAIndex",AAINDEX);
+	glutAddMenuEntry("Fog",FOG);
+	glutAddMenuEntry("FogIndex",FOGINDEX);
+	glutAddMenuEntry("PolyOff",POLYOFF);
+	glutAddMenuEntry("Torus",TORUS);
+	glutAddMenuEntry("List",LIST);
+	glutAddMenuEntry("Stroke",STROKE);
+	glutAddMenuEntry("Drawf",DRAWF);
+	glutAddMenuEntry("Font",FONT);
+	glutAddMenuEntry("Image",IMAGE);
+	glutAddMenuEntry("Checker",CHECKER);
+	glutAddMenuEntry("TexSub",TEXSUB);
+	glutAddMenuEntry("MipMap",MIPMAP);
+	glutAddMenuEntry("TexBind",TEXBIND);
+	glutAddMenuEntry("TexGen",TEXGEN);
+	glutAddMenuEntry("Stencil",STENCIL);
+	glutAddMenuEntry("Dof",DOF);
+
+	menuUnidadeIII = glutCreateMenu(MenuExemplosRedBook);
+	glutAddMenuEntry("Tess",TESS);
+	glutAddMenuEntry("Quadric",QUADRIC);
+	glutAddMenuEntry("BezCurve",BEZCURVE);
+	glutAddMenuEntry("BezSurf",BEZSURF);
+	glutAddMenuEntry("BezMesh",BEZMESH);
+	glutAddMenuEntry("TextureSurf",TEXTURESURF);
+	glutAddMenuEntry("Surface",SURFACE);
+	glutAddMenuEntry("PickSquare",PICKSQUARE);
+	glutAddMenuEntry("Trim",TRIM);
+	glutAddMenuEntry("Select",SELECT);
+	glutAddMenuEntry("PickDepth",PICKDEPTH);
+	glutAddMenuEntry("Feedback",FEEDBACK);
+
+	menuRedBook = glutCreateMenu(MenuExemplosUnidadeI);
+	glutAddSubMenu("Unidade I", menuUnidadeI);
+	glutAddSubMenu("Unidade II", menuUnidadeII);
+	glutAddSubMenu("Unidade III", menuUnidadeIII);
 
 	menu = glutCreateMenu(MenuPrincipal);
 	glutAddMenuEntry("Primeiro Programa", PRIMEIRO_PROGRAMA);
@@ -388,7 +574,7 @@ void CriaMenu() {
 	glutAddSubMenu("Primitivas", submenu2);
 	glutAddMenuEntry("TeaPot3D", TEAPOT3D);
 	glutAddMenuEntry("Iluminação", ILUMINACAO);
-	glutAddSubMenu("Outros exemplos", menuUnidadeI);
+	glutAddSubMenu("Outros exemplos", menuRedBook);
 
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
