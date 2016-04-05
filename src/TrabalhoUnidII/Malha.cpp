@@ -12,6 +12,11 @@
 
 using namespace std;
 
+#include "../Examples/examples.h"
+
+enum TrabalhoII {
+	MALHA_PLY = NUM_EXAMPLES + 1, NUM_QUESTOES
+};
 
 struct Vertice {
 	float x;
@@ -45,7 +50,14 @@ void criarMalha(Malha *m, float v1x, float v1y, float v2x, float v2y, float v3x,
 }
 
 int mainMalha (int argc, char **argv) {
+	// Malha 3D
 	Malha m1;
+
+	// Ler malha de um arquivo
+	cout << "Lendo malha de arquivo .ply..." << endl;
+
+	// Gravar/atualizar/substituir malha em um arquivo
+	cout << "Gravando malha em arquivo .ply..." << endl;
 
 	criarMalha(&m1, 0, 0, 0, 0, 0, 0);
 

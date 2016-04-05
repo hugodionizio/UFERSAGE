@@ -8,6 +8,70 @@
 #ifndef SRC_EXAMPLES_EXAMPLES_H_
 #define SRC_EXAMPLES_EXAMPLES_H_
 
+#include "../Exemplos/Exemplos.h"
+
+enum Example {
+	// Examples (redbook)
+	CHUNKOPENGL = NUM_EXEMPLOS + 1,
+	HELLO,
+	DOUBLE,
+	LINES,
+	POLYS,
+	VARRAY,
+	MVARRAY,
+	CUBE,
+	MODEL,
+	CLIP,
+	PLANET,
+	ROBOT,
+	UNPROJECT,
+	SMOOTH,
+	LIGHT,
+	MOVELIGHT,
+	MATERIAL,
+	COLORMAT,
+	EXAMPLES_I,
+
+	// Unidade II
+	ALPHA,
+	ALPHA3D,
+	AARGB,
+	AAINDEX,
+	FOG,
+	FOGINDEX,
+	POLYOFF,
+	TORUS,
+	LIST,
+	STROKE,
+	DRAWF,
+	FONT,
+	IMAGE,
+	CHECKER,
+	TEXSUB,
+	MIPMAP,
+	TEXBIND,
+	TEXGEN,
+	STENCIL,
+	DOF,
+	EXAMPLES_II,
+
+	// Unidade III
+	TESS,
+	QUADRIC,
+	BEZCURVE,
+	BEZSURF,
+	BEZMESH,
+	TEXTURESURF,
+	SURFACE,
+	PICKSQUARE,
+	TRIM,
+	SELECT,
+	PICKDEPTH,
+	FEEDBACK,
+	EXAMPLES_III,
+	NUM_EXAMPLES
+};
+
 // Unidade I
 int mainChunkOpenGL(int, char**);
 int mainHello(int, char**);

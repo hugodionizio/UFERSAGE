@@ -25,81 +25,6 @@
 //#define QUADRADO 1
 //#define TRIANGULO 2
 //#define LOSANGO   3
-enum Exemplo {
-	// Unidade I
-	// Exemplos (Manssour)
-	PRIMEIRO_PROGRAMA,
-	ANIMA,
-	INTERACAO,
-	NUM_PRIM_EXEMPLOS,
-	QUADRADO,
-	TRIANGULO,
-	LOSANGO,
-	PRIMITIVAS,
-	TEAPOT3D,
-	ILUMINACAO,
-	NUM_EXEMPLOS,
-
-	// Examples (redbook)
-	CHUNKOPENGL,
-	HELLO,
-	DOUBLE,
-	LINES,
-	POLYS,
-	VARRAY,
-	MVARRAY,
-	CUBE,
-	MODEL,
-	CLIP,
-	PLANET,
-	ROBOT,
-	UNPROJECT,
-	SMOOTH,
-	LIGHT,
-	MOVELIGHT,
-	MATERIAL,
-	COLORMAT,
-	EXAMPLES_I,
-
-	// Unidade II
-	ALPHA,
-	ALPHA3D,
-	AARGB,
-	AAINDEX,
-	FOG,
-	FOGINDEX,
-	POLYOFF,
-	TORUS,
-	LIST,
-	STROKE,
-	DRAWF,
-	FONT,
-	IMAGE,
-	CHECKER,
-	TEXSUB,
-	MIPMAP,
-	TEXBIND,
-	TEXGEN,
-	STENCIL,
-	DOF,
-	EXAMPLES_II,
-
-	// Unidade III
-	TESS,
-	QUADRIC,
-	BEZCURVE,
-	BEZSURF,
-	BEZMESH,
-	TEXTURESURF,
-	SURFACE,
-	PICKSQUARE,
-	TRIM,
-	SELECT,
-	PICKDEPTH,
-	FEEDBACK,
-	EXAMPLES_III,
-	NUM_EXAMPLES
-};
 
 enum Cor {
 	VERMELHO, VERDE, AZUL, NUM_CORES
@@ -526,40 +451,40 @@ void CriaMenu() {
 	glutAddMenuEntry("ColorMat", COLORMAT);
 
 	menuUnidadeII = glutCreateMenu(MenuExemplosRedBook);
-	glutAddMenuEntry("Alpha",ALPHA);
-	glutAddMenuEntry("Alpha3D",ALPHA3D);
-	glutAddMenuEntry("AARGB",AARGB);
-	glutAddMenuEntry("AAIndex",AAINDEX);
-	glutAddMenuEntry("Fog",FOG);
-	glutAddMenuEntry("FogIndex",FOGINDEX);
-	glutAddMenuEntry("PolyOff",POLYOFF);
-	glutAddMenuEntry("Torus",TORUS);
-	glutAddMenuEntry("List",LIST);
-	glutAddMenuEntry("Stroke",STROKE);
-	glutAddMenuEntry("Drawf",DRAWF);
-	glutAddMenuEntry("Font",FONT);
-	glutAddMenuEntry("Image",IMAGE);
-	glutAddMenuEntry("Checker",CHECKER);
-	glutAddMenuEntry("TexSub",TEXSUB);
-	glutAddMenuEntry("MipMap",MIPMAP);
-	glutAddMenuEntry("TexBind",TEXBIND);
-	glutAddMenuEntry("TexGen",TEXGEN);
-	glutAddMenuEntry("Stencil",STENCIL);
-	glutAddMenuEntry("Dof",DOF);
+	glutAddMenuEntry("Alpha", ALPHA);
+	glutAddMenuEntry("Alpha3D", ALPHA3D);
+	glutAddMenuEntry("AARGB", AARGB);
+	glutAddMenuEntry("AAIndex", AAINDEX);
+	glutAddMenuEntry("Fog", FOG);
+	glutAddMenuEntry("FogIndex", FOGINDEX);
+	glutAddMenuEntry("PolyOff", POLYOFF);
+	glutAddMenuEntry("Torus", TORUS);
+	glutAddMenuEntry("List", LIST);
+	glutAddMenuEntry("Stroke", STROKE);
+	glutAddMenuEntry("Drawf", DRAWF);
+	glutAddMenuEntry("Font", FONT);
+	glutAddMenuEntry("Image", IMAGE);
+	glutAddMenuEntry("Checker", CHECKER);
+	glutAddMenuEntry("TexSub", TEXSUB);
+	glutAddMenuEntry("MipMap", MIPMAP);
+	glutAddMenuEntry("TexBind", TEXBIND);
+	glutAddMenuEntry("TexGen", TEXGEN);
+	glutAddMenuEntry("Stencil", STENCIL);
+	glutAddMenuEntry("Dof", DOF);
 
 	menuUnidadeIII = glutCreateMenu(MenuExemplosRedBook);
-	glutAddMenuEntry("Tess",TESS);
-	glutAddMenuEntry("Quadric",QUADRIC);
-	glutAddMenuEntry("BezCurve",BEZCURVE);
-	glutAddMenuEntry("BezSurf",BEZSURF);
-	glutAddMenuEntry("BezMesh",BEZMESH);
-	glutAddMenuEntry("TextureSurf",TEXTURESURF);
-	glutAddMenuEntry("Surface",SURFACE);
-	glutAddMenuEntry("PickSquare",PICKSQUARE);
-	glutAddMenuEntry("Trim",TRIM);
-	glutAddMenuEntry("Select",SELECT);
-	glutAddMenuEntry("PickDepth",PICKDEPTH);
-	glutAddMenuEntry("Feedback",FEEDBACK);
+	glutAddMenuEntry("Tess", TESS);
+	glutAddMenuEntry("Quadric", QUADRIC);
+	glutAddMenuEntry("BezCurve", BEZCURVE);
+	glutAddMenuEntry("BezSurf", BEZSURF);
+	glutAddMenuEntry("BezMesh", BEZMESH);
+	glutAddMenuEntry("TextureSurf", TEXTURESURF);
+	glutAddMenuEntry("Surface", SURFACE);
+	glutAddMenuEntry("PickSquare", PICKSQUARE);
+	glutAddMenuEntry("Trim", TRIM);
+	glutAddMenuEntry("Select", SELECT);
+	glutAddMenuEntry("PickDepth", PICKDEPTH);
+	glutAddMenuEntry("Feedback", FEEDBACK);
 
 	menuRedBook = glutCreateMenu(MenuExemplosUnidadeI);
 	glutAddSubMenu("Unidade I", menuUnidadeI);

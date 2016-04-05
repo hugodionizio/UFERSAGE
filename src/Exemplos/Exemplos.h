@@ -8,6 +8,22 @@
 #ifndef EXEMPLOS_MOUSE_H_
 #define EXEMPLOS_MOUSE_H_
 
+enum Exemplo {
+	// Unidade I
+	// Exemplos (Manssour)
+	PRIMEIRO_PROGRAMA,
+	ANIMA,
+	INTERACAO,
+	NUM_PRIM_EXEMPLOS,
+	QUADRADO,
+	TRIANGULO,
+	LOSANGO,
+	PRIMITIVAS,
+	TEAPOT3D,
+	ILUMINACAO,
+	NUM_EXEMPLOS
+};
+
 // Exercícios
 int mainAula01(int, char**);
 int mainMouse(int, char **);
