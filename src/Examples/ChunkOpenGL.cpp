@@ -44,6 +44,10 @@
 
 #include "whateverYouNeed.h"
 
+void displayChunkOpenGL(void) {
+
+}
+
 void InitializeAWindowPlease() {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(400, 350);

@@ -66,4 +66,25 @@ int mainFeedback(int, char**);
 
 int mainVortex(int, char**);
 
+// Funções
+// Unidade I
+void displayChunkOpenGL(void);
+void displayHello(void);
+void displayDouble(void);
+void displayLines(void);
+void displayPolys(void);
+void displayVarray(void);
+void displayMVArray(void);
+void displayCube(void);
+void displayModel(void);
+void displayClip(void);
+void displayPlanet(void);
+void displayRobot(void);
+void displayUnProject(void);
+void displaySmooth(void);
+void displayLight(void);
+void displayMoveLight(void);
+void displayMaterial(void);
+void displayColorMat(void);
+
 #endif /* SRC_EXAMPLES_EXAMPLES_H_ */

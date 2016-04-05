@@ -7,6 +7,10 @@
 
 #include "whateverYouNeed.h"
 
+void displayMVArray(void) {
+
+}
+
 /*
 void glMultiDrawElements(GLenum mode, GLsizei *count, GLenum type,
 		const GLvoid **indices, GLsizei primcount) {

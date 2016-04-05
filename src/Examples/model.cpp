@@ -49,6 +49,10 @@ void draw_triangle() {
 	std::cout << "Model..." << std::endl;
 }
 
+void displayModel(void) {
+
+}
+
 int mainModel(int argc, char **argv) {
 	glLoadIdentity();
 	glColor3f(1.0, 1.0, 1.0);

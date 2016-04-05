@@ -44,6 +44,10 @@
 
 #include "whateverYouNeed.h"
 
+void displayVarray(void) {
+
+}
+
 int mainVarray(int argc, char **argv) {
 	static GLint vertices[] = { 25, 25, 100, 325, 175, 25, 175, 325, 250, 25, 325,
 			325 };

@@ -14,6 +14,8 @@
 # include <GL/glut.h>
 #endif
 
+#include "Exemplos.h"
+
 // Tamanho e posi��o inicial do quadrado
 GLfloat x1 = 100.0f;
 GLfloat y1 = 150.0f;

@@ -24,5 +24,13 @@ int mainMenu(int, char **);
 int mainTeaPot3D(int, char **);
 int mainIluminacao(int, char **);
 
+// Funções
+void DesenhaPrimeiroPrograma(void);
+void DesenhaAnima(void);
+void DesenhaInteracao(void);
+void Timer(int);
+//void AlteraTamanhoJanelaAnima(GLsizei w, GLsizei h);
+void DesenhaTeaPot3D(void);
+void DesenhaIluminacao(void);
 
 #endif /* EXEMPLOS_MOUSE_H_ */
