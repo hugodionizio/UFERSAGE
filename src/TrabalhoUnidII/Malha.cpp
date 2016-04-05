@@ -8,6 +8,8 @@
 #include <GL/glew.h>
 #include <GL/glui.h>
 
+// Diretivas
+#include <fstream> // Para a classe de arquivos
 #include <iostream>
 
 using namespace std;
@@ -94,11 +96,17 @@ void inicializarMalha(void) {
 }
 
 void desenharMalha(void) {
+	// Seção de Declarações Internas
+	ifstream fin("Malha.ply", ios::binary);
+
 	// Malha 3D
 	Malha m1;
 
 	// Ler malha de um arquivo
 	cout << "Lendo malha de arquivo .ply..." << endl;
+
+	while (fin.read(reinterpret_cast<char *>(&m1), sizeof(Malha))) {
+	}
 
 	criarMalha(&m1, 0, 0, 0, 0, 0, 0);
 
