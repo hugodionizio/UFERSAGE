@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 //	mainQuadrado(argc, argv);
 //	mainAnima(argc, argv);
 //	mainInteracao(argc, argv);
-	mainMenu(argc, argv);
+//	mainMenu(argc, argv);
 //	mainTeaPot3D(argc, argv);
 //	mainIluminacao(argc, argv);
 
@@ -106,7 +106,7 @@ int main(int argc, char **argv) {
 // Fim da Unidade II
 
 // Trabalho 2 - Unidade II
-//	mainMalha(argc, argv);
+	mainMalha(argc, argv);
 
 // Unidade III
 // Examples (redbook)
