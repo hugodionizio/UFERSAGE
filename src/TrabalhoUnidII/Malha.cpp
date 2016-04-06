@@ -41,6 +41,8 @@ struct Malha {
 
 float x = 0.0, y = 0.0;
 
+FGAPI int     FGAPIENTRY Wind;
+
 // Malha 3D
 Malha m1;
 Face f1;
@@ -105,6 +107,7 @@ void desenharMalha(void) {
 	bool salvar = false;
 	// Seção de Declarações Internas
 	ifstream fin("Malha.ply", ios::binary);
+	ofstream fout2("MalhaTmp.ply", ios::binary);
 
 	// Ler malha de um arquivo
 	cout << "Lendo malha de arquivo .ply..." << endl;
@@ -113,30 +116,40 @@ void desenharMalha(void) {
 		tam++;
 	}
 
-	float v1x;
 	if (tam == 0) {
 		cout << "Arquivo inexistente." << endl;
 		criarMalha(&m1, x, y, 6, 8, 10, 12);
 		salvar = true;
-	}
-	else {
+	} else {
 		m1.f = new Face[1];
 		m1.f = &f1;
 		x = m1.f->v1.x;
 		y = m1.f->v1.y;
 	}
+	fin.close();
+
 	cout << "Imprimindo..." << endl;
 //	else {
-		cout << m1.f->v1.x << endl;
-		cout << m1.f->v1.y << endl;
-		cout << m1.f->v2.x << endl;
-		cout << m1.f->v2.y << endl;
-		cout << m1.f->v3.x << endl;
-		cout << m1.f->v3.y << endl;
-//	}
 //		cout << m1.f->v1.x << endl;
+//		cout << m1.f->v1.y << endl;
+//		cout << m1.f->v2.x << endl;
+//		cout << m1.f->v2.y << endl;
+//		cout << m1.f->v3.x << endl;
+//		cout << m1.f->v3.y << endl;
+//	}
 
 	f1 = *m1.f;
+	x = f1.v1.x;
+	y = f1.v1.y;
+
+	cout << x << endl;
+	cout << y << endl;
+	cout << f1.v1.x << endl;
+	cout << f1.v1.y << endl;
+	cout << f1.v2.x << endl;
+	cout << f1.v2.y << endl;
+	cout << f1.v3.x << endl;
+	cout << f1.v3.y << endl;
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_TEXTURE_2D);
@@ -146,32 +159,38 @@ void desenharMalha(void) {
 #endif
 
 	glBegin(GL_QUADS);
-		glTexCoord2f(x, y);
-		glVertex3f(-2.0, -1.0, 0.0);
-		glTexCoord2f(0.0, 1.0);
-		glVertex3f(-2.0, 1.0, 0.0);
-		glTexCoord2f(1.0, 1.0);
-		glVertex3f(0.0, 1.0, 0.0);
-		glTexCoord2f(1.0, 0.0);
-		glVertex3f(0.0, -1.0, 0.0);
+	glTexCoord2f(x, y);
+	glVertex3f(-2.0, -1.0, 0.0);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(-2.0, 1.0, 0.0);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.0, 1.0, 0.0);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(0.0, -1.0, 0.0);
 
-		glTexCoord2f(0.0, 0.0);
-		glVertex3f(1.0, -1.0, 0.0);
-		glTexCoord2f(0.0, 1.0);
-		glVertex3f(1.0, 1.0, 0.0);
-		glTexCoord2f(1.0, 1.0);
-		glVertex3f(2.41421, 1.0, -1.41421);
-		glTexCoord2f(1.0, 0.0);
-		glVertex3f(2.41421, -1.0, -1.41421);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(1.0, -1.0, 0.0);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(1.0, 1.0, 0.0);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(2.41421, 1.0, -1.41421);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(2.41421, -1.0, -1.41421);
 	glEnd();
 
 	if (salvar) {
 //		m1.f->v1.x*=2;
 
-		// Gravar/atualizar/substituir malha em um arquivo
+// Gravar/atualizar/substituir malha em um arquivo
 		cout << "Gravando malha em arquivo .ply..." << endl;
 		ofstream fout("Malha.ply", ios::binary);
 		fout.write(reinterpret_cast<char *>(&f1), sizeof(Face));
+		fout.close();
+	}
+	else {
+		cout << "Fazendo backup..." << endl;
+				fout2.write(reinterpret_cast<char *>(&f1), sizeof(Face));
+				fout2.close();
 	}
 
 	glFlush();
@@ -189,27 +208,59 @@ void redesenharMalha(int w, int h) {
 }
 
 void tecladoMalha(unsigned char key, int x, int y) {
+	ofstream fout("Malha.ply", ios::binary);
+
+	float k = 0.01;
+
 	switch (key) {
 	case 'a':
-		x+=1.0;
+
 		cout << x << endl;
-		break;
-	case 'b':
-		x-=1.0;
-		cout << x << endl;
-		break;
-	case 27:
+		x = 1.0f;
+
 		f1.v1.x = x;
 
-//		cout << "Gravando malha em arquivo .ply..." << endl;
-//		ofstream fout("Malha.ply", ios::binary);
-//		fout.write(reinterpret_cast<char *>(&f1), sizeof(Face));
+		cout << "Incrementado malha em arquivo .ply..." << endl;
+		fout.write(reinterpret_cast<char *>(&f1), sizeof(Face));
 
-		exit(0);
+		cout << x << endl;
+		cout << y << endl;
+		cout << f1.v1.x << endl;
+		cout << f1.v1.y << endl;
+		cout << f1.v2.x << endl;
+		cout << f1.v2.y << endl;
+		cout << f1.v3.x << endl;
+		cout << f1.v3.y << endl;
+
+		cout << "Incrementado." << endl;
+
 		break;
-	default:
+	case 'b':
+		x = 0.0f;
+
+		f1.v1.x = x;
+
+		cout << "Decrementando malha em arquivo .ply..." << endl;
+		fout.write(reinterpret_cast<char *>(&f1), sizeof(Face));
+
+		cout << x << endl;
+		cout << y << endl;
+		cout << f1.v1.x << endl;
+		cout << f1.v1.y << endl;
+		cout << f1.v2.x << endl;
+		cout << f1.v2.y << endl;
+		cout << f1.v3.x << endl;
+		cout << f1.v3.y << endl;
+
+		cout << "Decrementado." << endl;
+
+		break;
+	case 27:
+		glutDestroyWindow(Wind);
+		exit(EXIT_SUCCESS);
 		break;
 	}
+	glutPostRedisplay();
 }
 
 int mainMalha(int argc, char **argv) {
@@ -219,7 +270,7 @@ int mainMalha(int argc, char **argv) {
 	glutInitWindowSize(650, 600);
 	glutInitWindowPosition(100, 100);
 //   glutCreateWindow(argv[0]);
-	glutCreateWindow("Malha Ply");
+	Wind = glutCreateWindow("Malha Ply");
 	inicializarMalha();
 	glutDisplayFunc(desenharMalha);
 	glutReshapeFunc(redesenharMalha);
