@@ -16,6 +16,7 @@ enum TrabalhoII {
 };
 
 int mainMalha (int, char **);
+int mainPly(int, char **);
 
 // Funções
 void desenharMalha(void);
