@@ -387,8 +387,8 @@ void MenuCor(int op) {
 
 // Gerenciamento do menu com as opções de exemplos
 void MenuImplementacoes(int op) {
-	if (op < NUM_QUESTOES && op != NUM_PRIM_EXEMPLOS &&
-			op != PRIMITIVAS && op != NUM_EXAMPLES) {
+	if (op < NUM_QUESTOES && op != NUM_PRIM_EXEMPLOS && op != PRIMITIVAS
+			&& op != NUM_EXAMPLES) {
 		primitiva = op;
 	}
 	glutPostRedisplay();

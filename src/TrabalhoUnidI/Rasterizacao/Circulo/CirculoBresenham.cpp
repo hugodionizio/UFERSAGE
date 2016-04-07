@@ -35,14 +35,14 @@ void displayCirculoBresenham(void) {
 	/*
 	 * Limpar todos os pixels
 	 */
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear (GL_COLOR_BUFFER_BIT);
 
 	/*
 	 * b) Rasterização de cículos, dado o raio de entrada.
 	 * - Utilizando o algoritmo de Bresenham.
 	 */
 	glColor3f(1.0, 1.0, 0.0);
-	glBegin(GL_POINTS);
+	glBegin (GL_POINTS);
 	glColor3f(1.0, 1.0, 0.0);
 	// 1. Receba o valor do raio r e as coordenadas do centro (xc, yc)\
 		e obtenha o primeiro ponto de um círculo centrado na origem: \
@@ -63,24 +63,23 @@ void displayCirculoBresenham(void) {
 	float x = 0;
 	float y = R;
 	float d = 1 - R;
-	float deltaE = 3.0/YMAXIMO;
-	float deltaSE = -2 * R + 5.0/(100*XMAXIMO);
+	float deltaE = 3.0 / YMAXIMO;
+	float deltaSE = -2 * R + 5.0 / (100 * XMAXIMO);
 	PontosCirculo(x, y, 0);
 	cout << x << ", " << y << endl;
 
 	while (y >= x) {
-		if (d <= 0) {	/* Selecione E */
+		if (d <= 0) { /* Selecione E */
 			d += deltaE;
-			deltaE += 2.0/(10*YMAXIMO);
-			deltaSE += 2.0/(10*XMAXIMO);
+			deltaE += 2.0 / (10 * YMAXIMO);
+			deltaSE += 2.0 / (10 * XMAXIMO);
+		} else {
+			d += deltaSE; /* Selecione SE */
+			deltaE += 2.0 / (10 * YMAXIMO);
+			deltaSE += 4.0 / (10 * XMAXIMO);
+			y -= 1.0 / (10 * YMAXIMO);
 		}
-		else {
-			d += deltaSE;	/* Selecione SE */
-			deltaE += 2.0/(10*YMAXIMO);
-			deltaSE += 4.0/(10*XMAXIMO);
-			y-=1.0/(10*YMAXIMO);
-		}
-		x+=1.0/(10*XMAXIMO);
+		x += 1.0 / (10 * XMAXIMO);
 		PontosCirculo(x, y, 0);
 		cout << x << ", " << y << endl;
 	}
@@ -102,7 +101,7 @@ void initCirculoBresenham(void) {
 	/* Inicializar valores de visualização
 	 *
 	 */
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
 }

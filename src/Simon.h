@@ -21,12 +21,10 @@
 #include <iterator>
 #include <vector>
 
-class Simon
-{
+class Simon {
 public:
 	//Structure to hold our element information for each element in Simon.
-	struct element
-	{
+	struct element {
 		float color[3];
 		float translate[3];
 		bool active;
@@ -34,11 +32,17 @@ public:
 	};
 
 	//Game state enumeration to keep track of the current game's state.
-	enum GameState {playSequence, playerInput, playerCorrect, playerIncorrect, gameReady, pause};
+	enum GameState {
+		playSequence,
+		playerInput,
+		playerCorrect,
+		playerIncorrect,
+		gameReady,
+		pause
+	};
 
 	//Constructor
-	Simon()
-	{
+	Simon() {
 		up = new element();
 		down = new element();
 		right = new element();
@@ -94,24 +98,25 @@ public:
 		camera[0] = 0.0;
 		camera[1] = 0.0;
 
-		srand((unsigned)time(0));
+		srand((unsigned) time(0));
 
 		rotationAngle = 0.0f;
 
 		InitSoundEngine();
 
 		up->source = LoadWavFile("Sounds/beep.wav", 0.0500f, 1.0f, AL_FALSE);
-		right->source = LoadWavFile("Sounds/beep.wav", 0.0500f, 0.75f, AL_FALSE);
+		right->source = LoadWavFile("Sounds/beep.wav", 0.0500f, 0.75f,
+				AL_FALSE);
 		down->source = LoadWavFile("Sounds/beep.wav", 0.05f, 0.5f, AL_FALSE);
 		left->source = LoadWavFile("Sounds/beep.wav", 0.05f, 0.25f, AL_FALSE);
 
-		musicSource = LoadWavFile("Sounds/simonMusic.wav", 0.35f, 1.0f, AL_TRUE);
+		musicSource = LoadWavFile("Sounds/simonMusic.wav", 0.35f, 1.0f,
+				AL_TRUE);
 		alSourcePlay(musicSource);
 	}
 
 	//Destructor
-	~Simon()
-	{
+	~Simon() {
 		alSourceStop(musicSource);
 
 		CleanUpSoundEngine();
@@ -125,17 +130,15 @@ public:
 
 	//Static function to return the instance for Simon.  We only want one instance
 	//of Simon activate at a time.
-	static Simon* Instance()
-	{
+	static Simon* Instance() {
 		static Simon *simon = new Simon();
-		
+
 		return simon;
 	}
 
 	//A function to initialize the sequence, add the first item in the sequence,
 	//and set the game flag to false.
-	void Init()
-	{
+	void Init() {
 		sequence.clear();
 		sequenceCount = 0;
 		AddItemToSequence();
@@ -144,12 +147,9 @@ public:
 
 	//A function to activate the passed element.  This will brighten the
 	//the element on screen.
-	void Activate(element* _element)
-	{
-		if (_element != center)
-		{
-			if (!_element->active)
-			{
+	void Activate(element* _element) {
+		if (_element != center) {
+			if (!_element->active) {
 				for (int i = 0; i < 3; i++)
 					_element->color[i] *= 4.0f;
 
@@ -158,8 +158,7 @@ public:
 			}
 		}
 
-		else
-		{
+		else {
 			if (gameState == GameState::playerCorrect)
 				_element->color[1] *= 100.0f;
 
@@ -170,21 +169,16 @@ public:
 
 	//A function to deactivate the passed element.  This will dim the element
 	//on screen.
-	void Deactivate(element* _element)
-	{
-		if (_element != center)
-		{
-			if (_element->active)
-			{
+	void Deactivate(element* _element) {
+		if (_element != center) {
+			if (_element->active) {
 				for (int i = 0; i < 3; i++)
 					_element->color[i] /= 4.0f;
 
 				_element->active = false;
 
-				if (gameState == GameState::playerInput)
-				{
-					if ((*iter) != _element)
-					{
+				if (gameState == GameState::playerInput) {
+					if ((*iter) != _element) {
 						gameState = GameState::playerIncorrect;
 						flag = false;
 					}
@@ -194,8 +188,7 @@ public:
 			}
 		}
 
-		else 
-		{
+		else {
 			if (gameState == GameState::playerCorrect)
 				_element->color[1] /= 100.0f;
 
@@ -206,8 +199,7 @@ public:
 
 	//A function to rotate the camera according to which elements are active
 	//and not active.
-	void RotateCamera()
-	{
+	void RotateCamera() {
 		if (up->active)
 			if (camera[1] < up->translate[1] / 3)
 				camera[1] += (((up->translate[1] / 3) - camera[1]) / 10.0);
@@ -227,17 +219,15 @@ public:
 		if (!(up->active || down->active))
 			if (camera[1] != 0.0)
 				camera[1] -= (camera[1] / 10.0);
-		
+
 		if (!(right->active || left->active))
 			if (camera[0] != 0.0)
 				camera[0] -= (camera[0] / 10.0);
 	}
-	
+
 	//A function to add a random item to the sequence in our Simon game.
-	void AddItemToSequence()
-	{
-		switch(rand() % 4)
-		{
+	void AddItemToSequence() {
+		switch (rand() % 4) {
 		case 0:
 			sequence.push_back(up);
 			break;
@@ -256,8 +246,7 @@ public:
 	}
 
 	//A function to initialize the openAL sound engine.
-	void InitSoundEngine()
-	{
+	void InitSoundEngine() {
 		device = alcOpenDevice(0);
 		context = alcCreateContext(device, 0);
 
@@ -265,8 +254,7 @@ public:
 	}
 
 	//A function to clean up the openAL elements in the proper order.
-	void CleanUpSoundEngine()
-	{
+	void CleanUpSoundEngine() {
 		alcMakeContextCurrent(NULL);
 		alcDestroyContext(context);
 		alcCloseDevice(device);
@@ -274,8 +262,8 @@ public:
 
 	//A function to load a wav file.  We will pass the file name, the gain, the pitch, and if the
 	//sound should loop.
-	ALuint LoadWavFile(char* _fileName, const float _gain, const float _pitch, const int _loop)
-	{
+	ALuint LoadWavFile(char* _fileName, const float _gain, const float _pitch,
+			const int _loop) {
 		//Declare a file, data, wave format, riff header, and wave data objects.  This will be used
 		//to break down the wave file for playing.
 		FILE* soundFile = NULL;
@@ -297,8 +285,8 @@ public:
 		ALfloat SourceVel[] = { 0.0, 0.0, 0.0 };
 		ALfloat ListenerPos[] = { 0.0, 0.0, 0.0 };
 		ALfloat ListenerVel[] = { 0.0, 0.0, 0.0 };
-		ALfloat ListenerOri[] = { 0.0, 0.0, -1.0, 0.0, 1.0, 0.0 };  
-		
+		ALfloat ListenerOri[] = { 0.0, 0.0, -1.0, 0.0, 1.0, 0.0 };
+
 		//Open the sound file prepping it for reading.
 		soundFile = fopen(_fileName, "rb");
 
@@ -313,38 +301,33 @@ public:
 
 		//Check to see how many bitsPerSample and number of channels the wav
 		//file uses.  Set the format for the wave file based on this information.
-		if (waveFormat.bitsPerSample == 8)
-		{
-			if (waveFormat.numOfChannels == 1)
-			{
+		if (waveFormat.bitsPerSample == 8) {
+			if (waveFormat.numOfChannels == 1) {
 				format = AL_FORMAT_MONO8;
 			}
 
-			else if (waveFormat.numOfChannels == 2)
-			{
+			else if (waveFormat.numOfChannels == 2) {
 				format = AL_FORMAT_STEREO8;
 			}
 		}
 
-		else if (waveFormat.bitsPerSample == 16)
-		{
-			if (waveFormat.numOfChannels == 1)
-			{
+		else if (waveFormat.bitsPerSample == 16) {
+			if (waveFormat.numOfChannels == 1) {
 				format = AL_FORMAT_MONO16;
 			}
 
-			else if (waveFormat.numOfChannels == 2)
-			{
+			else if (waveFormat.numOfChannels == 2) {
 				format = AL_FORMAT_STEREO16;
 			}
 		}
-		
+
 		//Generate a source and buffer in openAL.
 		alGenBuffers(1, &buffer);
 		alGenSources(1, &source);
 
 		//Add the wave data to the buffer using the format and sampleRate of the wav file.
-		alBufferData(buffer, format, data, waveData.subChunk2Size, waveFormat.sampleRate);
+		alBufferData(buffer, format, data, waveData.subChunk2Size,
+				waveFormat.sampleRate);
 
 		//Set the listener position, velocity, and orientation in openAL.
 		alListenerfv(AL_POSITION, ListenerPos);
@@ -365,153 +348,128 @@ public:
 	}
 
 	//Function to play the the sound associated to the element passed.
-	void PlaySoundWav(element* _element)
-	{
+	void PlaySoundWav(element* _element) {
 		alSourcePlay(_element->source);
 	}
 
-	void SaveTime()
-	{
+	void SaveTime() {
 		saveTime = clock();
 	}
 
-	void SetSequenceIter()
-	{
+	void SetSequenceIter() {
 		iter = sequence.begin();
 	}
 
-	void SetGameState(GameState _gameState)
-	{
+	void SetGameState(GameState _gameState) {
 		gameState = _gameState;
 	}
 
-	void SetFlag(bool _flag)
-	{
+	void SetFlag(bool _flag) {
 		flag = _flag;
 	}
 
 	//A function to keep track of the current window size.  This will be used to
 	//reshape the window and help handle the camera rotation when projecting.
-	void SetResolution(int _width, int _height)
-	{
+	void SetResolution(int _width, int _height) {
 		screenResolution[0] = _width;
 		screenResolution[1] = _height;
 	}
-	
+
 	//A function to handle rotating the center element.
-	void RotateAngle()
-	{
+	void RotateAngle() {
 		rotationAngle += 0.5f;
 
 		if (rotationAngle > 360.0f)
 			rotationAngle = 0.0f;
 	}
-	
+
 	//Getter to return the center element rotation angle.
-	const float GetRotationAngle()
-	{
+	const float GetRotationAngle() {
 		return rotationAngle;
 	}
 
 	//A function to return the current iterator for the sequence.
-	std::vector<element*>::iterator& GetSequenceIter()
-	{
+	std::vector<element*>::iterator& GetSequenceIter() {
 		return iter;
 	}
 
 	//A function to advance the iterator in the sequence.
-	void AdvanceSequenceIter()
-	{
+	void AdvanceSequenceIter() {
 		iter++;
 	}
 
 	//Getter to return the current flag status.
-	bool GetFlag()
-	{
+	bool GetFlag() {
 		return flag;
 	}
 
 	//Getter to return the current time saved.
-	clock_t GetSavedTime()
-	{
+	clock_t GetSavedTime() {
 		return saveTime;
 	}
 
 	//Getter to return the current time elapsed.
-	clock_t GetTimer()
-	{
+	clock_t GetTimer() {
 		return clock();
 	}
 
 	//Getter to return the pause between sequence activations to deactivations.
-	const int GetSequencePause()
-	{
+	const int GetSequencePause() {
 		return (((1500 + (sequenceCount * 500)) / sequenceCount) + 250);
 	}
 
 	//Getter to return the pause between sequence deactivations to activations.
-	const int GetBetweenSequencePause()
-	{
+	const int GetBetweenSequencePause() {
 		return 250;
 	}
 
 	//Getter to return the pause after a player is incorrect.
-	const int GetGamePause()
-	{
+	const int GetGamePause() {
 		return 2000;
 	}
 
 	//Getter to return the current sequence.
-	std::vector<element*>& GetSequence()
-	{
+	std::vector<element*>& GetSequence() {
 		return sequence;
 	}
 
 	//Getter to return the current game state.
-	GameState GetGameState()
-	{
+	GameState GetGameState() {
 		return gameState;
 	}
 
 	//Getter to return the Up element.
-	element* GetUp()
-	{
+	element* GetUp() {
 		return up;
 	}
 
 	//Getter to return the Down element.
-	element* GetDown()
-	{
+	element* GetDown() {
 		return down;
 	}
 
 	//Getter to return the Right element.
-	element* GetRight()
-	{
+	element* GetRight() {
 		return right;
 	}
 
 	//Getter to return the Left element.
-	element* GetLeft()
-	{
+	element* GetLeft() {
 		return left;
 	}
 
 	//Getter to return the Center element.
-	element* GetCenter()
-	{
+	element* GetCenter() {
 		return center;
 	}
 
 	//Getter to return the camera coordinates.
-	double* GetCameraRotation()
-	{
+	double* GetCameraRotation() {
 		return camera;
 	}
 
 	//Getter to return the current window resolution.
-	int* GetResolution()
-	{
+	int* GetResolution() {
 		return screenResolution;
 	}
 
@@ -536,15 +494,13 @@ private:
 	ALCcontext* context;
 	ALuint musicSource;
 
-	struct RIFF_Header
-	{
+	struct RIFF_Header {
 		char chunkID[4];
 		long chunkSize;
 		char format[4];
 	};
 
-	struct WAVE_Format
-	{
+	struct WAVE_Format {
 		char subChunkID[4];
 		long subChunkSize;
 		short audioFormat;
@@ -555,8 +511,7 @@ private:
 		short bitsPerSample;
 	};
 
-	struct WAVE_Data
-	{
+	struct WAVE_Data {
 		char subChunkID[4];
 		long subChunk2Size;
 	};

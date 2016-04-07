@@ -90,19 +90,19 @@ void initVao() {
 		glGenBuffers(NumVBOs, buffers);
 		glBindBuffer(GL_ARRAY_BUFFER, buffers[Vertices]);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVerts), cubeVerts,
-				GL_STATIC_DRAW);
+		GL_STATIC_DRAW);
 		glVertexPointer(3, GL_FLOAT, 0, BUFFER_OFFSET(0));
 		glEnableClientState(GL_VERTEX_ARRAY);
 
 		glBindBuffer(GL_ARRAY_BUFFER, buffers[Colors]);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(cubeColors), cubeColors,
-				GL_STATIC_DRAW);
+		GL_STATIC_DRAW);
 		glColorPointer(3, GL_FLOAT, 0, BUFFER_OFFSET(0));
 		glEnableClientState(GL_COLOR_ARRAY);
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[Elements]);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(cubeIndices), cubeIndices,
-				GL_STATIC_DRAW);
+		GL_STATIC_DRAW);
 
 		PrimType[Cube] = GL_QUADS;
 		NumElements[Cube] = NumberOf(cubeIndices);
@@ -136,19 +136,19 @@ void initVao() {
 		glGenBuffers(NumVBOs, buffers);
 		glBindBuffer(GL_ARRAY_BUFFER, buffers[Vertices]);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(coneVerts), coneVerts,
-				GL_STATIC_DRAW);
+		GL_STATIC_DRAW);
 		glVertexPointer(3, GL_FLOAT, 0, BUFFER_OFFSET(0));
 		glEnableClientState(GL_VERTEX_ARRAY);
 
 		glBindBuffer(GL_ARRAY_BUFFER, buffers[Colors]);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(coneColors), coneColors,
-				GL_STATIC_DRAW);
+		GL_STATIC_DRAW);
 		glColorPointer(3, GL_FLOAT, 0, BUFFER_OFFSET(0));
 		glEnableClientState(GL_COLOR_ARRAY);
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[Elements]);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(coneIndices), coneIndices,
-				GL_STATIC_DRAW);
+		GL_STATIC_DRAW);
 
 		PrimType[Cone] = GL_TRIANGLE_FAN;
 		NumElements[Cone] = NumberOf(coneIndices);
@@ -166,13 +166,12 @@ void displayVao() {
 
 	for (i = 0; i < NumVAOs; ++i) {
 		glPushMatrix();
-		glTranslatef(Xform[i].xlate.x, Xform[i].xlate.y,
-				Xform[i].xlate.z);
-		glRotatef(Xform[i].angle, Xform[i].axis.x,
-				Xform[i].axis.y, Xform[i].axis.z);
+		glTranslatef(Xform[i].xlate.x, Xform[i].xlate.y, Xform[i].xlate.z);
+		glRotatef(Xform[i].angle, Xform[i].axis.x, Xform[i].axis.y,
+				Xform[i].axis.z);
 		glBindVertexArray(VAO[i]);
 		glDrawElements(PrimType[i], NumElements[i],
-				GL_UNSIGNED_BYTE, BUFFER_OFFSET(0));
+		GL_UNSIGNED_BYTE, BUFFER_OFFSET(0));
 		glPopMatrix();
 	}
 

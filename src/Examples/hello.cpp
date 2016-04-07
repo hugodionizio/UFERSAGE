@@ -51,18 +51,18 @@ void displayHello(void) {
 	/*
 	 * Limpar todos os pixels
 	 */
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear (GL_COLOR_BUFFER_BIT);
 
 	/*
 	 * Desenhar polígono em branco (retângulo) com cantos em
 	 *  (0.25, 0.25, 0.0) e (0.75, 0.75, 0.0)
 	 */
 	glColor3f(1.0, 1.0, 0.0);
-	glBegin(GL_POLYGON);
-		glVertex3f(.25, .25, 0.0);
-		glVertex3f(.75, .25, 0.0);
-		glVertex3f(.75, .75, 0.0);
-		glVertex3f(.25, .75, 0.0);
+	glBegin (GL_POLYGON);
+	glVertex3f(.25, .25, 0.0);
+	glVertex3f(.75, .25, 0.0);
+	glVertex3f(.75, .75, 0.0);
+	glVertex3f(.25, .75, 0.0);
 	glEnd();
 
 	/*
@@ -81,7 +81,7 @@ void initHello(void) {
 	/*
 	 * Inicializar valores de visualização
 	 */
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0.0f, 1.0f, 0.0f, 1.0f, -1.0f, 1.0f);
 }
@@ -104,6 +104,4 @@ int mainHello(int argc, char** argv) {
 	glutMainLoop();
 	return 0; /* ISO C requer "main" para retornar int */
 }
-
-
 

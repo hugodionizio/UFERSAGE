@@ -36,20 +36,20 @@ void displayParabolaIncremental(void) {
 
 	/*
 	 * c) Implemente a rasterização de uma parábola da forma y = a*x*x + b*x + c, em que a, b e c são
-		parâmetros reais (dados um x inicial e um x final).
-		- Utilizando o algoritmo incremental criado em sala
+	 parâmetros reais (dados um x inicial e um x final).
+	 - Utilizando o algoritmo incremental criado em sala
 	 */
 	x = x0;
 	glColor3f(1.0, 1.0, 0.0);
 	glBegin(GL_POINTS);
 	glColor3f(1.0, 1.0, 0.0);
-		do {
-			y = a*x*x+b*x+c;
-			yinc = floor(y*YMAXIMO+0.2)/YMAXIMO;
-			glVertex3f(x, yinc, 0.0);
-			cout << x << ", " << yinc << endl;
-			x = x + 0.01f / XMAXIMO;
-		} while (x <= x1);
+	do {
+		y = a * x * x + b * x + c;
+		yinc = floor(y * YMAXIMO + 0.2) / YMAXIMO;
+		glVertex3f(x, yinc, 0.0);
+		cout << x << ", " << yinc << endl;
+		x = x + 0.01f / XMAXIMO;
+	} while (x <= x1);
 	glEnd();
 
 	x = x0;
@@ -60,8 +60,8 @@ void displayParabolaIncremental(void) {
 	glBegin(GL_POINTS);
 	glColor3f(0.0, 1.0, 1.0);
 	do {
-		y = a*x*x+b*x+c;
-		yinc = floor(y*YMAXIMO+0.2)/YMAXIMO;
+		y = a * x * x + b * x + c;
+		yinc = floor(y * YMAXIMO + 0.2) / YMAXIMO;
 		glVertex3f(x, yinc, 0.0);
 		cout << x << ", " << yinc << endl;
 		x = x + 0.01f / XMAXIMO;
@@ -76,8 +76,8 @@ void displayParabolaIncremental(void) {
 	glBegin(GL_POINTS);
 	glColor3f(1.0, 0.0, 1.0);
 	do {
-		y = a*x*x+b*x+c;
-		yinc = floor(y*YMAXIMO+0.2)/YMAXIMO;
+		y = a * x * x + b * x + c;
+		yinc = floor(y * YMAXIMO + 0.2) / YMAXIMO;
 		glVertex3f(x, yinc, 0.0);
 		cout << x << ", " << yinc << endl;
 		x = x + 0.01f / XMAXIMO;

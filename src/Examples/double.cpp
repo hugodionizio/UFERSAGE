@@ -48,11 +48,11 @@ static GLfloat spin = 0.0;
 
 void initDouble(void) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
-	glShadeModel (GL_FLAT);
+	glShadeModel(GL_FLAT);
 }
 
 void displayDouble(void) {
-	glClear (GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT);
 	glPushMatrix();
 	glRotatef(spin, 0.0, 0.0, 1.0);
 	glColor3f(1.0, 1.0, 1.0);
@@ -70,10 +70,10 @@ void spinDisplayDouble(void) {
 
 void reshapeDouble(int w, int h) {
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
-	glMatrixMode (GL_PROJECTION);
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-50.0, 50.0, -50.0, 50.0, -1.0, 1.0);
-	glMatrixMode (GL_MODELVIEW);
+	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 }
 
@@ -85,7 +85,7 @@ void mouseDouble(int button, int state, int x, int y) {
 		break;
 	case GLUT_MIDDLE_BUTTON:
 		if (state == GLUT_DOWN)
-			glutIdleFunc (NULL);
+			glutIdleFunc(NULL);
 		break;
 	default:
 		break;

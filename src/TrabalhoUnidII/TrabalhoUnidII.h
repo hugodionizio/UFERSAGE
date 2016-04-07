@@ -11,15 +11,13 @@
 #include "../Examples/examples.h" // Para incrementar MALHA_PLY com NUM_EXAMPLES
 
 enum TrabalhoII {
-	MALHA_PLY = NUM_EXAMPLES + 1,
-	NUM_QUESTOES
+	MALHA_PLY = NUM_EXAMPLES + 1, NUM_QUESTOES
 };
 
-int mainMalha (int, char **);
+int mainMalha(int, char **);
 int mainPly(int, char **);
 
 // Funções
 void desenharMalha(void);
-
 
 #endif /* TRABALHOUNIDII_H_ */

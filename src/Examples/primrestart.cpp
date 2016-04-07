@@ -69,7 +69,7 @@ void initPrimRestart() {
 	glBufferData(GL_ARRAY_BUFFER, 2 * NumPoints * sizeof(GLfloat), NULL,
 	GL_STATIC_DRAW);
 
-	vertices = (GLfloat *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+	vertices = (GLfloat *) glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 	if (vertices == NULL) {
 		fprintf(stderr, "Unable to map vertex buffer\n");
 		exit(EXIT_FAILURE);
@@ -104,7 +104,7 @@ void initPrimRestart() {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
 	NumStrips * (NumPointsPerStrip + 1) * sizeof(GLushort),
 	NULL, GL_STATIC_DRAW);
-	indices = (GLushort *)glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
+	indices = (GLushort *) glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
 
 	if (indices == NULL) {
 		fprintf(stderr, "Unable to map index buffer\n");

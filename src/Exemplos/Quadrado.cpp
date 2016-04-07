@@ -16,24 +16,24 @@
 
 // Fun��o callback chamada para fazer o desenho
 void DesenhaQuadrado(void) {
-	glMatrixMode(GL_MODELVIEW);
+	glMatrixMode (GL_MODELVIEW);
 	glLoadIdentity();
 
 	// Limpa a janela de visualiza��o com a cor de fundo especificada
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear (GL_COLOR_BUFFER_BIT);
 
 	// Especifica que a cor corrente � vermelha
 	//         R     G     B
 	glColor3f(1.0f, 0.0f, 0.0f);
 
 	// Desenha um quadrado preenchido com a cor corrente
-	glBegin(GL_QUADS);
-		glVertex2i(100, 150);
-		glVertex2i(100, 100);
-		// Especifica que a cor corrente � azul
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glVertex2i(150, 100);
-		glVertex2i(150, 150);
+	glBegin (GL_QUADS);
+	glVertex2i(100, 150);
+	glVertex2i(100, 100);
+	// Especifica que a cor corrente � azul
+	glColor3f(0.0f, 0.0f, 1.0f);
+	glVertex2i(150, 100);
+	glVertex2i(150, 150);
 	glEnd();
 
 	// Executa os comandos OpenGL
@@ -56,7 +56,7 @@ void AlteraTamanhoJanelaExemplo(GLsizei w, GLsizei h) {
 	glViewport(0, 0, w, h);
 
 	// Inicializa o sistema de coordenadas
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
 
 	// Estabelece a janela de sele��o (left, right, bottom, top)

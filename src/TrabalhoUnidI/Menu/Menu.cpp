@@ -5,7 +5,6 @@
  *      Author: hugo
  */
 
-
 /*
  * 2. Construa um menu contendo opções para objetos e cores.
  * A opção objetos possibilita a exibição de um determinado
@@ -38,11 +37,7 @@
 
 // Constantes
 enum {
-	QUADRADO = 1,
-	TRIANGULO,
-	LOSANGO,
-	PENTAGONO,
-	HEXAGONO
+	QUADRADO = 1, TRIANGULO, LOSANGO, PENTAGONO, HEXAGONO
 };
 
 // Variáveis
@@ -50,13 +45,13 @@ char textoQuestaoMenu[30];
 GLfloat win_questao_menu, rQuestaoMenu, gQuestaoMenu, bQuestaoMenu;
 GLint view_w_questao_menu, view_h_questao_menu, primitivaQuestaoMenu;
 
-int testeFTGL () {
+int testeFTGL() {
 	// Create a pixmap font from a TrueType file.
 	FTGLPixmapFont font("/home/user/Arial.ttf");
 
 	// If something went wrong, bail out.
-	if(font.Error())
-	    return -1;
+	if (font.Error())
+		return -1;
 
 	// Set the font size and render a small text.
 	font.FaceSize(72);
@@ -65,10 +60,9 @@ int testeFTGL () {
 	return 0;
 }
 
-
 // Função que desenha um losango
 void DesenhaLosangoQuestaoMenu(void) {
-	glBegin(GL_POLYGON);
+	glBegin (GL_POLYGON);
 	glVertex2f(-25.0f, 0.0f);
 	glVertex2f(0.0f, 25.0f);
 	glVertex2f(25.0f, 0.0f);
@@ -80,7 +74,8 @@ void DesenhaLosangoQuestaoMenu(void) {
 void DesenhaTextoQuestaoMenu(char *string) {
 	glPushMatrix();
 	// Posição no universo onde o texto será colocado
-	glRasterPos2f(-win_questao_menu, win_questao_menu - (win_questao_menu * 0.08));
+	glRasterPos2f(-win_questao_menu,
+			win_questao_menu - (win_questao_menu * 0.08));
 	// Exibe caracter a caracter
 	while (*string)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_10, *string++);
@@ -89,10 +84,10 @@ void DesenhaTextoQuestaoMenu(char *string) {
 
 // Função callback chamada para fazer o desenho
 void DesenhaQuestaoMenu(void) {
-	glMatrixMode(GL_MODELVIEW);
+	glMatrixMode (GL_MODELVIEW);
 	glLoadIdentity();
 
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear (GL_COLOR_BUFFER_BIT);
 
 	// Define a cor corrente
 	glColor3f(rQuestaoMenu, gQuestaoMenu, bQuestaoMenu);
@@ -145,9 +140,10 @@ void AlteraTamJanQuestaoMenu(GLsizei w, GLsizei h) {
 	view_h_questao_menu = h;
 
 	// Inicializa o sistema de coordenadas
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(-win_questao_menu, win_questao_menu, -win_questao_menu, win_questao_menu);
+	gluOrtho2D(-win_questao_menu, win_questao_menu, -win_questao_menu,
+			win_questao_menu);
 }
 
 // Função callback chamada sempre que o mouse é movimentado
@@ -171,17 +167,19 @@ void TeclasEspeciaisQuestaoMenu(int key, int x, int y) {
 		win_questao_menu -= 10;
 		if (win_questao_menu < 10)
 			win_questao_menu = 10;
-		glMatrixMode(GL_PROJECTION);
+		glMatrixMode (GL_PROJECTION);
 		glLoadIdentity();
-		gluOrtho2D(-win_questao_menu, win_questao_menu, -win_questao_menu, win_questao_menu);
+		gluOrtho2D(-win_questao_menu, win_questao_menu, -win_questao_menu,
+				win_questao_menu);
 	}
 	if (key == GLUT_KEY_DOWN) {
 		win_questao_menu += 10;
 		if (win_questao_menu > 500)
 			win_questao_menu = 500;
-		glMatrixMode(GL_PROJECTION);
+		glMatrixMode (GL_PROJECTION);
 		glLoadIdentity();
-		gluOrtho2D(-win_questao_menu, win_questao_menu, -win_questao_menu, win_questao_menu);
+		gluOrtho2D(-win_questao_menu, win_questao_menu, -win_questao_menu,
+				win_questao_menu);
 	}
 	glutPostRedisplay();
 }

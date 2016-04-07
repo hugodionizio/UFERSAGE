@@ -12,16 +12,16 @@ void displayMVArray(void) {
 }
 
 /*
-void glMultiDrawElements(GLenum mode, GLsizei *count, GLenum type,
-		const GLvoid **indices, GLsizei primcount) {
-	int i;
+ void glMultiDrawElements(GLenum mode, GLsizei *count, GLenum type,
+ const GLvoid **indices, GLsizei primcount) {
+ int i;
 
-	for (i = 0; i < primcount; i++) {
-	if (count[i] > 0)
-	glDrawElements(mode, count[i], type, indices[i]);
-	}
-}
-*/
+ for (i = 0; i < primcount; i++) {
+ if (count[i] > 0)
+ glDrawElements(mode, count[i], type, indices[i]);
+ }
+ }
+ */
 
 int mainMVArray(int argc, char **argv) {
 	static GLubyte oneIndices[] = { 0, 1, 2, 3, 4, 5, 6 };

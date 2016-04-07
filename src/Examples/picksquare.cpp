@@ -47,16 +47,15 @@
 #include <stdio.h>
 #include <GL/glut.h>
 
-int board[3][3];   /*  amount of color for each square	*/
+int board[3][3]; /*  amount of color for each square	*/
 
 /*  Clear color value for every square on the board   */
-void initPickSquare(void)
-{
-   int i, j;
-   for (i = 0; i < 3; i++) 
-      for (j = 0; j < 3; j ++)
-         board[i][j] = 0;
-   glClearColor (0.0, 0.0, 0.0, 0.0);
+void initPickSquare(void) {
+	int i, j;
+	for (i = 0; i < 3; i++)
+		for (j = 0; j < 3; j++)
+			board[i][j] = 0;
+	glClearColor(0.0, 0.0, 0.0, 0.0);
 }
 
 /*  The nine squares are drawn.  In selection mode, each 
@@ -65,51 +64,52 @@ void initPickSquare(void)
  *  square is determined by its position on the grid, and 
  *  the value in the board[][] array.
  */
-void drawSquares(GLenum mode)
-{
-   GLuint i, j;
-   for (i = 0; i < 3; i++) {
-      if (mode == GL_SELECT)
-         glLoadName (i);
-      for (j = 0; j < 3; j ++) {
-         if (mode == GL_SELECT)
-            glPushName (j);
-         glColor3f ((GLfloat) i/3.0, (GLfloat) j/3.0, 
-                    (GLfloat) board[i][j]/3.0);
-         glRecti (i, j, i+1, j+1);
-         if (mode == GL_SELECT)
-            glPopName ();
-      }
-   }
+void drawSquares(GLenum mode) {
+	GLuint i, j;
+	for (i = 0; i < 3; i++) {
+		if (mode == GL_SELECT)
+			glLoadName(i);
+		for (j = 0; j < 3; j++) {
+			if (mode == GL_SELECT)
+				glPushName(j);
+			glColor3f((GLfloat) i / 3.0, (GLfloat) j / 3.0,
+					(GLfloat) board[i][j] / 3.0);
+			glRecti(i, j, i + 1, j + 1);
+			if (mode == GL_SELECT)
+				glPopName();
+		}
+	}
 }
 
 /*  processHits prints out the contents of the 
  *  selection array.
  */
-void processHitsPickSquare (GLint hits, GLuint buffer[])
-{
-   unsigned int i, j;
-   GLuint ii, jj, names, *ptr;
+void processHitsPickSquare(GLint hits, GLuint buffer[]) {
+	unsigned int i, j;
+	GLuint ii, jj, names, *ptr;
 
-   printf ("hits = %d\n", hits);
-   ptr = (GLuint *) buffer;
-   for (i = 0; i < hits; i++) {	/*  for each hit  */
-      names = *ptr;
-      printf (" number of names for this hit = %d\n", names); ptr++;
-      printf("  z1 is %g;", (float) *ptr/0x7fffffff); ptr++;
-      printf(" z2 is %g\n", (float) *ptr/0x7fffffff); ptr++;
-      printf ("   names are ");
-      for (j = 0; j < names; j++) { /*  for each name */
-         printf ("%d ", *ptr);
-         if (j == 0)  /*  set row and column  */
-            ii = *ptr;
-         else if (j == 1)
-            jj = *ptr;
-         ptr++;
-      }
-      printf ("\n");
-      board[ii][jj] = (board[ii][jj] + 1) % 3;
-   }
+	printf("hits = %d\n", hits);
+	ptr = (GLuint *) buffer;
+	for (i = 0; i < hits; i++) { /*  for each hit  */
+		names = *ptr;
+		printf(" number of names for this hit = %d\n", names);
+		ptr++;
+		printf("  z1 is %g;", (float) *ptr / 0x7fffffff);
+		ptr++;
+		printf(" z2 is %g\n", (float) *ptr / 0x7fffffff);
+		ptr++;
+		printf("   names are ");
+		for (j = 0; j < names; j++) { /*  for each name */
+			printf("%d ", *ptr);
+			if (j == 0) /*  set row and column  */
+				ii = *ptr;
+			else if (j == 1)
+				jj = *ptr;
+			ptr++;
+		}
+		printf("\n");
+		board[ii][jj] = (board[ii][jj] + 1) % 3;
+	}
 }
 
 /*  pickSquares() sets up selection mode, name stack, 
@@ -118,80 +118,75 @@ void processHitsPickSquare (GLint hits, GLuint buffer[])
  */
 #define BUFSIZE 512
 
-void pickSquares(int button, int state, int x, int y)
-{
-   GLuint selectBuf[BUFSIZE];
-   GLint hits;
-   GLint viewport[4];
+void pickSquares(int button, int state, int x, int y) {
+	GLuint selectBuf[BUFSIZE];
+	GLint hits;
+	GLint viewport[4];
 
-   if (button != GLUT_LEFT_BUTTON || state != GLUT_DOWN)
-      return;
+	if (button != GLUT_LEFT_BUTTON || state != GLUT_DOWN)
+		return;
 
-   glGetIntegerv (GL_VIEWPORT, viewport);
+	glGetIntegerv(GL_VIEWPORT, viewport);
 
-   glSelectBuffer (BUFSIZE, selectBuf);
-   (void) glRenderMode (GL_SELECT);
+	glSelectBuffer(BUFSIZE, selectBuf);
+	(void) glRenderMode(GL_SELECT);
 
-   glInitNames();
-   glPushName(0);
+	glInitNames();
+	glPushName(0);
 
-   glMatrixMode (GL_PROJECTION);
-   glPushMatrix ();
-   glLoadIdentity ();
-/*  create 5x5 pixel picking region near cursor location	*/
-   gluPickMatrix ((GLdouble) x, (GLdouble) (viewport[3] - y), 
-                  5.0, 5.0, viewport);
-   gluOrtho2D (0.0, 3.0, 0.0, 3.0);
-   drawSquares (GL_SELECT);
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	/*  create 5x5 pixel picking region near cursor location	*/
+	gluPickMatrix((GLdouble) x, (GLdouble) (viewport[3] - y), 5.0, 5.0,
+			viewport);
+	gluOrtho2D(0.0, 3.0, 0.0, 3.0);
+	drawSquares(GL_SELECT);
 
-   glMatrixMode (GL_PROJECTION);
-   glPopMatrix ();
-   glFlush ();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glFlush();
 
-   hits = glRenderMode (GL_RENDER);
-   processHitsPickSquare (hits, selectBuf);
-   glutPostRedisplay();
-} 
-
-void displayPickSquare(void)
-{
-   glClear(GL_COLOR_BUFFER_BIT);
-   drawSquares (GL_RENDER);
-   glFlush();
+	hits = glRenderMode(GL_RENDER);
+	processHitsPickSquare(hits, selectBuf);
+	glutPostRedisplay();
 }
 
-void reshapePickSquare(int w, int h)
-{
-   glViewport(0, 0, w, h);
-   glMatrixMode(GL_PROJECTION);
-   glLoadIdentity();
-   gluOrtho2D (0.0, 3.0, 0.0, 3.0);
-   glMatrixMode(GL_MODELVIEW);
-   glLoadIdentity();
+void displayPickSquare(void) {
+	glClear(GL_COLOR_BUFFER_BIT);
+	drawSquares(GL_RENDER);
+	glFlush();
 }
 
-void keyboardPickSquare(unsigned char key, int x, int y)
-{
-   switch (key) {
-      case 27:
-         exit(0);
-         break;
-   }
+void reshapePickSquare(int w, int h) {
+	glViewport(0, 0, w, h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(0.0, 3.0, 0.0, 3.0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+}
+
+void keyboardPickSquare(unsigned char key, int x, int y) {
+	switch (key) {
+	case 27:
+		exit(0);
+		break;
+	}
 }
 
 /* Main Loop */
-int mainPickSquare(int argc, char** argv)
-{
-   glutInit(&argc, argv);
-   glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
-   glutInitWindowSize (100, 100);
-   glutInitWindowPosition (100, 100);
-   glutCreateWindow (argv[0]);
-   initPickSquare ();
-   glutReshapeFunc (reshapePickSquare);
-   glutDisplayFunc(displayPickSquare); 
-   glutMouseFunc (pickSquares);
-   glutKeyboardFunc (keyboardPickSquare);
-   glutMainLoop();
-   return 0; 
+int mainPickSquare(int argc, char** argv) {
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(100, 100);
+	glutInitWindowPosition(100, 100);
+	glutCreateWindow(argv[0]);
+	initPickSquare();
+	glutReshapeFunc(reshapePickSquare);
+	glutDisplayFunc(displayPickSquare);
+	glutMouseFunc(pickSquares);
+	glutKeyboardFunc(keyboardPickSquare);
+	glutMainLoop();
+	return 0;
 }

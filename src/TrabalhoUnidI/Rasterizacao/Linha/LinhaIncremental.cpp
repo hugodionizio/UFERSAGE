@@ -48,14 +48,14 @@ void displayLinhaIncremental(void) {
 	float yinc;
 	glColor3f(0.0, 1.0, 0.0);
 	glBegin(GL_POINTS);
-		glColor3f(0.0, 1.0, 0.0);
-		do {
-			yinc = floor(0.4f *(y + 0.5)) / YMAXIMO;
-			glVertex3f(x, yinc, 0.0);
-			cout << x << ", " << yinc << endl;
-			x = x + 0.4f / XMAXIMO;
-			y = y + m;
-		} while (x <= x1);
+	glColor3f(0.0, 1.0, 0.0);
+	do {
+		yinc = floor(0.4f * (y + 0.5)) / YMAXIMO;
+		glVertex3f(x, yinc, 0.0);
+		cout << x << ", " << yinc << endl;
+		x = x + 0.4f / XMAXIMO;
+		y = y + m;
+	} while (x <= x1);
 	glEnd();
 
 	/*

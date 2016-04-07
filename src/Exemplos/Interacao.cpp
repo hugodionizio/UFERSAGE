@@ -19,12 +19,12 @@ GLint view_w, view_h;
 
 // Fun��o callback chamada para fazer o desenho
 void DesenhaInteracao(void) {
-	glMatrixMode(GL_MODELVIEW);
+	glMatrixMode (GL_MODELVIEW);
 	glLoadIdentity();
 
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear (GL_COLOR_BUFFER_BIT);
 	// Desenha um ret�ngulo preenchido com a cor corrente
-	glBegin(GL_POLYGON);
+	glBegin (GL_POLYGON);
 	glVertex2f(0.0f, 0.0f);
 	glVertex2f(xf, 0.0f);
 	glVertex2f(xf, yf);
@@ -50,7 +50,7 @@ void AlteraTamanhoJanelaInteracao(GLsizei w, GLsizei h) {
 	view_h = h;
 
 	// Inicializa o sistema de coordenadas
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(-win, win, -win, win);
 }
@@ -91,13 +91,13 @@ void GerenciaMouseInteracao(int button, int state, int x, int y) {
 void TeclasEspeciaisInteracao(int key, int x, int y) {
 	if (key == GLUT_KEY_UP) {
 		win -= 20;
-		glMatrixMode(GL_PROJECTION);
+		glMatrixMode (GL_PROJECTION);
 		glLoadIdentity();
 		gluOrtho2D(-win, win, -win, win);
 	}
 	if (key == GLUT_KEY_DOWN) {
 		win += 20;
-		glMatrixMode(GL_PROJECTION);
+		glMatrixMode (GL_PROJECTION);
 		glLoadIdentity();
 		gluOrtho2D(-win, win, -win, win);
 	}

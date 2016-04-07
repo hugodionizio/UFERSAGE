@@ -45,13 +45,13 @@ void displayExpoenteIncremental(void) {
 	glColor3f(1.0, 1.0, 0.0); // Vermelho
 	glBegin(GL_POINTS);
 	glColor3f(1.0, 1.0, 0.0);
-		do {
-			y = a*exp(b*x);
-			yinc = floor(y*YMAXIMO+0.5)/YMAXIMO;
-			glVertex3f(x, yinc, 0.0);
-			cout << x << ", " << yinc << endl;
-			x = x + 0.01f / XMAXIMO;
-		} while (x <= x1);
+	do {
+		y = a * exp(b * x);
+		yinc = floor(y * YMAXIMO + 0.5) / YMAXIMO;
+		glVertex3f(x, yinc, 0.0);
+		cout << x << ", " << yinc << endl;
+		x = x + 0.01f / XMAXIMO;
+	} while (x <= x1);
 	glEnd();
 
 	x = x0;
@@ -60,13 +60,13 @@ void displayExpoenteIncremental(void) {
 	glColor3f(0.0, 1.0, 0.0); // Verde
 	glBegin(GL_POINTS);
 	glColor3f(0.0, 1.0, 0.0);
-		do {
-			y = a*exp(b*x);
-			yinc = floor(y*YMAXIMO+0.5)/YMAXIMO;
-			glVertex3f(x, yinc, 0.0);
+	do {
+		y = a * exp(b * x);
+		yinc = floor(y * YMAXIMO + 0.5) / YMAXIMO;
+		glVertex3f(x, yinc, 0.0);
 //			cout << x << ", " << yinc << endl;
-			x = x + 0.01f / XMAXIMO;
-		} while (x <= x1);
+		x = x + 0.01f / XMAXIMO;
+	} while (x <= x1);
 	glEnd();
 
 	x = x0;
@@ -75,13 +75,13 @@ void displayExpoenteIncremental(void) {
 	glColor3f(0.0, 0.0, 1.0); // Azul
 	glBegin(GL_POINTS);
 	glColor3f(0.0, 0.0, 1.0);
-		do {
-			y = a*exp(b*x);
-			yinc = floor(y*YMAXIMO)/YMAXIMO;
-			glVertex3f(x, yinc, 0.0);
-			cout << x << ", " << yinc << endl;
-			x = x + 0.01f / XMAXIMO;
-		} while (x <= x1);
+	do {
+		y = a * exp(b * x);
+		yinc = floor(y * YMAXIMO) / YMAXIMO;
+		glVertex3f(x, yinc, 0.0);
+		cout << x << ", " << yinc << endl;
+		x = x + 0.01f / XMAXIMO;
+	} while (x <= x1);
 	glEnd();
 	/*
 	 * Sem pausa!

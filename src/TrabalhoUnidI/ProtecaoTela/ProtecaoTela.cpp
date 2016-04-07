@@ -5,7 +5,6 @@
  *      Author: hugo
  */
 
-
 /*
  * 4. Implementar uma proteção de tela em OpenGL onde a figura
  * geométrica animada fique passeando pela tela e
@@ -42,25 +41,26 @@ GLfloat windowHeightProtecaoTela;
 
 // Fun��o callback chamada para fazer o desenho
 void DesenhaProtecaoTela(void) {
-	glMatrixMode(GL_MODELVIEW);
+	glMatrixMode (GL_MODELVIEW);
 	glLoadIdentity();
 
 	// Limpa a janela de visualiza��o com a cor de fundo especificada
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear (GL_COLOR_BUFFER_BIT);
 
 	// Especifica que a cor corrente � vermelha
 	//         R     G     B
 	glColor3f(1.0f, 0.0f, 0.0f);
 
 	// Desenha um quadrado preenchido com a cor corrente
-	glBegin(GL_QUADS);
-		glVertex2i(x1ProtecaoTela, y1ProtecaoTela + rsizeProtecaoTela);
-		glVertex2i(x1ProtecaoTela, y1ProtecaoTela);
+	glBegin (GL_QUADS);
+	glVertex2i(x1ProtecaoTela, y1ProtecaoTela + rsizeProtecaoTela);
+	glVertex2i(x1ProtecaoTela, y1ProtecaoTela);
 
-		// Especifica que a cor corrente � azul
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glVertex2i(x1ProtecaoTela + rsizeProtecaoTela, y1ProtecaoTela);
-		glVertex2i(x1ProtecaoTela + rsizeProtecaoTela, y1ProtecaoTela + rsizeProtecaoTela);
+	// Especifica que a cor corrente � azul
+	glColor3f(0.0f, 0.0f, 1.0f);
+	glVertex2i(x1ProtecaoTela + rsizeProtecaoTela, y1ProtecaoTela);
+	glVertex2i(x1ProtecaoTela + rsizeProtecaoTela,
+			y1ProtecaoTela + rsizeProtecaoTela);
 	glEnd();
 
 	// Executa os comandos OpenGL
@@ -71,11 +71,13 @@ void DesenhaProtecaoTela(void) {
 // (a window n�o est� sendo redimensionada ou movida)
 void TimerProtecaoTela(int value) {
 	// Muda a dire��o quando chega na borda esquerda ou direita
-	if (x1ProtecaoTela > windowWidthProtecaoTela - rsizeProtecaoTela || x1ProtecaoTela < 0)
+	if (x1ProtecaoTela > windowWidthProtecaoTela - rsizeProtecaoTela
+			|| x1ProtecaoTela < 0)
 		xstepProtecaoTela = -xstepProtecaoTela;
 
 	// Muda a dire��o quando chega na borda superior ou inferior
-	if (y1ProtecaoTela > windowHeightProtecaoTela - rsizeProtecaoTela || y1ProtecaoTela < 0)
+	if (y1ProtecaoTela > windowHeightProtecaoTela - rsizeProtecaoTela
+			|| y1ProtecaoTela < 0)
 		ystepProtecaoTela = -ystepProtecaoTela;
 
 	// Verifica as bordas.  Se a window for menor e o
@@ -111,7 +113,7 @@ void AlteraTamanhoJanelaProtecaoTela(GLsizei w, GLsizei h) {
 	glViewport(0, 0, w, h);
 
 	// Inicializa o sistema de coordenadas
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
 
 	// Estabelece a janela de sele��o (left, right, bottom, top)

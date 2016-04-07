@@ -49,95 +49,87 @@ static int leftFirst = GL_TRUE;
 
 /*  Initialize alpha blending function.
  */
-static void initAlpha(void)
-{
-   glEnable (GL_BLEND);
-   glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-   glShadeModel (GL_FLAT);
-   glClearColor (0.0, 0.0, 0.0, 0.0);
+static void initAlpha(void) {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glShadeModel(GL_FLAT);
+	glClearColor(0.0, 0.0, 0.0, 0.0);
 }
 
-static void drawLeftTriangleAlpha(void)
-{
-   /* draw yellow triangle on LHS of screen */
+static void drawLeftTriangleAlpha(void) {
+	/* draw yellow triangle on LHS of screen */
 
-   glBegin (GL_TRIANGLES);
-      glColor4f(1.0, 1.0, 0.0, 0.75);
-      glVertex3f(0.1, 0.9, 0.0); 
-      glVertex3f(0.1, 0.1, 0.0); 
-      glVertex3f(0.7, 0.5, 0.0); 
-   glEnd();
+	glBegin(GL_TRIANGLES);
+	glColor4f(1.0, 1.0, 0.0, 0.75);
+	glVertex3f(0.1, 0.9, 0.0);
+	glVertex3f(0.1, 0.1, 0.0);
+	glVertex3f(0.7, 0.5, 0.0);
+	glEnd();
 }
 
-static void drawRightTriangleAlpha(void)
-{
-   /* draw cyan triangle on RHS of screen */
+static void drawRightTriangleAlpha(void) {
+	/* draw cyan triangle on RHS of screen */
 
-   glBegin (GL_TRIANGLES);
-      glColor4f(0.0, 1.0, 1.0, 0.75);
-      glVertex3f(0.9, 0.9, 0.0); 
-      glVertex3f(0.3, 0.5, 0.0); 
-      glVertex3f(0.9, 0.1, 0.0); 
-   glEnd();
+	glBegin(GL_TRIANGLES);
+	glColor4f(0.0, 1.0, 1.0, 0.75);
+	glVertex3f(0.9, 0.9, 0.0);
+	glVertex3f(0.3, 0.5, 0.0);
+	glVertex3f(0.9, 0.1, 0.0);
+	glEnd();
 }
 
-void displayAlpha(void)
-{
-   glClear(GL_COLOR_BUFFER_BIT);
+void displayAlpha(void) {
+	glClear(GL_COLOR_BUFFER_BIT);
 
-   if (leftFirst) {
-      drawLeftTriangleAlpha();
-      drawRightTriangleAlpha();
-   }
-   else {
-      drawRightTriangleAlpha();
-      drawLeftTriangleAlpha();
-   }
+	if (leftFirst) {
+		drawLeftTriangleAlpha();
+		drawRightTriangleAlpha();
+	} else {
+		drawRightTriangleAlpha();
+		drawLeftTriangleAlpha();
+	}
 
-   glFlush();
+	glFlush();
 }
 
-void reshapeAlpha(int w, int h)
-{
-   glViewport(0, 0, (GLsizei) w, (GLsizei) h);
-   glMatrixMode(GL_PROJECTION);
-   glLoadIdentity();
-   if (w <= h) 
-      gluOrtho2D (0.0, 1.0, 0.0, 1.0*(GLfloat)h/(GLfloat)w);
-   else 
-      gluOrtho2D (0.0, 1.0*(GLfloat)w/(GLfloat)h, 0.0, 1.0);
+void reshapeAlpha(int w, int h) {
+	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	if (w <= h)
+		gluOrtho2D(0.0, 1.0, 0.0, 1.0 * (GLfloat) h / (GLfloat) w);
+	else
+		gluOrtho2D(0.0, 1.0 * (GLfloat) w / (GLfloat) h, 0.0, 1.0);
 }
 
-void keyboardAlpha(unsigned char key, int x, int y)
-{
-   switch (key) {
-      case 't':
-      case 'T':
-         leftFirst = !leftFirst;
-         glutPostRedisplay();	
-         break;
-      case 27:  /*  Escape key  */
-         exit(0);
-         break;
-      default:
-         break;
-   }
+void keyboardAlpha(unsigned char key, int x, int y) {
+	switch (key) {
+	case 't':
+	case 'T':
+		leftFirst = !leftFirst;
+		glutPostRedisplay();
+		break;
+	case 27: /*  Escape key  */
+		exit(0);
+		break;
+	default:
+		break;
+	}
 }
 
 /*  Main Loop
  *  Open window with initial window size, title bar, 
  *  RGBA display mode, and handle input events.
  */
-int mainAlpha(int argc, char** argv)
-{
-   glutInit(&argc, argv);
-   glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
-   glutInitWindowSize (200, 200);
-   glutCreateWindow (argv[0]);
-   initAlpha();
-   glutReshapeFunc (reshapeAlpha);
-   glutKeyboardFunc (keyboardAlpha);
-   glutDisplayFunc (displayAlpha);
-   glutMainLoop();
-   return 0;
+int mainAlpha(int argc, char** argv) {
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(200, 200);
+	glutCreateWindow(argv[0]);
+	initAlpha();
+	glutReshapeFunc(reshapeAlpha);
+	glutKeyboardFunc(keyboardAlpha);
+	glutDisplayFunc(displayAlpha);
+	glutMainLoop();
+	return 0;
 }

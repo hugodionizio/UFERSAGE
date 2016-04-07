@@ -42,47 +42,48 @@ void displayLinhaBresenham(void) {
 	 * a) Rasterização de linhas dados os pontos inicial e final
 	 *	- Algoritmo de Bresenham
 	 */
-	cout << "Algoritmo do Ponto Médio ou Midpoint de Bresenham da Reta (azul):" << endl;
+	cout << "Algoritmo do Ponto Médio ou Midpoint de Bresenham da Reta (azul):"
+			<< endl;
 	glColor3f(0.0, 0.0, 1.0);
 	glBegin(GL_POINTS);
-		glColor3f(0.0, 0.0, 1.0);
-		// 1. Receba os dois vértices do segmento de reta \
+	glColor3f(0.0, 0.0, 1.0);
+	// 1. Receba os dois vértices do segmento de reta \
 			e armazene o vértice mais à esquerda como sendo \
 			o ponto (x0, y0)
-		// 3. Calcule as constantes delta(x), delta(y), \
+	// 3. Calcule as constantes delta(x), delta(y), \
 			2*delta(y) - 2*delta(x), e obtenha o parâmetro \
 			de decisão inicial p0 = 2*delta(y) - 2*delta(x)
-			float dx = x1 - x0;
-			float dy = y1 - y0;
-			float d = 2*dy - dx;
-			float incrE = 2*dy;
-			float incrNE = 2*(dy - dx);
-			x = x0;
-			y = y0;
+	float dx = x1 - x0;
+	float dy = y1 - y0;
+	float d = 2 * dy - dx;
+	float incrE = 2 * dy;
+	float incrNE = 2 * (dy - dx);
+	x = x0;
+	y = y0;
 
-		// 2. Pinta pixel (x0, y0)
-			glVertex3f(x, y, 0.0);
-			cout << x << ", " << y << endl;
+	// 2. Pinta pixel (x0, y0)
+	glVertex3f(x, y, 0.0);
+	cout << x << ", " << y << endl;
 
-			// 5. Repita o passo 4*delta(x) vezes
-			while (x < x1) {
-				// 4. Para cada xk ao longo da reta, começando com \
+	// 5. Repita o passo 4*delta(x) vezes
+	while (x < x1) {
+		// 4. Para cada xk ao longo da reta, começando com \
 					k = 0, faça o seguinte teste: \
 					- Se pk < 0, Pinta pixel(xk+1, yk) e \
 					p(k+1) = pk + 2*delta(y) \
 					- Caso contrário, Pinta pixel(xk + 1, yk + 1) e \
 					p(k+1) = 2*delta(y)- 2*delta(x)
-				if(d<=0) {
-					d+=incrE;
-					x += (0.4f / XMAXIMO);
-				} else {
-					d+=incrNE;
-					x += (0.4f / XMAXIMO);
-					y += (0.4f / YMAXIMO);
-				}
-				glVertex3f(x, y, 0.0);
-				cout << x << ", " << y << endl;
-			}
+		if (d <= 0) {
+			d += incrE;
+			x += (0.4f / XMAXIMO);
+		} else {
+			d += incrNE;
+			x += (0.4f / XMAXIMO);
+			y += (0.4f / YMAXIMO);
+		}
+		glVertex3f(x, y, 0.0);
+		cout << x << ", " << y << endl;
+	}
 	glEnd();
 	/*
 	 * Sem pausa!

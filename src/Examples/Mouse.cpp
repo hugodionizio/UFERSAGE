@@ -21,22 +21,22 @@ void displayMouse(void) {
 	/*
 	 * Limpar todos os pixels
 	 */
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear (GL_COLOR_BUFFER_BIT);
 
 	/*
 	 * Desenhar polígono em branco (retângulo) com cantos em
 	 *  (0.25, 0.25, 0.0) e (0.75, 0.75, 0.0)
 	 */
 	glColor3f(0.0, 1.0, 1.0);
-	glBegin(GL_POINTS);
+	glBegin (GL_POINTS);
 	glColor3f(1.0, 0.0, 1.0);
 
 	// y1 = sqrt(R^2-x^2)
 	// y2 = -sqrt(R^2-x^2)
 
-	for (i = -1; i < 1; i+=0.0001) {
-		glVertex3f(i, sqrt(R*R-i*i), 0.0);
-		glVertex3f(i, -sqrt(R*R-i*i), 0.0);
+	for (i = -1; i < 1; i += 0.0001) {
+		glVertex3f(i, sqrt(R * R - i * i), 0.0);
+		glVertex3f(i, -sqrt(R * R - i * i), 0.0);
 	}
 	glColor3f(0.0, 1.0, 0.0);
 	glEnd();
@@ -54,22 +54,22 @@ void newDisplayMouse(void) {
 	/*
 	 * Limpar todos os pixels
 	 */
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear (GL_COLOR_BUFFER_BIT);
 
 	/*
 	 * Desenhar polígono em branco (retângulo) com cantos em
 	 *  (0.25, 0.25, 0.0) e (0.75, 0.75, 0.0)
 	 */
 	glColor3f(1.0, 0.0, 1.0);
-	glBegin(GL_POINTS);
+	glBegin (GL_POINTS);
 	glColor3f(0.0, 0.0, 0.0);
 
 	// y1 = sqrt(R^2-x^2)
 	// y2 = -sqrt(R^2-x^2)
 
-	for (i = -1; i < 1; i+=0.0001) {
-		glVertex3f(i, sqrt(R*R-i*i), 0.0);
-		glVertex3f(i, -sqrt(R*R-i*i), 0.0);
+	for (i = -1; i < 1; i += 0.0001) {
+		glVertex3f(i, sqrt(R * R - i * i), 0.0);
+		glVertex3f(i, -sqrt(R * R - i * i), 0.0);
 	}
 	glColor3f(1.0, 1.0, 1.0);
 	glEnd();
@@ -90,7 +90,7 @@ void initMouse(void) {
 	/* Inicializar valores de visualização
 	 *
 	 */
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
 }
@@ -101,7 +101,7 @@ void testeMouse(int button, int state, int x, int y) {
 
 	if (button == GLUT_RIGHT_BUTTON)
 //		cout << "Testando botões do mouse..." << endl;
-		if(state == GLUT_UP) {
+		if (state == GLUT_UP) {
 			newDisplayMouse();
 			glutPostRedisplay();
 		}

@@ -19,7 +19,6 @@
 
 using namespace std;
 
-
 void displayLinhaSimples(void) {
 	float x0 = 1, y0 = 1, x1 = 120, y1 = 50, x, y, m;
 
@@ -43,7 +42,8 @@ void displayLinhaSimples(void) {
 	glBegin(GL_POINTS);
 	glColor3f(1.0, 0.0, 0.0);
 	for (x = x0; x < x1; x += 0.4f / XMAXIMO) {
-		y = y0 + floor(((XMAXIMO + YMAXIMO) / 2) * m * (x - x0) + .5)
+		y = y0
+				+ floor(((XMAXIMO + YMAXIMO) / 2) * m * (x - x0) + .5)
 						/ ((XMAXIMO + YMAXIMO) / 2);
 		cout << x << ", " << y << endl;
 		glVertex3f(x, y, 0.0);

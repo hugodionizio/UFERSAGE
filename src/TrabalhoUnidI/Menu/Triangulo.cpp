@@ -9,7 +9,7 @@
 
 // Função que desenha um triângulo
 void DesenhaTrianguloQuestaoMenu(void) {
-	glBegin(GL_TRIANGLES);
+	glBegin (GL_TRIANGLES);
 	glVertex2f(-25.0f, -25.0f);
 	glVertex2f(0.0f, 25.0f);
 	glVertex2f(25.0f, -25.0f);

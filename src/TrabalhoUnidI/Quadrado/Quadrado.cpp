@@ -88,7 +88,7 @@ void testeBotaoMouse(int button, int state, int x, int y) {
 void alteraCorObjetoTeclado(unsigned char key, int x, int y) {
 
 	switch (key) {
-		// - apertando 'r' o objeto fica vermelho
+	// - apertando 'r' o objeto fica vermelho
 	case 'R':
 	case 'r':
 		glColor3f(1.0f, 0.0f, 0.0f);

@@ -25,23 +25,23 @@ void displayCirculoCoordPolar(void) {
 	/*
 	 * Limpar todos os pixels
 	 */
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear (GL_COLOR_BUFFER_BIT);
 
 	/*
 	 * b) Rasterização de cículos, dado o raio de entrada.
 	 * - Utilizando coordenadas polares.
 	 */
 	glColor3f(1.0, 1.0, 0.0);
-	glBegin(GL_POINTS);
+	glBegin (GL_POINTS);
 	glColor3f(1.0, 1.0, 0.0);
 	// x = xc + R*cos(theta)
 	// y1 = yc + R*sin(theta)
 	// y2 = -(yc + R*sin(theta))
-	for (theta = 180; theta >= 0; theta-=.005) {
-		glVertex3f(R*cos(theta), R*sin(theta), 0.0);
-		glVertex3f(R*cos(theta), -R*sin(theta), 0.0);
-		cout << "[" << R*cos(theta) << ", " << R*sin(theta) << "] [";
-		cout << R*cos(theta) << ", " << -R*sin(theta) << "]" << endl;
+	for (theta = 180; theta >= 0; theta -= .005) {
+		glVertex3f(R * cos(theta), R * sin(theta), 0.0);
+		glVertex3f(R * cos(theta), -R * sin(theta), 0.0);
+		cout << "[" << R * cos(theta) << ", " << R * sin(theta) << "] [";
+		cout << R * cos(theta) << ", " << -R * sin(theta) << "]" << endl;
 	}
 	glEnd();
 
@@ -61,7 +61,7 @@ void initCirculoCoordPolar(void) {
 	/* Inicializar valores de visualização
 	 *
 	 */
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
 }

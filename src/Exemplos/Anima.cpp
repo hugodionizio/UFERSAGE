@@ -33,25 +33,25 @@ GLfloat windowHeight;
 
 // Fun��o callback chamada para fazer o desenho
 void DesenhaAnima(void) {
-	glMatrixMode(GL_MODELVIEW);
+	glMatrixMode (GL_MODELVIEW);
 	glLoadIdentity();
 
 	// Limpa a janela de visualiza��o com a cor de fundo especificada
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear (GL_COLOR_BUFFER_BIT);
 
 	// Especifica que a cor corrente � vermelha
 	//         R     G     B
 	glColor3f(1.0f, 0.0f, 0.0f);
 
 	// Desenha um quadrado preenchido com a cor corrente
-	glBegin(GL_QUADS);
-		glVertex2i(x1, y1 + rsize);
-		glVertex2i(x1, y1);
+	glBegin (GL_QUADS);
+	glVertex2i(x1, y1 + rsize);
+	glVertex2i(x1, y1);
 
-		// Especifica que a cor corrente � azul
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glVertex2i(x1 + rsize, y1);
-		glVertex2i(x1 + rsize, y1 + rsize);
+	// Especifica que a cor corrente � azul
+	glColor3f(0.0f, 0.0f, 1.0f);
+	glVertex2i(x1 + rsize, y1);
+	glVertex2i(x1 + rsize, y1 + rsize);
 	glEnd();
 
 	// Executa os comandos OpenGL
@@ -102,7 +102,7 @@ void AlteraTamanhoJanelaAnima(GLsizei w, GLsizei h) {
 	glViewport(0, 0, w, h);
 
 	// Inicializa o sistema de coordenadas
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
 
 	// Estabelece a janela de sele��o (left, right, bottom, top)

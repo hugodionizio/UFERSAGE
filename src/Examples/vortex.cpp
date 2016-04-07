@@ -47,8 +47,8 @@ void displayVortex() {
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo);
 		glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imageWidth, imageHeight,
-				GL_RGBA,
-				GL_UNSIGNED_BYTE, 0);
+		GL_RGBA,
+		GL_UNSIGNED_BYTE, 0);
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, 0);
 
 		glEnable(GL_TEXTURE_2D);
@@ -98,7 +98,7 @@ int mainVortex(int argc, char **argv) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA,
-			GL_UNSIGNED_BYTE, imageVortex); //initialize the extentions needed for using a PBO
+	GL_UNSIGNED_BYTE, imageVortex); //initialize the extentions needed for using a PBO
 	glewInit();
 	if (!glewIsSupported("GL_VERSION_2_0 " "GL_ARB_pixel_buffer_object"))
 		printf("ERROR: Support for necessary OpenGL extensions missing."); //create the PBO

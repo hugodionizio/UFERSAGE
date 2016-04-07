@@ -21,44 +21,42 @@ typedef int (*PFunc)(int, char**); /* O tipo PFunc é ponteiro p/fção void */
 enum Implementacoes {
 	// Unidade I
 	// Exercícios
-		AULA01,
-		MOUSE,
+	AULA01,
+	MOUSE,
 
 	// Exemplo (Professor Leandro Souza)
-		EXEMPLOCALLBACKS,
+	EXEMPLOCALLBACKS,
 
 	// Exemplos (Manssour)
-		PRIMEIROPROGRAMA,
-		MENU = 7,
+	PRIMEIROPROGRAMA,
+	MENU = 7,
 
 	// Examples (redbook)
 
-
 	// Trabalho I - Unidade I
 	// Questão do Quadrado (Questão 2 - Parte 1)
-		QUESTAOQUADRADO = 28,
+	QUESTAOQUADRADO = 28,
 
 	// Questão da Rasterização (Questão 1 - Parte 2)
-		LINHASIMPLES,
-		LINHAINCREMENTAL,
-		LINHABRESENHAM,
-		CIRCULOEQUACAO,
-		CIRCULOCOORDPOLAR,
-		CIRCULOBRESENHAM,
-		PARABOLAEQUACAO,
-		PARABOLAINCREMENTAL,
-		EXPOENTEINCREMENTAL,
+	LINHASIMPLES,
+	LINHAINCREMENTAL,
+	LINHABRESENHAM,
+	CIRCULOEQUACAO,
+	CIRCULOCOORDPOLAR,
+	CIRCULOBRESENHAM,
+	PARABOLAEQUACAO,
+	PARABOLAINCREMENTAL,
+	EXPOENTEINCREMENTAL,
 
 	// Questão do Menu (Questão 2 - Parte 2)
-		QUESTAOMENU,
+	QUESTAOMENU,
 
 	// Questão das Transformações (Questão 3 - Parte 2)
-		TRANSFORMACOES,
+	TRANSFORMACOES,
 
 	// Questão do Quadrado (Questão 4 - Parte 2)
-		PROTECAOTELA,
+	PROTECAOTELA,
 	// Fim da Unidade I
-
 
 	// Unidade II
 	// Examples (redbook)
@@ -66,246 +64,136 @@ enum Implementacoes {
 	// Fim da Unidade II
 
 	// Trabalho 2 - Unidade II
-		PLY = 61,
-		MALHA,
+	PLY = 61,
+	MALHA,
 
 	// Unidade III
 	// Examples (redbook)
 	// Fim da Unidade III
 
-
 	// Adicionais
-		VORTEX = 75,
+	VORTEX = 75,
 
-		NUM_IMPLEMENTACOES
+	NUM_IMPLEMENTACOES
 };
 
 int main(int argc, char **argv) {
 	PFunc ptrf[] = {
 			// Unidade I
 			//	Exercícios
-				mainAula01,
-				mainMouse,
+			mainAula01, mainMouse,
 
 			//	Exemplo (Professor Leandro Souza)
-				mainExemploCallbacks,
+			mainExemploCallbacks,
 
 			// Exemplos (Manssour)
-				mainPrimeiroPrograma,
-				mainQuadrado,
-				mainAnima,
-				mainInteracao,
-				mainMenu,
-				mainTeaPot3D,
-				mainIluminacao,
+			mainPrimeiroPrograma, mainQuadrado, mainAnima, mainInteracao,
+			mainMenu, mainTeaPot3D, mainIluminacao,
 
 			// Examples (redbook)
-				mainChunkOpenGL,
-				mainHello,
-				mainDouble,
-				mainLines,
-				mainPolys,
-				mainVarray,
-				mainMVArray,
-				mainCube,
-				mainModel,
-				mainClip,
-				mainPlanet,
-				mainRobot,
-				mainUnProject,
-				mainSmooth,
-				mainLight,
-				mainMoveLight,
-				mainMaterial,
-				mainColorMat,
+			mainChunkOpenGL, mainHello, mainDouble, mainLines, mainPolys,
+			mainVarray, mainMVArray, mainCube, mainModel, mainClip, mainPlanet,
+			mainRobot, mainUnProject, mainSmooth, mainLight, mainMoveLight,
+			mainMaterial, mainColorMat,
 
 			// Trabalho I - Unidade I
 			// Questão do Quadrado (Questão 2 - Parte 1)
-				mainQuestaoQuadrado,
+			mainQuestaoQuadrado,
 
 			// Questão da Rasterização (Questão 1 - Parte 2)
-				mainLinhaSimples,
-				mainLinhaIncremental,
-				mainLinhaBresenham,
-				mainCirculoEquacao,
-				mainCirculoCoordPolar,
-				mainCirculoBresenham,
-				mainParabolaEquacao,
-				mainParabolaIncremental,
-				mainExpoenteIncremental,
+			mainLinhaSimples, mainLinhaIncremental, mainLinhaBresenham,
+			mainCirculoEquacao, mainCirculoCoordPolar, mainCirculoBresenham,
+			mainParabolaEquacao, mainParabolaIncremental,
+			mainExpoenteIncremental,
 
 			// Questão do Menu (Questão 2 - Parte 2)
-				mainQuestaoMenu,
+			mainQuestaoMenu,
 
 			// Questão das Transformações (Questão 3 - Parte 2)
-				mainTransformacoes,
+			mainTransformacoes,
 
 			// Questão do Quadrado (Questão 4 - Parte 2)
-				mainProtecaoTela,
+			mainProtecaoTela,
 			// Fim da Unidade I
-
 
 			// Unidade II
 			// Examples (redbook)
-				mainAlpha,
-				mainAlpha3D,
-				mainAARGB,
-				mainAAIndex,
-				mainFog,
-				mainFogIndex,
-				mainPolyOff,
-				mainTorus,
-				mainList,
-				mainStroke,
-				mainDrawf,
-				mainFont,
-				mainImage,
-				mainChecker,
-				mainTexSub,
-				mainMipMap,
-				mainTexBind,
-				mainTexGen,
-				mainStencil, // ???
-				mainDof,
+			mainAlpha, mainAlpha3D, mainAARGB, mainAAIndex, mainFog,
+			mainFogIndex, mainPolyOff, mainTorus, mainList, mainStroke,
+			mainDrawf, mainFont, mainImage, mainChecker, mainTexSub, mainMipMap,
+			mainTexBind, mainTexGen,
+			mainStencil, // ???
+			mainDof,
 			// Fim da Unidade II
 
 			// Trabalho 2 - Unidade II
-				mainPly,
-				mainMalha,
+			mainPly, mainMalha,
 
 			// Unidade III
 			// Examples (redbook)
-				mainTess,
-				mainQuadric,
-				mainBezCurve,
-				mainBezSurf,
-				mainBezMesh,
-				mainTextureSurf,
-				mainSurface,
-				mainPickSquare,
-				mainTrim,
-				mainSelect,
-				mainPickDepth,
-				mainFeedback, // ???
+			mainTess, mainQuadric, mainBezCurve, mainBezSurf, mainBezMesh,
+			mainTextureSurf, mainSurface, mainPickSquare, mainTrim, mainSelect,
+			mainPickDepth, mainFeedback, // ???
 			// Fim da Unidade III
 
-
 			//	Adicionais
-				mainVortex
-	};
+			mainVortex };
 
 	char *menu[] = {
 			// Unidade I
 			//	Exercícios
-				"Aula01",
-				"Mouse",
+			"Aula01", "Mouse",
 
 			//	Exemplo (Professor Leandro Souza)
-				"ExemploCallbacks",
+			"ExemploCallbacks",
 
 			// Exemplos (Manssour)
-				"PrimeiroPrograma",
-				"Quadrado",
-				"Anima",
-				"Interacao",
-				"Menu",
-				"TeaPot3D",
-				"Iluminacao",
+			"PrimeiroPrograma", "Quadrado", "Anima", "Interacao", "Menu",
+			"TeaPot3D", "Iluminacao",
 
 			// Examples (redbook)
-				"ChunkOpenGL",
-				"Hello",
-				"Double",
-				"Lines",
-				"Polys",
-				"Varray",
-				"MVArray",
-				"Cube",
-				"Model",
-				"Clip",
-				"Planet",
-				"Robot",
-				"UnProject",
-				"Smooth",
-				"Light",
-				"MoveLight",
-				"Material",
-				"ColorMat",
+			"ChunkOpenGL", "Hello", "Double", "Lines", "Polys", "Varray",
+			"MVArray", "Cube", "Model", "Clip", "Planet", "Robot", "UnProject",
+			"Smooth", "Light", "MoveLight", "Material", "ColorMat",
 
 			// Trabalho I - Unidade I
 			// Questão do Quadrado (Questão 2 - Parte 1)
-				"QuestaoQuadrado",
+			"QuestaoQuadrado",
 
 			// Questão da Rasterização (Questão 1 - Parte 2)
-				"LinhaSimples",
-				"LinhaIncremental",
-				"LinhaBresenham",
-				"CirculoEquacao",
-				"CirculoCoordPolar",
-				"CirculoBresenham",
-				"ParabolaEquacao",
-				"ParabolaIncremental",
-				"ExpoenteIncremental",
+			"LinhaSimples", "LinhaIncremental", "LinhaBresenham",
+			"CirculoEquacao", "CirculoCoordPolar", "CirculoBresenham",
+			"ParabolaEquacao", "ParabolaIncremental", "ExpoenteIncremental",
 
 			// Questão do Menu (Questão 2 - Parte 2)
-				"QuestaoMenu",
+			"QuestaoMenu",
 
 			// Questão das Transformações (Questão 3 - Parte 2)
-				"Transformacoes",
+			"Transformacoes",
 
 			// Questão do Quadrado (Questão 4 - Parte 2)
-				"ProtecaoTela",
+			"ProtecaoTela",
 			// Fim da Unidade I
-
 
 			// Unidade II
 			// Examples (redbook)
-				"Alpha",
-				"Alpha3D",
-				"AARGB",
-				"AAIndex",
-				"Fog",
-				"FogIndex",
-				"PolyOff",
-				"Torus",
-				"List",
-				"Stroke",
-				"Drawf",
-				"Font",
-				"Image",
-				"Checker",
-				"TexSub",
-				"MipMap",
-				"TexBind",
-				"TexGen",
-				"Stencil",
-				"Dof",
+			"Alpha", "Alpha3D", "AARGB", "AAIndex", "Fog", "FogIndex",
+			"PolyOff", "Torus", "List", "Stroke", "Drawf", "Font", "Image",
+			"Checker", "TexSub", "MipMap", "TexBind", "TexGen", "Stencil",
+			"Dof",
 			// Fim da Unidade II
 
 			// Trabalho 2 - Unidade II
-				"Ply",
-				"Malha",
+			"Ply", "Malha",
 
 			// Unidade III
 			// Examples (redbook)
-				"Tess",
-				"Quadric",
-				"BezCurve",
-				"BezSurf",
-				"BezMesh",
-				"TextureSurf",
-				"Surface",
-				"PickSquare",
-				"Trim",
-				"Select",
-				"PickDepth",
-				"Feedback",
+			"Tess", "Quadric", "BezCurve", "BezSurf", "BezMesh", "TextureSurf",
+			"Surface", "PickSquare", "Trim", "Select", "PickDepth", "Feedback",
 			// Fim da Unidade III
 
-
 			//	Adicionais
-				"Vortex"
-	};
+			"Vortex" };
 
 	cout << "Hello World!!" << endl;
 	cout << "Hello OpenGL!" << endl;
@@ -319,10 +207,14 @@ int main(int argc, char **argv) {
 				break;
 			}
 		}
-		if (i == NUM_IMPLEMENTACOES)
+		if (strcmp(argv[1], "help") == 0) {
+			for (int j = 0; j < NUM_IMPLEMENTACOES; ++j) {
+				cout << menu[j] << "\t";
+			}
+			cout << endl;
+		} else if (i == NUM_IMPLEMENTACOES)
 			cout << "Opção não encontrada." << endl;
-	}
-	else
+	} else
 		(*ptrf[MENU])(argc, argv);
 
 // Unidade I
@@ -387,7 +279,6 @@ int main(int argc, char **argv) {
 //	mainProtecaoTela(argc, argv);
 // Fim da Unidade I
 
-
 // Unidade II
 // Examples (redbook)
 //	mainAlpha(argc, argv);
@@ -431,7 +322,6 @@ int main(int argc, char **argv) {
 //	mainPickDepth(argc, argv);
 //	mainFeedback(argc, argv); // ???
 // Fim da Unidade III
-
 
 //	Adicionais
 //	mainVortex(argc, argv);

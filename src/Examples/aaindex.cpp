@@ -57,97 +57,93 @@ static float rotAngle = 0.;
  *  at RAMP1START, and a blue color ramp starting
  *  at RAMP2START. The ramps must be a multiple of 16.
  */
-void initAAIndex(void)
-{
-   int i;
+void initAAIndex(void) {
+	int i;
 
-   for (i = 0; i < RAMPSIZE; i++) {
-      GLfloat shade;
-      shade = (GLfloat) i/(GLfloat) RAMPSIZE;
-      glutSetColor(RAMP1START+(GLint)i, 0., shade, 0.);
-      glutSetColor(RAMP2START+(GLint)i, 0., 0., shade);
-   }
+	for (i = 0; i < RAMPSIZE; i++) {
+		GLfloat shade;
+		shade = (GLfloat) i / (GLfloat) RAMPSIZE;
+		glutSetColor(RAMP1START + (GLint) i, 0., shade, 0.);
+		glutSetColor(RAMP2START + (GLint) i, 0., 0., shade);
+	}
 
-   glEnable (GL_LINE_SMOOTH);
-   glHint (GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
-   glLineWidth (1.5);
+	glEnable(GL_LINE_SMOOTH);
+	glHint(GL_LINE_SMOOTH_HINT, GL_DONT_CARE);
+	glLineWidth(1.5);
 
-   glClearIndex ((GLfloat) RAMP1START);
+	glClearIndex((GLfloat) RAMP1START);
 }
 
 /*  Draw 2 diagonal lines to form an X
  */
-void displayAAIndex(void)
-{
-   glClear(GL_COLOR_BUFFER_BIT);
+void displayAAIndex(void) {
+	glClear(GL_COLOR_BUFFER_BIT);
 
-   glIndexi(RAMP1START);
-   glPushMatrix();
-   glRotatef(-rotAngle, 0.0, 0.0, 0.1);
-   glBegin (GL_LINES);
-      glVertex2f (-0.5, 0.5);
-      glVertex2f (0.5, -0.5);
-   glEnd ();
-   glPopMatrix();
+	glIndexi(RAMP1START);
+	glPushMatrix();
+	glRotatef(-rotAngle, 0.0, 0.0, 0.1);
+	glBegin(GL_LINES);
+	glVertex2f(-0.5, 0.5);
+	glVertex2f(0.5, -0.5);
+	glEnd();
+	glPopMatrix();
 
-   glIndexi(RAMP2START);
-   glPushMatrix();
-   glRotatef(rotAngle, 0.0, 0.0, 0.1);
-   glBegin (GL_LINES);
-      glVertex2f (0.5, 0.5);
-      glVertex2f (-0.5, -0.5);
-   glEnd ();
-   glPopMatrix();
+	glIndexi(RAMP2START);
+	glPushMatrix();
+	glRotatef(rotAngle, 0.0, 0.0, 0.1);
+	glBegin(GL_LINES);
+	glVertex2f(0.5, 0.5);
+	glVertex2f(-0.5, -0.5);
+	glEnd();
+	glPopMatrix();
 
-   glFlush();
+	glFlush();
 }
 
-void reshapeAAIndex(int w, int h)
-{
-   glViewport(0, 0, (GLsizei) w, (GLsizei) h);
-   glMatrixMode(GL_PROJECTION);
-   glLoadIdentity();
-   if (w <= h) 
-      gluOrtho2D (-1.0, 1.0, 
-         -1.0*(GLfloat)h/(GLfloat)w, 1.0*(GLfloat)h/(GLfloat)w);
-   else 
-      gluOrtho2D (-1.0*(GLfloat)w/(GLfloat)h, 
-         1.0*(GLfloat)w/(GLfloat)h, -1.0, 1.0);
-   glMatrixMode(GL_MODELVIEW);
-   glLoadIdentity();
+void reshapeAAIndex(int w, int h) {
+	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	if (w <= h)
+		gluOrtho2D(-1.0, 1.0, -1.0 * (GLfloat) h / (GLfloat) w,
+				1.0 * (GLfloat) h / (GLfloat) w);
+	else
+		gluOrtho2D(-1.0 * (GLfloat) w / (GLfloat) h,
+				1.0 * (GLfloat) w / (GLfloat) h, -1.0, 1.0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
 
-void keyboardAAIndex(unsigned char key, int x, int y)
-{
-   switch (key) {
-      case 'r':
-      case 'R':
-         rotAngle += 20.;
-         if (rotAngle >= 360.) rotAngle = 0.;
-         glutPostRedisplay();	
-         break;
-      case 27:  /*  Escape Key */
-         exit(0);
-         break;
-      default:
-         break;
-    }
+void keyboardAAIndex(unsigned char key, int x, int y) {
+	switch (key) {
+	case 'r':
+	case 'R':
+		rotAngle += 20.;
+		if (rotAngle >= 360.)
+			rotAngle = 0.;
+		glutPostRedisplay();
+		break;
+	case 27: /*  Escape Key */
+		exit(0);
+		break;
+	default:
+		break;
+	}
 }
 
 /*  Main Loop
  *  Open window with initial window size, title bar, 
  *  color index display mode, and handle input events.
  */
-int mainAAIndex(int argc, char** argv)
-{
-   glutInit(&argc, argv);
-   glutInitDisplayMode (GLUT_SINGLE | GLUT_INDEX);
-   glutInitWindowSize (200, 200);
-   glutCreateWindow (argv[0]);
-   initAAIndex();
-   glutReshapeFunc (reshapeAAIndex);
-   glutKeyboardFunc (keyboardAAIndex);
-   glutDisplayFunc (displayAAIndex);
-   glutMainLoop();
-   return 0;
+int mainAAIndex(int argc, char** argv) {
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_INDEX);
+	glutInitWindowSize(200, 200);
+	glutCreateWindow(argv[0]);
+	initAAIndex();
+	glutReshapeFunc(reshapeAAIndex);
+	glutKeyboardFunc(keyboardAAIndex);
+	glutDisplayFunc(displayAAIndex);
+	glutMainLoop();
+	return 0;
 }

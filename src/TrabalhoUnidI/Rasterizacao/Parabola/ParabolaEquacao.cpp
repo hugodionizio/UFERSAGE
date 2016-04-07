@@ -5,7 +5,6 @@
  *      Author: hugo
  */
 
-
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -27,14 +26,14 @@ void displayParabolaEquacao(void) {
 
 	/*
 	 * c) Implemente a rasterização de uma parábola da forma y = a*x*x + b*x + c, em que a, b e c são
-		parâmetros reais (dados um x inicial e um x final).
-		- Utilizando a equação da parábola
+	 parâmetros reais (dados um x inicial e um x final).
+	 - Utilizando a equação da parábola
 	 */
 	glColor3f(1.0, 0.0, 0.0); // Vermelho
 	glBegin(GL_POINTS);
 	glColor3f(1.0, 0.0, 0.0);
-	for (x = x0; x <= x1; x+=0.0001) {
-		glVertex3f(x, a*x*x+b*x+c, 0.0);
+	for (x = x0; x <= x1; x += 0.0001) {
+		glVertex3f(x, a * x * x + b * x + c, 0.0);
 	}
 	glEnd();
 
@@ -44,8 +43,8 @@ void displayParabolaEquacao(void) {
 	glColor3f(0.0, 1.0, 0.0); // Verde
 	glBegin(GL_POINTS);
 	glColor3f(0.0, 1.0, 0.0);
-	for (x = x0; x <= x1; x+=0.0001) {
-		glVertex3f(x, a*x*x+b*x+c, 0.0);
+	for (x = x0; x <= x1; x += 0.0001) {
+		glVertex3f(x, a * x * x + b * x + c, 0.0);
 	}
 	glEnd();
 
@@ -55,8 +54,8 @@ void displayParabolaEquacao(void) {
 	glColor3f(0.0, 0.0, 1.0); // Azul
 	glBegin(GL_POINTS);
 	glColor3f(0.0, 0.0, 1.0);
-	for (x = x0; x <= x1; x+=0.0001) {
-		glVertex3f(x, a*x*x+b*x+c, 0.0);
+	for (x = x0; x <= x1; x += 0.0001) {
+		glVertex3f(x, a * x * x + b * x + c, 0.0);
 	}
 	glEnd();
 	/*

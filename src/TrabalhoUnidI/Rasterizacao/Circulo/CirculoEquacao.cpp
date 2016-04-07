@@ -16,20 +16,20 @@ void displayCirculoEquacao(void) {
 	/*
 	 * Limpar todos os pixels
 	 */
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear (GL_COLOR_BUFFER_BIT);
 
 	/*
 	 * b) Rasterização de cículos, dado o raio de entrada.
 	 * - Utilizando equação do círculo.
 	 */
 	glColor3f(1.0, 1.0, 0.0);
-	glBegin(GL_POINTS);
+	glBegin (GL_POINTS);
 	glColor3f(1.0, 1.0, 0.0);
 	// y1 = sqrt(R^2-x^2)
 	// y2 = -sqrt(R^2-x^2)
-	for (i = -1; i <= 1; i+=0.00001) {
-		glVertex3f(i, sqrt(R*R-i*i), 0.0);
-		glVertex3f(i, -sqrt(R*R-i*i), 0.0);
+	for (i = -1; i <= 1; i += 0.00001) {
+		glVertex3f(i, sqrt(R * R - i * i), 0.0);
+		glVertex3f(i, -sqrt(R * R - i * i), 0.0);
 	}
 	glEnd();
 
@@ -49,7 +49,7 @@ void initCirculoEquacao(void) {
 	/* Inicializar valores de visualização
 	 *
 	 */
-	glMatrixMode(GL_PROJECTION);
+	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
 }

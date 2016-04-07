@@ -41,7 +41,7 @@ struct Malha {
 
 float x = 0.0, y = 0.0;
 
-FGAPI int     FGAPIENTRY Wind;
+FGAPI int FGAPIENTRY Wind;
 
 // Malha 3D
 Malha m1;
@@ -186,11 +186,10 @@ void desenharMalha(void) {
 		ofstream fout("Malha.ply", ios::binary);
 		fout.write(reinterpret_cast<char *>(&f1), sizeof(Face));
 		fout.close();
-	}
-	else {
+	} else {
 		cout << "Fazendo backup..." << endl;
-				fout2.write(reinterpret_cast<char *>(&f1), sizeof(Face));
-				fout2.close();
+		fout2.write(reinterpret_cast<char *>(&f1), sizeof(Face));
+		fout2.close();
 	}
 
 	glFlush();
