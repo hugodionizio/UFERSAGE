@@ -17,7 +17,6 @@ using namespace std;
 
 typedef int (*PFunc)(int, char**); /* O tipo PFunc é ponteiro p/fção void */
 
-#define MENUITENS 76
 enum Implementacoes {
 	// Unidade I
 	// Exercícios
@@ -215,7 +214,7 @@ int main(int argc, char **argv) {
 		} else if (i == NUM_IMPLEMENTACOES)
 			cout << "Opção não encontrada." << endl;
 	} else
-		(*ptrf[MENU])(argc, argv);
+		(*ptrf[PLY])(argc, argv);
 
 // Unidade I
 //	Exercícios
