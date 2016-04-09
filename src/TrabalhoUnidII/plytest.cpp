@@ -108,6 +108,8 @@ void initPly(void) {
 }
 
 void displayPly(void) {
+	int nverts = sizeof(verts) / sizeof(Vertex);
+
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(1.0, 1.0, 1.0);
 	glLoadIdentity(); /* clear the matrix */
@@ -115,14 +117,11 @@ void displayPly(void) {
 	gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 	glScalef(1.0, 2.0, 1.0); /* modeling transformation */
 
-	glBegin(GL_POLYGON);
+	glBegin(GL_TRIANGLES);
 	glColor3f(1.0, 1.0, 1.0);
-	glVertex3f(-0.20, -0.130, 0);
-	glVertex3f(-0.20, 0.13, 0);
-	glVertex3f(0.0, 0.27, 0);
-	glVertex3f(0.20, 0.13, 0);
-	glVertex3f(0.20, -0.130, 0);
-	glVertex3f(0.0, -0.270, 0);
+	for (int i = 0; i < nverts; ++i) {
+		glVertex3f(verts[i].x, verts[i].y, verts[i].z);
+	}
 	glEnd();
 
 	glFlush();

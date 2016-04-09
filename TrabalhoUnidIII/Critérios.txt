@@ -1,0 +1,4 @@
+Cena em 3D: Tamanhos mínimo e máximo da cena
+Objetos com texturas: Quantidade de objetos e número de texturas em todo o projeto
+Movimento contínuo: Quantidade de movimentos, quantidade de estados de cada movimento e frequência dos movimentos
+Interface do usuário: Quantidade e tipo de interfaces do usuário
