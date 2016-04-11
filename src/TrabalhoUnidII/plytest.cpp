@@ -114,7 +114,7 @@ void displayPly(void) {
 	glColor3f(1.0, 1.0, 1.0);
 	glLoadIdentity(); /* clear the matrix */
 	/* viewing transformation */
-	gluLookAt(1.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	gluLookAt(1.0, -1.0, 6.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 	glScalef(2.0, 2.0, 2.0); /* modeling transformation */
 
 	glBegin(GL_TRIANGLES);
@@ -195,7 +195,7 @@ void reshapePly(int w, int h) {
 int mainPly(int argc, char** argv) {
 #if 1
 	/* write a PLY file */
-	write_test();
+	//write_test();
 #endif
 
 #if 1
@@ -235,13 +235,13 @@ void write_test() {
 		faces[i].verts = vert_ptrs[i];
 
 	/* open either a binary or ascii PLY file for writing */
-	/* (the file will be called "test.ply" because the routines */
+	/* (the file will be called "teste.ply" because the routines */
 	/*  enforce the .ply filename extension) */
 
 #if 1
-	ply = ply_open_for_writing("test", 2, elem_names, PLY_ASCII, &version);
+	ply = ply_open_for_writing("teste", 2, elem_names, PLY_ASCII, &version);
 #else
-	ply = ply_open_for_writing("test", 2, elem_names, PLY_BINARY_BE, &version);
+	ply = ply_open_for_writing("teste", 2, elem_names, PLY_BINARY_BE, &version);
 #endif
 
 	/* describe what properties go into the vertex and face elements */
@@ -300,7 +300,7 @@ void read_test() {
 	char **obj_info;
 
 	/* open a PLY file for reading */
-	ply = ply_open_for_reading("test", &nelems, &elist, &file_type, &version);
+	ply = ply_open_for_reading("exemplo", &nelems, &elist, &file_type, &version);
 
 	/* print what we found out about the file */
 	printf("version %f\n", version);

@@ -45,7 +45,7 @@ void displayLinhaSimples(void) {
 		y = y0
 				+ floor(((XMAXIMO + YMAXIMO) / 2) * m * (x - x0) + .5)
 						/ ((XMAXIMO + YMAXIMO) / 2);
-		cout << x << ", " << y << endl;
+		// cout << x << ", " << y << endl;
 		glVertex3f(x, y, 0.0);
 	}
 	glEnd();

@@ -66,7 +66,7 @@ void displayCirculoBresenham(void) {
 	float deltaE = 3.0 / YMAXIMO;
 	float deltaSE = -2 * R + 5.0 / (100 * XMAXIMO);
 	PontosCirculo(x, y, 0);
-	cout << x << ", " << y << endl;
+	// cout << x << ", " << y << endl;
 
 	while (y >= x) {
 		if (d <= 0) { /* Selecione E */
@@ -81,7 +81,7 @@ void displayCirculoBresenham(void) {
 		}
 		x += 1.0 / (10 * XMAXIMO);
 		PontosCirculo(x, y, 0);
-		cout << x << ", " << y << endl;
+		// cout << x << ", " << y << endl;
 	}
 	glEnd();
 

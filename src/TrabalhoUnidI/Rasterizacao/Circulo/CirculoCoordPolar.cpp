@@ -40,8 +40,8 @@ void displayCirculoCoordPolar(void) {
 	for (theta = 180; theta >= 0; theta -= .005) {
 		glVertex3f(R * cos(theta), R * sin(theta), 0.0);
 		glVertex3f(R * cos(theta), -R * sin(theta), 0.0);
-		cout << "[" << R * cos(theta) << ", " << R * sin(theta) << "] [";
-		cout << R * cos(theta) << ", " << -R * sin(theta) << "]" << endl;
+//		cout << "[" << R * cos(theta) << ", " << R * sin(theta) << "] [";
+//		cout << R * cos(theta) << ", " << -R * sin(theta) << "]" << endl;
 	}
 	glEnd();
 

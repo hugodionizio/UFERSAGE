@@ -52,7 +52,7 @@ void displayLinhaIncremental(void) {
 	do {
 		yinc = floor(0.4f * (y + 0.5)) / YMAXIMO;
 		glVertex3f(x, yinc, 0.0);
-		cout << x << ", " << yinc << endl;
+		// cout << x << ", " << yinc << endl;
 		x = x + 0.4f / XMAXIMO;
 		y = y + m;
 	} while (x <= x1);

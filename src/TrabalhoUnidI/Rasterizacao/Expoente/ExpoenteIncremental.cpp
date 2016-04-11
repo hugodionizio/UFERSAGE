@@ -49,7 +49,7 @@ void displayExpoenteIncremental(void) {
 		y = a * exp(b * x);
 		yinc = floor(y * YMAXIMO + 0.5) / YMAXIMO;
 		glVertex3f(x, yinc, 0.0);
-		cout << x << ", " << yinc << endl;
+		// cout << x << ", " << yinc << endl;
 		x = x + 0.01f / XMAXIMO;
 	} while (x <= x1);
 	glEnd();
@@ -79,7 +79,7 @@ void displayExpoenteIncremental(void) {
 		y = a * exp(b * x);
 		yinc = floor(y * YMAXIMO) / YMAXIMO;
 		glVertex3f(x, yinc, 0.0);
-		cout << x << ", " << yinc << endl;
+		// cout << x << ", " << yinc << endl;
 		x = x + 0.01f / XMAXIMO;
 	} while (x <= x1);
 	glEnd();

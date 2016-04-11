@@ -47,7 +47,7 @@ void displayParabolaIncremental(void) {
 		y = a * x * x + b * x + c;
 		yinc = floor(y * YMAXIMO + 0.2) / YMAXIMO;
 		glVertex3f(x, yinc, 0.0);
-		cout << x << ", " << yinc << endl;
+		// cout << x << ", " << yinc << endl;
 		x = x + 0.01f / XMAXIMO;
 	} while (x <= x1);
 	glEnd();
@@ -63,7 +63,7 @@ void displayParabolaIncremental(void) {
 		y = a * x * x + b * x + c;
 		yinc = floor(y * YMAXIMO + 0.2) / YMAXIMO;
 		glVertex3f(x, yinc, 0.0);
-		cout << x << ", " << yinc << endl;
+		// cout << x << ", " << yinc << endl;
 		x = x + 0.01f / XMAXIMO;
 	} while (x <= x1);
 	glEnd();
@@ -79,7 +79,7 @@ void displayParabolaIncremental(void) {
 		y = a * x * x + b * x + c;
 		yinc = floor(y * YMAXIMO + 0.2) / YMAXIMO;
 		glVertex3f(x, yinc, 0.0);
-		cout << x << ", " << yinc << endl;
+		// cout << x << ", " << yinc << endl;
 		x = x + 0.01f / XMAXIMO;
 	} while (x <= x1);
 	glEnd();

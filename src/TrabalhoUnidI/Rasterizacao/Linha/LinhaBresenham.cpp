@@ -63,7 +63,7 @@ void displayLinhaBresenham(void) {
 
 	// 2. Pinta pixel (x0, y0)
 	glVertex3f(x, y, 0.0);
-	cout << x << ", " << y << endl;
+	// cout << x << ", " << y << endl;
 
 	// 5. Repita o passo 4*delta(x) vezes
 	while (x < x1) {
@@ -82,7 +82,7 @@ void displayLinhaBresenham(void) {
 			y += (0.4f / YMAXIMO);
 		}
 		glVertex3f(x, y, 0.0);
-		cout << x << ", " << y << endl;
+		// cout << x << ", " << y << endl;
 	}
 	glEnd();
 	/*
