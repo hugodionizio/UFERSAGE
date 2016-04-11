@@ -114,14 +114,67 @@ void displayPly(void) {
 	glColor3f(1.0, 1.0, 1.0);
 	glLoadIdentity(); /* clear the matrix */
 	/* viewing transformation */
-	gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-	glScalef(1.0, 2.0, 1.0); /* modeling transformation */
+	gluLookAt(1.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	glScalef(2.0, 2.0, 2.0); /* modeling transformation */
 
 	glBegin(GL_TRIANGLES);
+	// Face 1
 	glColor3f(1.0, 1.0, 1.0);
-	for (int i = 0; i < nverts; ++i) {
-		glVertex3f(verts[i].x, verts[i].y, verts[i].z);
-	}
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(0.0, 0.5, 0.0);
+	glVertex3f(0.5, 0.5, 0.0);
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(0.5, 0.0, 0.0);
+	glVertex3f(0.5, 0.5, 0.0);
+
+	// Face 2
+	glColor3f(1.0, 0.0, 0.0);
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(0.0, 0.5, 0.0);
+	glVertex3f(0.0, 0.5, 0.5);
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(0.0, 0.0, 0.5);
+	glVertex3f(0.0, 0.5, 0.5);
+
+	// Face 3
+	glColor3f(0.0, 1.0, 0.0);
+	glVertex3f(0.5, 0.0, 0.5);
+	glVertex3f(0.5, 0.5, 0.5);
+	glVertex3f(0.5, 0.5, 0.0);
+	glVertex3f(0.5, 0.0, 0.5);
+	glVertex3f(0.5, 0.0, 0.0);
+	glVertex3f(0.5, 0.5, 0.0);
+
+	// Face 4
+	glColor3f(0.0, 0.0, 1.0);
+	glVertex3f(0.0, 0.0, 0.5);
+	glVertex3f(0.0, 0.5, 0.5);
+	glVertex3f(0.5, 0.5, 0.5);
+	glVertex3f(0.0, 0.0, 0.5);
+	glVertex3f(0.5, 0.0, 0.5);
+	glVertex3f(0.5, 0.5, 0.5);
+
+	// Face 5
+	glColor3f(1.0, 1.0, 0.0);
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(0.5, 0.0, 0.0);
+	glVertex3f(0.5, 0.0, 0.5);
+	glVertex3f(0.0, 0.0, 0.0);
+	glVertex3f(0.0, 0.0, 0.5);
+	glVertex3f(0.5, 0.0, 0.5);
+
+	// Face 6
+	glColor3f(1.0, 0.0, 1.0);
+	glVertex3f(0.0, 0.5, 0.0);
+	glVertex3f(0.5, 0.5, 0.0);
+	glVertex3f(0.5, 0.5, 0.5);
+	glVertex3f(0.0, 0.5, 0.0);
+	glVertex3f(0.0, 0.5, 0.5);
+	glVertex3f(0.5, 0.5, 0.5);
+
+//	for (int i = 0; i < nverts; ++i) {
+//		glVertex3f(verts[i].x, verts[i].y, verts[i].z);
+//	}
 	glEnd();
 
 	glFlush();
