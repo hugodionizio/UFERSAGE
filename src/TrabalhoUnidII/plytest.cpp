@@ -179,8 +179,8 @@ void displayPly(void) {
 	glColor3f(1.0, 1.0, 1.0);
 	glLoadIdentity(); /* clear the matrix */
 	/* viewing transformation */
-	gluLookAt(2.0, -1.0, 6.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-	glScalef(2.0, 2.0, 2.0); /* modeling transformation */
+	gluLookAt(1.0, -1.0, 6.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	glScalef(1.0, 1.0, 1.0); /* modeling transformation */
 
 //	desenhaCubo();
 	float xcor, ycor, zcor;
@@ -216,7 +216,7 @@ int mainPly(int argc, char** argv) {
 
 #if 1
 	/* read a PLY file */
-	read_test();
+	read_test(&argc, argv);
 #endif
 
 	glutInit(&argc, argv);
@@ -297,9 +297,10 @@ void write_test() {
  Read in a PLY file.
  ******************************************************************************/
 
-void read_test() {
+void read_test(int *argc, char** argv) {
 	int i, j, k;
 	PlyFile *ply;
+	char *filename;
 	int nelems;
 	char **elist;
 	int file_type;
@@ -315,8 +316,13 @@ void read_test() {
 	int num_obj_info;
 	char **obj_info;
 
+	if (*argc > 2)
+		filename = argv[2];
+	else
+		filename = "ant";
+
 	/* open a PLY file for reading */
-	ply = ply_open_for_reading("test", &nelems, &elist, &file_type, &version);
+	ply = ply_open_for_reading(filename, &nelems, &elist, &file_type, &version);
 
 	/* print what we found out about the file */
 	printf("version %f\n", version);

@@ -160,7 +160,7 @@ extern void ply_free_other_elements(PlyOtherElems *);
 extern int equal_strings(char *, char *);
 
 void write_test();
-void read_test();
+void read_test(int *, char**);
 
 #ifdef __cplusplus
 }

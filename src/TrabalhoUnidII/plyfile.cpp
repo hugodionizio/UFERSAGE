@@ -744,8 +744,12 @@ PlyFile *ply_open_for_reading(char *filename, int *nelems, char ***elem_names,
 	/* open the file for reading */
 
 	fp = fopen(name, "r");
-	if (fp == NULL)
+	if (fp == NULL) {
+		printf("Erro de leitura: arquivo não encontrado\n");
 		return (NULL);
+	}
+	else
+		printf("Lendo arquivo...\n");
 
 	/* create the PlyFile data structure */
 
@@ -1593,7 +1597,7 @@ char **get_words(FILE *fp, int *nwords, char **orig_line) {
 	static char str[BIG_STRING];
 	static char str_copy[BIG_STRING];
 	char **words;
-	int max_words = 10;
+	int max_words = 486+912+9+1;
 	int num_words = 0;
 	char *ptr, *ptr2;
 	char *result;

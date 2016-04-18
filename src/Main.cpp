@@ -214,7 +214,7 @@ int main(int argc, char **argv) {
 		} else if (i == NUM_IMPLEMENTACOES)
 			cout << "Opção não encontrada." << endl;
 	} else
-		(*ptrf[PLY])(argc, argv);
+		(*ptrf[MALHA])(argc, argv);
 
 // Unidade I
 //	Exercícios

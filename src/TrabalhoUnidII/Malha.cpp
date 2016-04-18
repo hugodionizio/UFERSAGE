@@ -11,6 +11,7 @@
 // Diretivas
 #include <fstream> // Para a classe de arquivos
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -27,17 +28,27 @@ struct Vertice {
 	float x;
 	float y;
 	float z;
-};
+}*vert;
 
 struct Face {
 	Vertice v1;
 	Vertice v2;
 	Vertice v3;
-};
+
+	int numVertices;
+	int *v;
+}*face;
 
 struct Malha {
+	int numPalavras;
+	int numCaracteres;
+	int numLinhas;
+	int fim_cabecalho;
+	int numVertices;
+	int numFaces;
+	Vertice *v;
 	Face *f;
-};
+} malhaPly;
 
 float x = 0.0, y = 0.0;
 
@@ -262,7 +273,140 @@ void tecladoMalha(unsigned char key, int x, int y) {
 	glutPostRedisplay();
 }
 
+enum AtributoPly {
+	NONE, VERTEX, FACE
+};
+
+enum VerticeCor {
+	XCOOR, YCOOR, ZCOOR
+};
+
 int mainMalha(int argc, char **argv) {
+	const int MAX = 80;
+
+	// Variáveis
+	int comecouPalavra = 0, numPalavras = 0, numLinhas = 0, numCaracteres = 0;
+	char buff[MAX];
+	int fim_cabecalho = -1;
+	int atributoPly = NONE;
+	int numVertices = 0, numFaces = 0, numVertPorFace = 3;
+	int verticeCoor = NONE, faceVertice = NONE;
+
+	char *nomeArquivo;
+	if (argc > 2)
+		nomeArquivo = argv[2];
+	else
+		nomeArquivo = (char *) "test.ply";
+
+	ifstream finPly(nomeArquivo); // Cria arquivo para leitura em modo texto
+
+	// Seção de Comandos
+	while (!finPly.eof()) { // Enquanto não terminou o arquivo
+		finPly.getline(buff, MAX);
+		char * pch;
+		pch = strtok(buff, " ,\r");
+		while (pch != NULL) {
+			numPalavras++;
+//			cout << pch << endl;
+			if (strcmp(pch, "end_header") == 0) {
+				fim_cabecalho = numLinhas;
+				verticeCoor = XCOOR;
+
+			} else if (strcmp(pch, "vertex") == 0) {
+				atributoPly = VERTEX;
+			} else if (strcmp(pch, "face") == 0) {
+				atributoPly = FACE;
+			} else if (atributoPly == VERTEX) {
+				numVertices = atoi(pch);
+				vert = new Vertice[numVertices];
+				atributoPly = NONE;
+			} else if (atributoPly == FACE) {
+				numFaces = atoi(pch);
+				atributoPly = NONE;
+				face = new Face[numFaces];
+				for (int var = 0; var < numFaces; ++var) {
+					face[var].v = new int[numVertPorFace];
+				}
+			} else if (fim_cabecalho > 0
+					&& numLinhas < numVertices + fim_cabecalho) {
+				if (verticeCoor == XCOOR) {
+					vert[numLinhas - fim_cabecalho].x = atof(pch);
+					verticeCoor = YCOOR;
+				} else if (verticeCoor == YCOOR) {
+					vert[numLinhas - fim_cabecalho].y = atof(pch);
+					verticeCoor = ZCOOR;
+				} else if (verticeCoor == ZCOOR) {
+					vert[numLinhas - fim_cabecalho].z = atof(pch);
+					verticeCoor = NONE;
+				}
+			} else if (fim_cabecalho > 0
+					&& numLinhas < numFaces + numVertices + fim_cabecalho) {
+				if (numLinhas == numVertices + fim_cabecalho)
+					faceVertice = 0;
+				else if (faceVertice < numVertPorFace) {
+					face[numLinhas - (numVertices + fim_cabecalho)].numVertices =
+							numVertices;
+					face[numLinhas - (numVertices + fim_cabecalho)].v[faceVertice] =
+							atoi(pch);
+					cout << "face(i) = " << atoi(pch)
+							<< endl;
+					faceVertice++;
+				}
+			}
+			pch = strtok(NULL, " ");
+		}
+
+		numCaracteres += strlen(buff);
+		numLinhas++;
+	}
+
+	malhaPly.numLinhas = numLinhas;
+	malhaPly.numCaracteres = numCaracteres;
+	malhaPly.numPalavras = numPalavras;
+	malhaPly.fim_cabecalho = fim_cabecalho;
+	malhaPly.numVertices = numVertices;
+	malhaPly.numFaces = numFaces;
+	malhaPly.v = vert;
+	malhaPly.f = face;
+
+	cout << "O número de palavras do arquivo é: " << malhaPly.numPalavras
+			<< endl;
+	cout << "O número de caracteres do arquivo é: " << malhaPly.numCaracteres
+			<< endl;
+	cout << "O número de linhas do arquivo é: " << malhaPly.numLinhas << endl;
+
+	cout << "O fim do cabeçalho está na " << (malhaPly.fim_cabecalho + 1)
+			<< "ª linha." << endl;
+	cout << "O número de vértices do objeto é: " << malhaPly.numVertices
+			<< endl;
+	cout << "O número de faces do objeto é: " << malhaPly.numFaces << endl;
+
+	cout << "O primeiro vértice da primeira face é: V1F1("
+			<< malhaPly.v[malhaPly.f[0].v[0]].x << ", "
+			<< malhaPly.v[malhaPly.f[0].v[0]].y << ", "
+			<< malhaPly.v[malhaPly.f[0].v[0]].z << ")" << endl;
+
+	cout << "O último vértice da primeira face é: VNF1("
+			<< malhaPly.v[malhaPly.f[0].v[malhaPly.f->numVertices - 1]].x
+			<< ", "
+			<< malhaPly.v[malhaPly.f[0].v[malhaPly.f->numVertices - 1]].y
+			<< ", "
+			<< malhaPly.v[malhaPly.f[0].v[malhaPly.f->numVertices - 1]].z << ")"
+			<< endl;
+
+	cout << "O primeiro vértice da última face é: V1FN("
+			<< malhaPly.v[malhaPly.f[malhaPly.numFaces - 1].v[0]].x << ", "
+			<< malhaPly.v[malhaPly.f[malhaPly.numFaces - 1].v[0]].y << ", "
+			<< malhaPly.v[malhaPly.f[malhaPly.numFaces - 1].v[0]].z << ")"
+			<< endl;
+
+	cout << "O último vértice da última face é: VNFN("
+			<< malhaPly.v[malhaPly.f[malhaPly.numFaces - 1].v[malhaPly.f->numVertices
+					- 1]].x << ", "
+			<< malhaPly.v[malhaPly.f[malhaPly.numFaces - 1].v[malhaPly.f->numVertices
+					- 1]].y << ", "
+			<< malhaPly.v[malhaPly.f[malhaPly.numFaces - 1].v[malhaPly.f->numVertices
+					- 1]].z << ")" << endl;
 
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
