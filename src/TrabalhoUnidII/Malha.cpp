@@ -5,6 +5,8 @@
  *      Author: hugo
  */
 
+#define ARQUIVO_TESTE "airplanelinux.ply"
+
 #include <GL/glew.h>
 #include <GL/glui.h>
 
@@ -278,7 +280,7 @@ enum AtributoPly {
 };
 
 enum VerticeCor {
-	XCOOR, YCOOR, ZCOOR
+	XCOOR = 1, YCOOR, ZCOOR
 };
 
 int mainMalha(int argc, char **argv) {
@@ -296,7 +298,7 @@ int mainMalha(int argc, char **argv) {
 	if (argc > 2)
 		nomeArquivo = argv[2];
 	else
-		nomeArquivo = (char *) "test.ply";
+		nomeArquivo = (char *) ARQUIVO_TESTE;
 
 	ifstream finPly(nomeArquivo); // Cria arquivo para leitura em modo texto
 
@@ -304,7 +306,7 @@ int mainMalha(int argc, char **argv) {
 	while (!finPly.eof()) { // Enquanto não terminou o arquivo
 		finPly.getline(buff, MAX);
 		char * pch;
-		pch = strtok(buff, " ,\r");
+		pch = strtok(buff, " ,\r\n");
 		while (pch != NULL) {
 			numPalavras++;
 //			cout << pch << endl;
@@ -327,28 +329,35 @@ int mainMalha(int argc, char **argv) {
 				for (int var = 0; var < numFaces; ++var) {
 					face[var].v = new int[numVertPorFace];
 				}
-			} else if (fim_cabecalho > 0
-					&& numLinhas < numVertices + fim_cabecalho) {
+			} else if (fim_cabecalho > 0 // Lista e grava vértices na lista de vértices
+					&& numLinhas < numVertices + fim_cabecalho + 1) {
 				if (verticeCoor == XCOOR) {
 					vert[numLinhas - fim_cabecalho].x = atof(pch);
+					if (numLinhas - fim_cabecalho < 10)
+						cout << "P(" << vert[numLinhas - fim_cabecalho].x;
 					verticeCoor = YCOOR;
 				} else if (verticeCoor == YCOOR) {
 					vert[numLinhas - fim_cabecalho].y = atof(pch);
+					if (numLinhas - fim_cabecalho < 10)
+						cout << ", " << vert[numLinhas - fim_cabecalho].y;
 					verticeCoor = ZCOOR;
 				} else if (verticeCoor == ZCOOR) {
 					vert[numLinhas - fim_cabecalho].z = atof(pch);
-					verticeCoor = NONE;
+					if (numLinhas - fim_cabecalho < 10)
+						cout << ", " << vert[numLinhas - fim_cabecalho].z << ")" << endl;
+					verticeCoor = XCOOR;
 				}
-			} else if (fim_cabecalho > 0
+			} else if (fim_cabecalho > 0 // Lista e grava faces na lista de faces
 					&& numLinhas < numFaces + numVertices + fim_cabecalho) {
-				if (numLinhas == numVertices + fim_cabecalho)
+				if (numLinhas == numVertices + fim_cabecalho || faceVertice == numVertPorFace)
 					faceVertice = 0;
 				else if (faceVertice < numVertPorFace) {
 					face[numLinhas - (numVertices + fim_cabecalho)].numVertices =
 							numVertices;
 					face[numLinhas - (numVertices + fim_cabecalho)].v[faceVertice] =
 							atoi(pch);
-					cout << "face(i) = " << atoi(pch)
+					if (numLinhas - fim_cabecalho - numVertices < 10)
+						cout << "face(i) = " << atoi(pch)
 							<< endl;
 					faceVertice++;
 				}
@@ -357,6 +366,8 @@ int mainMalha(int argc, char **argv) {
 		}
 
 		numCaracteres += strlen(buff);
+//		if(numLinhas < 10)
+			//cout << "(" << strlen(buff) << " caracteres)" << buff << endl;
 		numLinhas++;
 	}
 
