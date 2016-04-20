@@ -5,7 +5,7 @@
  *      Author: hugo
  */
 
-#define ARQUIVO_TESTE "airplanelinux.ply"
+#define ARQUIVO_TESTE "ant.ply"
 
 #include <GL/glew.h>
 #include <GL/glui.h>
@@ -291,7 +291,7 @@ int mainMalha(int argc, char **argv) {
 	char buff[MAX];
 	int fim_cabecalho = -1;
 	int atributoPly = NONE;
-	int numVertices = 0, numFaces = 0, numVertPorFace = 3;
+	int numVertices = 0, numFaces = 0, numVertPorFace = 0;
 	int verticeCoor = NONE, faceVertice = NONE;
 
 	char *nomeArquivo;
@@ -326,48 +326,60 @@ int mainMalha(int argc, char **argv) {
 				numFaces = atoi(pch);
 				atributoPly = NONE;
 				face = new Face[numFaces];
-				for (int var = 0; var < numFaces; ++var) {
-					face[var].v = new int[numVertPorFace];
-				}
 			} else if (fim_cabecalho > 0 // Lista e grava vértices na lista de vértices
-					&& numLinhas < numVertices + fim_cabecalho + 1) {
-				if (verticeCoor == XCOOR) {
-					vert[numLinhas - fim_cabecalho].x = atof(pch);
-					if (numLinhas - fim_cabecalho < 10)
-						cout << "P(" << vert[numLinhas - fim_cabecalho].x;
-					verticeCoor = YCOOR;
-				} else if (verticeCoor == YCOOR) {
-					vert[numLinhas - fim_cabecalho].y = atof(pch);
-					if (numLinhas - fim_cabecalho < 10)
-						cout << ", " << vert[numLinhas - fim_cabecalho].y;
-					verticeCoor = ZCOOR;
-				} else if (verticeCoor == ZCOOR) {
-					vert[numLinhas - fim_cabecalho].z = atof(pch);
-					if (numLinhas - fim_cabecalho < 10)
-						cout << ", " << vert[numLinhas - fim_cabecalho].z << ")" << endl;
-					verticeCoor = XCOOR;
+			&& numLinhas < numVertices + fim_cabecalho + 1) {
+				if (strcmp(pch, "\r") != 0) {
+					if (verticeCoor == XCOOR) {
+						vert[numLinhas - fim_cabecalho].x = atof(pch);
+						if (numLinhas - fim_cabecalho < 10)
+							cout << "P(" << vert[numLinhas - fim_cabecalho].x;
+						verticeCoor = YCOOR;
+					} else if (verticeCoor == YCOOR) {
+						vert[numLinhas - fim_cabecalho].y = atof(pch);
+						if (numLinhas - fim_cabecalho < 10)
+							cout << ", " << vert[numLinhas - fim_cabecalho].y;
+						verticeCoor = ZCOOR;
+					} else if (verticeCoor == ZCOOR) {
+						vert[numLinhas - fim_cabecalho].z = atof(pch);
+						if (numLinhas - fim_cabecalho < 10)
+							cout << ", " << vert[numLinhas - fim_cabecalho].z
+									<< ")" << endl;
+						verticeCoor = XCOOR;
+					}
 				}
 			} else if (fim_cabecalho > 0 // Lista e grava faces na lista de faces
-					&& numLinhas < numFaces + numVertices + fim_cabecalho) {
-				if (numLinhas == numVertices + fim_cabecalho || faceVertice == numVertPorFace)
-					faceVertice = 0;
-				else if (faceVertice < numVertPorFace) {
+			&& numLinhas < numFaces + numVertices + fim_cabecalho) {
+				if (numLinhas == numVertices + fim_cabecalho + 1
+						&& numVertPorFace == 0) {
+					numVertPorFace = atoi(pch);
+					for (int var = 0; var < numFaces; ++var) {
+						face[var].v = new int[numVertPorFace];
+					}
+					faceVertice = 1;
+				} else if (faceVertice < numVertPorFace && faceVertice > 0) {
 					face[numLinhas - (numVertices + fim_cabecalho)].numVertices =
 							numVertices;
 					face[numLinhas - (numVertices + fim_cabecalho)].v[faceVertice] =
 							atoi(pch);
+
 					if (numLinhas - fim_cabecalho - numVertices < 10)
-						cout << "face(i) = " << atoi(pch)
-							<< endl;
+						cout << "face("
+								<< numLinhas - fim_cabecalho - numVertices
+								<< ") = " << atoi(pch) << endl;
+
+					if (faceVertice + 1 < numVertPorFace)
+						faceVertice++;
+					else
+						faceVertice = 0;
+				} else
 					faceVertice++;
-				}
 			}
+			numCaracteres += strlen(pch);
+//			if (numLinhas < 10)
+//				cout << "(" << strlen(pch) << " caracteres) " << pch << endl;
 			pch = strtok(NULL, " ");
 		}
 
-		numCaracteres += strlen(buff);
-//		if(numLinhas < 10)
-			//cout << "(" << strlen(buff) << " caracteres)" << buff << endl;
 		numLinhas++;
 	}
 
