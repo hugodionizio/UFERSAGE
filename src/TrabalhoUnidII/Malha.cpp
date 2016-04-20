@@ -293,6 +293,7 @@ int mainMalha(int argc, char **argv) {
 	int atributoPly = NONE;
 	int numVertices = 0, numFaces = 0, numVertPorFace = 0;
 	int verticeCoor = NONE, faceVertice = NONE;
+	int linhaAtual;
 
 	char *nomeArquivo;
 	if (argc > 2)
@@ -349,30 +350,42 @@ int mainMalha(int argc, char **argv) {
 				}
 			} else if (fim_cabecalho > 0 // Lista e grava faces na lista de faces
 			&& numLinhas < numFaces + numVertices + fim_cabecalho) {
-				if (numLinhas == numVertices + fim_cabecalho + 1
-						&& numVertPorFace == 0) {
-					numVertPorFace = atoi(pch);
-					for (int var = 0; var < numFaces; ++var) {
-						face[var].v = new int[numVertPorFace];
-					}
-					faceVertice = 1;
-				} else if (faceVertice < numVertPorFace && faceVertice > 0) {
-					face[numLinhas - (numVertices + fim_cabecalho)].numVertices =
-							numVertices;
-					face[numLinhas - (numVertices + fim_cabecalho)].v[faceVertice] =
-							atoi(pch);
+				if (strcmp(pch, "\r") != 0) {
+					if (numLinhas == numVertices + fim_cabecalho + 1
+							&& numVertPorFace == 0) {
+						numVertPorFace = atoi(pch);
+						for (int var = 0; var < numFaces; ++var) {
+							face[var].v = new int[numVertPorFace];
+						}
+						faceVertice = 1;
+					} else if (faceVertice <= numVertPorFace
+							&& faceVertice > 0) {
+						face[numLinhas - (numVertices + fim_cabecalho)].numVertices =
+								numVertices;
+						face[numLinhas - (numVertices + fim_cabecalho)].v[faceVertice] =
+								atoi(pch);
 
-					if (numLinhas - fim_cabecalho - numVertices < 10)
-						cout << "face("
-								<< numLinhas - fim_cabecalho - numVertices
-								<< ") = " << atoi(pch) << endl;
+						if (numLinhas - fim_cabecalho - numVertices <= 10) {
+							if (linhaAtual != numLinhas) {
+								cout << "F("
+										<< numLinhas - fim_cabecalho
+												- numVertices << ") = (";
+								linhaAtual = numLinhas;
+							}
+							cout << atoi(pch);
+							if (faceVertice + 1 <= numVertPorFace)
+								cout << ", ";
+							else
+								cout << ")" << endl;
+						}
 
-					if (faceVertice + 1 < numVertPorFace)
+						if (faceVertice + 1 <= numVertPorFace)
+							faceVertice++;
+						else
+							faceVertice = 0;
+					} else if (strcmp(pch, "\r") != 0)
 						faceVertice++;
-					else
-						faceVertice = 0;
-				} else
-					faceVertice++;
+				}
 			}
 			numCaracteres += strlen(pch);
 //			if (numLinhas < 10)
