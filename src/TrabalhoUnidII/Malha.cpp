@@ -331,25 +331,25 @@ int mainMalha(int argc, char **argv) {
 			&& numLinhas < numVertices + fim_cabecalho + 1) {
 				if (strcmp(pch, "\r") != 0) {
 					if (verticeCoor == XCOOR) {
-						vert[numLinhas - fim_cabecalho].x = atof(pch);
+						vert[numLinhas - fim_cabecalho - 1].x = atof(pch);
 						if (numLinhas - fim_cabecalho < 10)
-							cout << "P(" << vert[numLinhas - fim_cabecalho].x;
+							cout << "P(" << vert[numLinhas - fim_cabecalho - 1].x;
 						verticeCoor = YCOOR;
 					} else if (verticeCoor == YCOOR) {
-						vert[numLinhas - fim_cabecalho].y = atof(pch);
+						vert[numLinhas - fim_cabecalho - 1].y = atof(pch);
 						if (numLinhas - fim_cabecalho < 10)
-							cout << ", " << vert[numLinhas - fim_cabecalho].y;
+							cout << ", " << vert[numLinhas - fim_cabecalho - 1].y;
 						verticeCoor = ZCOOR;
 					} else if (verticeCoor == ZCOOR) {
-						vert[numLinhas - fim_cabecalho].z = atof(pch);
+						vert[numLinhas - fim_cabecalho - 1].z = atof(pch);
 						if (numLinhas - fim_cabecalho < 10)
-							cout << ", " << vert[numLinhas - fim_cabecalho].z
+							cout << ", " << vert[numLinhas - fim_cabecalho - 1].z
 									<< ")" << endl;
 						verticeCoor = XCOOR;
 					}
 				}
 			} else if (fim_cabecalho > 0 // Lista e grava faces na lista de faces
-			&& numLinhas < numFaces + numVertices + fim_cabecalho) {
+			&& numLinhas < numFaces + numVertices + fim_cabecalho + 1) {
 				if (strcmp(pch, "\r") != 0) {
 					if (numLinhas == numVertices + fim_cabecalho + 1
 							&& numVertPorFace == 0) {
@@ -360,9 +360,9 @@ int mainMalha(int argc, char **argv) {
 						faceVertice = 1;
 					} else if (faceVertice <= numVertPorFace
 							&& faceVertice > 0) {
-						face[numLinhas - (numVertices + fim_cabecalho)].numVertices =
-								numVertices;
-						face[numLinhas - (numVertices + fim_cabecalho)].v[faceVertice] =
+						face[numLinhas - (numVertices + fim_cabecalho) - 1].numVertices =
+								numVertPorFace;
+						face[numLinhas - (numVertices + fim_cabecalho) - 1].v[faceVertice - 1] =
 								atoi(pch);
 
 						if (numLinhas - fim_cabecalho - numVertices <= 10) {
@@ -372,7 +372,9 @@ int mainMalha(int argc, char **argv) {
 												- numVertices << ") = (";
 								linhaAtual = numLinhas;
 							}
-							cout << atoi(pch);
+							cout
+									<< face[numLinhas
+											- (numVertices + fim_cabecalho) - 1].v[faceVertice - 1];
 							if (faceVertice + 1 <= numVertPorFace)
 								cout << ", ";
 							else
@@ -404,6 +406,22 @@ int mainMalha(int argc, char **argv) {
 	malhaPly.numFaces = numFaces;
 	malhaPly.v = vert;
 	malhaPly.f = face;
+
+	cout << "Testando lista de vértices..." << endl;
+	for (int var = 0; var < malhaPly.numVertices; ++var) {
+		cout << "V(" << var << ") = (" << vert[var].x << ", " << vert[var].y
+				<< ", " << vert[var].z << ")" << endl;
+		if (var == 4)
+			var = malhaPly.numVertices - 5;
+	}
+
+	cout << "Testando lista de faces..." << endl;
+	for (int var = 0; var < malhaPly.numFaces; ++var) {
+		cout << "F(" << var << ") = (" << face[var].v[0] << ", " << face[var].v[1]
+				<< ", " << face[var].v[2] << ")" << endl;
+		if (var == 4)
+			var = malhaPly.numFaces - 5;
+	}
 
 	cout << "O número de palavras do arquivo é: " << malhaPly.numPalavras
 			<< endl;
