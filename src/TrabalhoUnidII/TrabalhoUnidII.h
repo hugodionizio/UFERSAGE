@@ -19,5 +19,6 @@ int mainPly(int, char **);
 
 // Funções
 void desenharMalha(void);
+void desenhaCubo(void);
 
 #endif /* TRABALHOUNIDII_H_ */

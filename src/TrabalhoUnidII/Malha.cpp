@@ -17,6 +17,8 @@
 
 using namespace std;
 
+#include "TrabalhoUnidII.h"
+
 /*	Create checkerboard texture	*/
 #define	checkImageWidth 64
 #define	checkImageHeight 64
@@ -93,130 +95,35 @@ void makeMalhaImage(void) {
 void inicializarMalha(void) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glShadeModel(GL_FLAT);
-	glEnable(GL_DEPTH_TEST);
-
-	makeMalhaImage();
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
-#ifdef GL_VERSION_1_1
-	glGenTextures(1, &texName);
-	glBindTexture(GL_TEXTURE_2D, texName);
-#endif
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-#ifdef GL_VERSION_1_1
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, checkImageWidth, checkImageHeight,
-			0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);
-#else
-	glTexImage2D(GL_TEXTURE_2D, 0, 4, checkImageWidth, checkImageHeight,
-			0, GL_RGBA, GL_UNSIGNED_BYTE, checkImage);
-#endif
 }
 
 void desenharMalha(void) {
-	bool salvar = false;
-	// Seção de Declarações Internas
-	ifstream fin("Malha.ply", ios::binary);
-	ofstream fout2("MalhaTmp.ply", ios::binary);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glColor3f(1.0, 1.0, 1.0);
+	glLoadIdentity(); /* clear the matrix */
+	/* viewing transformation */
+	gluLookAt(1.0, -1.0, 6.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	glScalef(0.18, 0.18, 0.18); /* modeling transformation */
 
-	// Ler malha de um arquivo
-	cout << "Lendo malha de arquivo .ply..." << endl;
-	int tam = 0;
-	while (fin.read(reinterpret_cast<char *>(&f1), sizeof(Face))) {
-		tam++;
+	glBegin(GL_LINE_LOOP);
+	glColor3f(1.0, 1.0, 1.0);
+	for (int i = 0; i < malhaPly.numFaces; ++i) {
+		for (int j = 0; j < 3; ++j) {
+//			desenhaCubo();
+			glVertex3f(malhaPly.v[malhaPly.f[i].v[j]].x, malhaPly.v[malhaPly.f[i].v[j]].y, malhaPly.v[malhaPly.f[i].v[j]].z);
+		}
 	}
-
-	if (tam == 0) {
-		cout << "Arquivo inexistente." << endl;
-		criarMalha(&m1, x, y, 6, 8, 10, 12);
-		salvar = true;
-	} else {
-		m1.f = new Face[1];
-		m1.f = &f1;
-		x = m1.f->v1.x;
-		y = m1.f->v1.y;
-	}
-	fin.close();
-
-	cout << "Imprimindo..." << endl;
-//	else {
-//		cout << m1.f->v1.x << endl;
-//		cout << m1.f->v1.y << endl;
-//		cout << m1.f->v2.x << endl;
-//		cout << m1.f->v2.y << endl;
-//		cout << m1.f->v3.x << endl;
-//		cout << m1.f->v3.y << endl;
-//	}
-
-	f1 = *m1.f;
-	x = f1.v1.x;
-	y = f1.v1.y;
-
-	cout << x << endl;
-	cout << y << endl;
-	cout << f1.v1.x << endl;
-	cout << f1.v1.y << endl;
-	cout << f1.v2.x << endl;
-	cout << f1.v2.y << endl;
-	cout << f1.v3.x << endl;
-	cout << f1.v3.y << endl;
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_TEXTURE_2D);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
-#ifdef GL_VERSION_1_1
-	glBindTexture(GL_TEXTURE_2D, texName);
-#endif
-
-	glBegin(GL_QUADS);
-	glTexCoord2f(x, y);
-	glVertex3f(-2.0, -1.0, 0.0);
-	glTexCoord2f(0.0, 1.0);
-	glVertex3f(-2.0, 1.0, 0.0);
-	glTexCoord2f(1.0, 1.0);
-	glVertex3f(0.0, 1.0, 0.0);
-	glTexCoord2f(1.0, 0.0);
-	glVertex3f(0.0, -1.0, 0.0);
-
-	glTexCoord2f(0.0, 0.0);
-	glVertex3f(1.0, -1.0, 0.0);
-	glTexCoord2f(0.0, 1.0);
-	glVertex3f(1.0, 1.0, 0.0);
-	glTexCoord2f(1.0, 1.0);
-	glVertex3f(2.41421, 1.0, -1.41421);
-	glTexCoord2f(1.0, 0.0);
-	glVertex3f(2.41421, -1.0, -1.41421);
 	glEnd();
 
-	if (salvar) {
-//		m1.f->v1.x*=2;
-
-// Gravar/atualizar/substituir malha em um arquivo
-		cout << "Gravando malha em arquivo .ply..." << endl;
-		ofstream fout("Malha.ply", ios::binary);
-		fout.write(reinterpret_cast<char *>(&f1), sizeof(Face));
-		fout.close();
-	} else {
-		cout << "Fazendo backup..." << endl;
-		fout2.write(reinterpret_cast<char *>(&f1), sizeof(Face));
-		fout2.close();
-	}
-
 	glFlush();
-	glDisable(GL_TEXTURE_2D);
 }
 
 void redesenharMalha(int w, int h) {
 	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0, (GLfloat) w / (GLfloat) h, 1.0, 30.0);
+	glFrustum(-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	glTranslatef(0.0, 0.0, -3.6);
 }
 
 void tecladoMalha(unsigned char key, int x, int y) {
@@ -283,7 +190,7 @@ enum VerticeCor {
 	XCOOR = 1, YCOOR, ZCOOR
 };
 
-int mainMalha(int argc, char **argv) {
+void lerArquivo(char *nomeArquivo) {
 	const int MAX = 80;
 
 	// Variáveis
@@ -294,12 +201,6 @@ int mainMalha(int argc, char **argv) {
 	int numVertices = 0, numFaces = 0, numVertPorFace = 0;
 	int verticeCoor = NONE, faceVertice = NONE;
 	int linhaAtual;
-
-	char *nomeArquivo;
-	if (argc > 2)
-		nomeArquivo = argv[2];
-	else
-		nomeArquivo = (char *) ARQUIVO_TESTE;
 
 	ifstream finPly(nomeArquivo); // Cria arquivo para leitura em modo texto
 
@@ -333,17 +234,20 @@ int mainMalha(int argc, char **argv) {
 					if (verticeCoor == XCOOR) {
 						vert[numLinhas - fim_cabecalho - 1].x = atof(pch);
 						if (numLinhas - fim_cabecalho < 10)
-							cout << "P(" << vert[numLinhas - fim_cabecalho - 1].x;
+							cout << "P("
+									<< vert[numLinhas - fim_cabecalho - 1].x;
 						verticeCoor = YCOOR;
 					} else if (verticeCoor == YCOOR) {
 						vert[numLinhas - fim_cabecalho - 1].y = atof(pch);
 						if (numLinhas - fim_cabecalho < 10)
-							cout << ", " << vert[numLinhas - fim_cabecalho - 1].y;
+							cout << ", "
+									<< vert[numLinhas - fim_cabecalho - 1].y;
 						verticeCoor = ZCOOR;
 					} else if (verticeCoor == ZCOOR) {
 						vert[numLinhas - fim_cabecalho - 1].z = atof(pch);
 						if (numLinhas - fim_cabecalho < 10)
-							cout << ", " << vert[numLinhas - fim_cabecalho - 1].z
+							cout << ", "
+									<< vert[numLinhas - fim_cabecalho - 1].z
 									<< ")" << endl;
 						verticeCoor = XCOOR;
 					}
@@ -362,8 +266,8 @@ int mainMalha(int argc, char **argv) {
 							&& faceVertice > 0) {
 						face[numLinhas - (numVertices + fim_cabecalho) - 1].numVertices =
 								numVertPorFace;
-						face[numLinhas - (numVertices + fim_cabecalho) - 1].v[faceVertice - 1] =
-								atoi(pch);
+						face[numLinhas - (numVertices + fim_cabecalho) - 1].v[faceVertice
+								- 1] = atoi(pch);
 
 						if (numLinhas - fim_cabecalho - numVertices <= 10) {
 							if (linhaAtual != numLinhas) {
@@ -374,7 +278,8 @@ int mainMalha(int argc, char **argv) {
 							}
 							cout
 									<< face[numLinhas
-											- (numVertices + fim_cabecalho) - 1].v[faceVertice - 1];
+											- (numVertices + fim_cabecalho) - 1].v[faceVertice
+											- 1];
 							if (faceVertice + 1 <= numVertPorFace)
 								cout << ", ";
 							else
@@ -417,8 +322,8 @@ int mainMalha(int argc, char **argv) {
 
 	cout << "Testando lista de faces..." << endl;
 	for (int var = 0; var < malhaPly.numFaces; ++var) {
-		cout << "F(" << var << ") = (" << face[var].v[0] << ", " << face[var].v[1]
-				<< ", " << face[var].v[2] << ")" << endl;
+		cout << "F(" << var << ") = (" << face[var].v[0] << ", "
+				<< face[var].v[1] << ", " << face[var].v[2] << ")" << endl;
 		if (var == 4)
 			var = malhaPly.numFaces - 5;
 	}
@@ -462,16 +367,27 @@ int mainMalha(int argc, char **argv) {
 			<< malhaPly.v[malhaPly.f[malhaPly.numFaces - 1].v[malhaPly.f->numVertices
 					- 1]].z << ")" << endl;
 
+}
+
+int mainMalha(int argc, char **argv) {
+	char *nomeArquivo;
+	if (argc > 2)
+		nomeArquivo = argv[2];
+	else
+		nomeArquivo = (char *) ARQUIVO_TESTE;
+
+	lerArquivo(nomeArquivo);
+
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
-	glutInitWindowSize(650, 600);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitWindowSize(500, 500);
 	glutInitWindowPosition(100, 100);
-//   glutCreateWindow(argv[0]);
 	Wind = glutCreateWindow("Malha Ply");
 	inicializarMalha();
 	glutDisplayFunc(desenharMalha);
 	glutReshapeFunc(redesenharMalha);
-	glutKeyboardFunc(tecladoMalha);
+//	glutKeyboardFunc(tecladoMalha);
 	glutMainLoop();
+
 	return 0;
 }
