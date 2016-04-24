@@ -69,7 +69,6 @@
 									<listOptionValue builtIn="false" value="&quot;FREETYPE_INCLUDE_PATH= /usr/include/&quot;"/>
 									<listOptionValue builtIn="false" value="__GXX_EXPERIMENTAL_CXX0X__"/>
 									<listOptionValue builtIn="false" value="__cplusplus=201103L"/>
-									<listOptionValue builtIn="false" value="LINUX"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1094993749" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>

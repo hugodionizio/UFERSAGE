@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <GL/glut.h>
 
-#ifdef LINUX
+#ifdef __linux__
 #include "Examples/examples.h"
 #include "Exemplos/Exemplos.h"
 #include "TrabalhoUnidI/TrabalhoUnidI.h"
@@ -23,7 +23,7 @@ using namespace std;
 typedef int (*PFunc)(int, char**); /* O tipo PFunc é ponteiro p/fção void */
 
 enum Implementacoes {
-#ifdef LINUX
+#ifdef __linux__
 	// Unidade I
 	// Exercícios
 	AULA01,
@@ -78,7 +78,7 @@ enum Implementacoes {
 	// Fim da Unidade III
 
 	// Adicionais
-#ifdef LINUX
+#ifdef __linux__
 	VORTEX = 75,
 #endif
 	NUM_IMPLEMENTACOES
@@ -86,7 +86,7 @@ enum Implementacoes {
 
 int main(int argc, char **argv) {
 	PFunc ptrf[] = {
-#ifdef LINUX
+#ifdef __linux__
 			// Unidade I
 			//	Exercícios
 			mainAula01, mainMouse,
@@ -153,7 +153,7 @@ int main(int argc, char **argv) {
 			};
 
 	char *menu[] = {
-#ifdef LINUX
+#ifdef __linux__
 			// Unidade I
 			//	Exercícios
 			"Aula01", "Mouse",
@@ -202,7 +202,7 @@ int main(int argc, char **argv) {
 #endif
 			"Malha",
 
-#ifdef LINUX
+#ifdef __linux__
 			// Unidade III
 			// Examples (redbook)
 			"Tess", "Quadric", "BezCurve", "BezSurf", "BezMesh", "TextureSurf",
@@ -216,7 +216,7 @@ int main(int argc, char **argv) {
 
 	cout << "Hello World!" << endl;
 
-#ifdef LINUX
+#ifdef __linux__
 	cout << "Hello Linux!!" << endl;
 #endif
 
@@ -241,7 +241,7 @@ int main(int argc, char **argv) {
 	} else
 		(*ptrf[MALHA])(argc, argv);
 
-#ifdef LINUX
+#ifdef __linux__
 // Unidade I
 //	Exercícios
 //	mainAula01(argc, argv);
