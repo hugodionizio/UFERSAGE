@@ -56,7 +56,9 @@ struct Malha {
 
 float x = 0.0, y = 0.0;
 
+#ifdef LINUX
 FGAPI int FGAPIENTRY Wind;
+#endif
 
 // Malha 3D
 Malha m1;
@@ -175,7 +177,9 @@ void tecladoMalha(unsigned char key, int x, int y) {
 
 		break;
 	case 27:
+#ifdef LINUX
 		glutDestroyWindow(Wind);
+#endif
 		exit(EXIT_SUCCESS);
 		break;
 	}
@@ -382,7 +386,11 @@ int mainMalha(int argc, char **argv) {
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(500, 500);
 	glutInitWindowPosition(100, 100);
+#ifdef LINUX
 	Wind = glutCreateWindow("Malha Ply");
+#else
+	glutCreateWindow("Malha Ply");
+#endif
 	inicializarMalha();
 	glutDisplayFunc(desenharMalha);
 	glutReshapeFunc(redesenharMalha);

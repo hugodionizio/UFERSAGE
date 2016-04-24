@@ -4,13 +4,18 @@
  *  Created on: 03/02/2016
  *      Author: hugo
  */
-#include <iostream>
-#include <random>
-#include <cstring>
+#include <fstream> // Para a classe de arquivos
+#include <iostream> // Para leitura/gravação de arquivos
+//#include <random> // Para funções de distribuição
+#include <cstring> // Para tratamento de strings
+#include <stdlib.h>
+#include <GL/glut.h>
 
+#ifdef LINUX
 #include "Examples/examples.h"
 #include "Exemplos/Exemplos.h"
 #include "TrabalhoUnidI/TrabalhoUnidI.h"
+#endif
 #include "TrabalhoUnidII/TrabalhoUnidII.h"
 
 using namespace std;
@@ -18,6 +23,7 @@ using namespace std;
 typedef int (*PFunc)(int, char**); /* O tipo PFunc é ponteiro p/fção void */
 
 enum Implementacoes {
+#ifdef LINUX
 	// Unidade I
 	// Exercícios
 	AULA01,
@@ -64,6 +70,7 @@ enum Implementacoes {
 
 	// Trabalho 2 - Unidade II
 	PLY = 61,
+#endif
 	MALHA,
 
 	// Unidade III
@@ -71,13 +78,15 @@ enum Implementacoes {
 	// Fim da Unidade III
 
 	// Adicionais
+#ifdef LINUX
 	VORTEX = 75,
-
+#endif
 	NUM_IMPLEMENTACOES
 };
 
 int main(int argc, char **argv) {
 	PFunc ptrf[] = {
+#ifdef LINUX
 			// Unidade I
 			//	Exercícios
 			mainAula01, mainMouse,
@@ -126,7 +135,8 @@ int main(int argc, char **argv) {
 			// Fim da Unidade II
 
 			// Trabalho 2 - Unidade II
-			mainPly, mainMalha,
+			mainPly,
+			mainMalha,
 
 			// Unidade III
 			// Examples (redbook)
@@ -136,9 +146,14 @@ int main(int argc, char **argv) {
 			// Fim da Unidade III
 
 			//	Adicionais
-			mainVortex };
+			mainVortex
+#else
+			mainMalha
+#endif
+			};
 
 	char *menu[] = {
+#ifdef LINUX
 			// Unidade I
 			//	Exercícios
 			"Aula01", "Mouse",
@@ -183,8 +198,11 @@ int main(int argc, char **argv) {
 			// Fim da Unidade II
 
 			// Trabalho 2 - Unidade II
-			"Ply", "Malha",
+			"Ply",
+#endif
+			"Malha",
 
+#ifdef LINUX
 			// Unidade III
 			// Examples (redbook)
 			"Tess", "Quadric", "BezCurve", "BezSurf", "BezMesh", "TextureSurf",
@@ -192,10 +210,17 @@ int main(int argc, char **argv) {
 			// Fim da Unidade III
 
 			//	Adicionais
-			"Vortex" };
+			"Vortex"
+#endif
+			};
 
-	cout << "Hello World!!" << endl;
-	cout << "Hello OpenGL!" << endl;
+	cout << "Hello World!" << endl;
+
+#ifdef LINUX
+	cout << "Hello Linux!!" << endl;
+#endif
+
+	cout << "Hello OpenGL!!!" << endl;
 
 	if (argc > 1) {
 		int i;
@@ -216,6 +241,7 @@ int main(int argc, char **argv) {
 	} else
 		(*ptrf[MALHA])(argc, argv);
 
+#ifdef LINUX
 // Unidade I
 //	Exercícios
 //	mainAula01(argc, argv);
@@ -324,6 +350,7 @@ int main(int argc, char **argv) {
 
 //	Adicionais
 //	mainVortex(argc, argv);
+#endif
 
 	return (0);
 }

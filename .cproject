@@ -42,6 +42,7 @@
 									<listOptionValue builtIn="false" value="&quot;FREETYPE_INCLUDE_PATH= /usr/include/&quot;"/>
 									<listOptionValue builtIn="false" value="__GXX_EXPERIMENTAL_CXX0X__"/>
 									<listOptionValue builtIn="false" value="__cplusplus=201103L"/>
+									<listOptionValue builtIn="false" value="LINUX"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.dialect.std.677539640" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.cpp.compiler.dialect.c++11" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.dialect.flags.2015908135" name="Other dialect flags" superClass="gnu.cpp.compiler.option.dialect.flags" useByScannerDiscovery="true" value="-std=c++11" valueType="string"/>
@@ -68,6 +69,7 @@
 									<listOptionValue builtIn="false" value="&quot;FREETYPE_INCLUDE_PATH= /usr/include/&quot;"/>
 									<listOptionValue builtIn="false" value="__GXX_EXPERIMENTAL_CXX0X__"/>
 									<listOptionValue builtIn="false" value="__cplusplus=201103L"/>
+									<listOptionValue builtIn="false" value="LINUX"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1094993749" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
