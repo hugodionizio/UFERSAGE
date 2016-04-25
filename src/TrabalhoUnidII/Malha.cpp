@@ -35,10 +35,6 @@ struct Vertice {
 }*vert;
 
 struct Face {
-	Vertice v1;
-	Vertice v2;
-	Vertice v3;
-
 	int numVertices;
 	int *v;
 }*face;
@@ -66,16 +62,18 @@ Face f1;
 
 void criarMalha(Malha *m, float v1x, float v1y, float v2x, float v2y, float v3x,
 		float v3y) {
+	m->f->v = new int[3];
+
 	// Ignorar eixo z
 	m->f = new Face[1];
-	m->f->v1.x = v1x;
-	m->f->v1.y = v1y;
-
-	m->f->v2.x = v2x;
-	m->f->v2.y = v2y;
-
-	m->f->v3.x = v3x;
-	m->f->v3.y = v3y;
+	m->v[1].x = v1x;
+//	m->f->v[1].y = v1y;
+//
+//	m->f->v2.x = v2x;
+//	m->f->v2.y = v2y;
+//
+//	m->f->v3.x = v3x;
+//	m->f->v3.y = v3y;
 
 	cout << "Malha criada." << endl;
 }
@@ -107,15 +105,15 @@ void desenharMalha(void) {
 	gluLookAt(1.0, -1.0, 6.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 	glScalef(0.18, 0.18, 0.18); /* modeling transformation */
 
-	glBegin(GL_LINE_LOOP);
-	glColor3f(1.0, 1.0, 1.0);
 	for (int i = 0; i < malhaPly.numFaces; ++i) {
+		glBegin(GL_LINE_LOOP);
+		glColor3f(1.0, 1.0, 1.0);
 		for (int j = 0; j < 3; ++j) {
 //			desenhaCubo();
 			glVertex3f(malhaPly.v[malhaPly.f[i].v[j]].x, malhaPly.v[malhaPly.f[i].v[j]].y, malhaPly.v[malhaPly.f[i].v[j]].z);
 		}
+		glEnd();
 	}
-	glEnd();
 
 	glFlush();
 }
@@ -139,19 +137,19 @@ void tecladoMalha(unsigned char key, int x, int y) {
 		cout << x << endl;
 		x = 1.0f;
 
-		f1.v1.x = x;
+//		f1.v1.x = x;
 
 		cout << "Incrementado malha em arquivo .ply..." << endl;
 		fout.write(reinterpret_cast<char *>(&f1), sizeof(Face));
 
 		cout << x << endl;
 		cout << y << endl;
-		cout << f1.v1.x << endl;
-		cout << f1.v1.y << endl;
-		cout << f1.v2.x << endl;
-		cout << f1.v2.y << endl;
-		cout << f1.v3.x << endl;
-		cout << f1.v3.y << endl;
+//		cout << f1.v1.x << endl;
+//		cout << f1.v1.y << endl;
+//		cout << f1.v2.x << endl;
+//		cout << f1.v2.y << endl;
+//		cout << f1.v3.x << endl;
+//		cout << f1.v3.y << endl;
 
 		cout << "Incrementado." << endl;
 
@@ -159,19 +157,19 @@ void tecladoMalha(unsigned char key, int x, int y) {
 	case 'b':
 		x = 0.0f;
 
-		f1.v1.x = x;
+//		f1.v1.x = x;
 
 		cout << "Decrementando malha em arquivo .ply..." << endl;
 		fout.write(reinterpret_cast<char *>(&f1), sizeof(Face));
 
 		cout << x << endl;
 		cout << y << endl;
-		cout << f1.v1.x << endl;
-		cout << f1.v1.y << endl;
-		cout << f1.v2.x << endl;
-		cout << f1.v2.y << endl;
-		cout << f1.v3.x << endl;
-		cout << f1.v3.y << endl;
+//		cout << f1.v1.x << endl;
+//		cout << f1.v1.y << endl;
+//		cout << f1.v2.x << endl;
+//		cout << f1.v2.y << endl;
+//		cout << f1.v3.x << endl;
+//		cout << f1.v3.y << endl;
 
 		cout << "Decrementado." << endl;
 
@@ -193,6 +191,16 @@ enum AtributoPly {
 enum VerticeCor {
 	XCOOR = 1, YCOOR, ZCOOR
 };
+
+void imprimirVertice(int numLinhas, int fim_cabecalho) {
+	if (numLinhas - fim_cabecalho < 10)
+		cout << "P("
+				<< vert[numLinhas - fim_cabecalho - 1].x;
+}
+
+void imprimirFace() {
+
+}
 
 void lerArquivo(char *nomeArquivo) {
 	const int MAX = 80;
@@ -261,15 +269,18 @@ void lerArquivo(char *nomeArquivo) {
 				if (strcmp(pch, "\r") != 0) {
 					if (numLinhas == numVertices + fim_cabecalho + 1
 							&& numVertPorFace == 0) {
+						// Para todas as faces
 						numVertPorFace = atoi(pch);
 						for (int var = 0; var < numFaces; ++var) {
 							face[var].v = new int[numVertPorFace];
 						}
 						faceVertice = 1;
-					} else if (faceVertice <= numVertPorFace
-							&& faceVertice > 0) {
+					} else if (faceVertice <= numVertPorFace && faceVertice > 0) {
+						// Atribuir número de vértices para a face local ou atual
 						face[numLinhas - (numVertices + fim_cabecalho) - 1].numVertices =
 								numVertPorFace;
+
+						// Atribuir a posição do vértice na lista de vértices do arquivo ply
 						face[numLinhas - (numVertices + fim_cabecalho) - 1].v[faceVertice
 								- 1] = atoi(pch);
 

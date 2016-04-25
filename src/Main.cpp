@@ -9,12 +9,14 @@
 //#include <random> // Para funções de distribuição
 #include <cstring> // Para tratamento de strings
 #include <stdlib.h>
-#include <GL/glut.h>
 
 #ifdef __linux__
+#include <GL/glut.h>
 #include "Examples/examples.h"
 #include "Exemplos/Exemplos.h"
 #include "TrabalhoUnidI/TrabalhoUnidI.h"
+#else
+#include <gl/glut.h>
 #endif
 #include "TrabalhoUnidII/TrabalhoUnidII.h"
 
