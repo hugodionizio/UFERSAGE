@@ -61,6 +61,9 @@ FGAPI int FGAPIENTRY Wind;
 Malha m1;
 Face f1;
 
+GLfloat angleMalha, fAspectMalha;
+GLdouble obsX=0, obsY=0, obsZ=200;
+
 void criarMalha(Malha *m, float v1x, float v1y, float v2x, float v2y, float v3x,
 		float v3y) {
 	m->f->v = new int[3];
@@ -95,21 +98,58 @@ void makeMalhaImage(void) {
 }
 
 void inicializarMalha(void) {
-	glClearColor(1.0, 1.0, 1.0, 0.0);
-	glShadeModel(GL_FLAT);
+	GLfloat luzDifusa[4] = { 0.7, 0.7, 0.7, 1.0 };		 // "cor"
+	GLfloat luzEspecular[4] = { 1.0, 1.0, 1.0, 1.0 };		 // "brilho"
+	GLfloat posicaoLuz[4] = { 0.0, 50.0, 50.0, 1.0 };
+
+	// Capacidade de brilho do material
+	GLfloat especularidade[4] = { 1.0, 1.0, 1.0, 1.0 };
+	GLint especMaterial = 60;
+
+	// Especifica que a cor de fundo da janela será preta
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+
+	// Habilita o modelo de colorização de Gouraud
+	//glShadeModel(GL_FLAT);
+	glShadeModel(GL_SMOOTH);
+
+	// Define a refletância do material
+	glMaterialfv(GL_FRONT, GL_SPECULAR, especularidade);
+	// Define a concentração do brilho
+	glMateriali(GL_FRONT, GL_SHININESS, especMaterial);
+
+	// Define os parâmetros da luz de número 0
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, luzDifusa);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, luzEspecular);
+	glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz);
+
+	// Habilita a definição da cor do material a partir da cor corrente
+	glEnable(GL_COLOR_MATERIAL);
+	//Habilita o uso de iluminação
+	glEnable(GL_LIGHTING);
+	// Habilita a luz de número 0
+	glEnable(GL_LIGHT0);
+	// Habilita o depth-buffering
+	glEnable(GL_DEPTH_TEST);
+
+	angleMalha = 45;
 }
 
 void desenharMalha(void) {
-	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(0.0, 0.0, 0.0);
-	glLoadIdentity(); /* clear the matrix */
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glColor3f(1.0, 1.0, 1.0);
+
+	//glLoadIdentity(); /* clear the matrix */
 	/* viewing transformation */
-	gluLookAt(1.0, -1.0, 6.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-	glScalef(0.18, 0.18, 0.18); /* modeling transformation */
+	//gluLookAt(1.0, -1.0, 6.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+
+	// ??
+	//glScalef(0.18, 0.18, 0.18); /* modeling transformation */
 
 	for (int i = 0; i < malhaPly.numFaces; ++i) {
-		glBegin(GL_LINE_LOOP);
-		glColor3f(0.0, 0.0, 0.0);
+		//glBegin(GL_LINE_LOOP);
+		glBegin(GL_TRIANGLES);
+		glColor3f(1.0, 1.0, 1.0);
 		for (int j = 0; j < 3; ++j) {
 			glVertex3f(malhaPly.v[malhaPly.f[i].v[j]].x,
 					malhaPly.v[malhaPly.f[i].v[j]].y,
@@ -118,15 +158,45 @@ void desenharMalha(void) {
 		glEnd();
 	}
 
-	glFlush();
+	//glFlush();
+	glutSwapBuffers();
 }
 
-void redesenharMalha(int w, int h) {
-	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+// Função usada para especificar o volume de visualização
+void EspecificaParametrosVisualizacaoMalha(void) {
+	// Especifica sistema de coordenadas de projeção
 	glMatrixMode(GL_PROJECTION);
+	// Inicializa sistema de coordenadas de projeção
 	glLoadIdentity();
-	glFrustum(-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
+
+	// Especifica a projeção perspectiva
+	gluPerspective(angleMalha, fAspectMalha, 0.4, 500);
+
+	// ??
+	//glFrustum(-1.0, 1.0, -1.0, 1.0, 1.5, 20.0);
+
+	// Especifica sistema de coordenadas do modelo
 	glMatrixMode(GL_MODELVIEW);
+	// Inicializa sistema de coordenadas do modelo
+	glLoadIdentity();
+
+	// Especifica posição do observador e do alvo
+	gluLookAt(0, 80, 200, 0, 0, 0, 0, 1, 0);
+//	gluLookAt(1.0, -1.0, 6.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+}
+
+void redesenharMalha(GLsizei w, GLsizei h) {
+	// Para previnir uma divisão por zero
+	if (h == 0)
+		h = 1;
+
+	// Especifica o tamanho da viewport
+	glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+
+	// Calcula a correção de aspecto
+	fAspectMalha = (GLfloat) w / (GLfloat) h;
+
+	EspecificaParametrosVisualizacaoMalha();
 }
 
 void tecladoMalha(unsigned char key, int x, int y) {
@@ -184,6 +254,76 @@ void tecladoMalha(unsigned char key, int x, int y) {
 		exit(EXIT_SUCCESS);
 		break;
 	}
+	glutPostRedisplay();
+}
+
+// Função callback chamada para gerenciar eventos de teclado
+void GerenciaTeclado(unsigned char key, int x, int y)
+{
+    switch (key) {
+            case 'R':
+            case 'r':// muda a cor corrente para vermelho
+                     glColor3f(1.0f, 0.0f, 0.0f);
+                     break;
+            case 'G':
+            case 'g':// muda a cor corrente para verde
+                     glColor3f(0.0f, 1.0f, 0.0f);
+                     break;
+            case 'B':
+            case 'b':// muda a cor corrente para azul
+                     glColor3f(0.0f, 0.0f, 1.0f);
+                     break;
+            case 'C':
+        	case 'c': //muda a cor do objeto para ciano
+        			 glColor3f(0.0f, 1.0f, 1.0f);
+        			 break;
+        	case 'M':
+        	case 'm':
+        			 glColor3f(1.0f, 0.0f, 1.0f);
+        			 break;
+    }
+    glutPostRedisplay();
+}
+
+void SpecialKeys(int key, int x, int y)
+        {
+		switch (key) {
+			case GLUT_KEY_LEFT :
+							obsX -=10;
+							break;
+			case GLUT_KEY_RIGHT :
+							obsX +=10;
+							break;
+			case GLUT_KEY_UP :
+							obsY +=10;
+							break;
+			case GLUT_KEY_DOWN :
+							obsY -=10;
+							break;
+
+			case GLUT_KEY_HOME :
+							obsZ +=10;
+							break;
+			case GLUT_KEY_END :
+							obsZ -=10;
+							break;
+		}
+		glLoadIdentity();
+		gluLookAt(obsX,obsY,obsZ, 0,0,0, 0,1,0);
+        	glutPostRedisplay();
+}
+
+void GerenciaMouseMalha(int button, int state, int x, int y)
+{
+	if (button == GLUT_LEFT_BUTTON)
+		if (state == GLUT_DOWN) {  // Zoom-in
+			if (angleMalha >= 10) angleMalha -= 5;
+		}
+	if (button == GLUT_RIGHT_BUTTON)
+		if (state == GLUT_DOWN) {  // Zoom-out
+			if (angleMalha <= 130) angleMalha += 5;
+		}
+	EspecificaParametrosVisualizacaoMalha();
 	glutPostRedisplay();
 }
 
@@ -433,6 +573,9 @@ int mainMalha(int argc, char **argv) {
 	glutDisplayFunc(desenharMalha);
 	glutReshapeFunc(redesenharMalha);
 //	glutKeyboardFunc(tecladoMalha);
+	glutKeyboardFunc(GerenciaTeclado);
+	glutMouseFunc(GerenciaMouseMalha);
+	glutSpecialFunc(SpecialKeys);
 	glutMainLoop();
 
 	return 0;
