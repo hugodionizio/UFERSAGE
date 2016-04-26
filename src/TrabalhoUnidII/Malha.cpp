@@ -95,13 +95,13 @@ void makeMalhaImage(void) {
 }
 
 void inicializarMalha(void) {
-	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glClearColor(1.0, 1.0, 1.0, 0.0);
 	glShadeModel(GL_FLAT);
 }
 
 void desenharMalha(void) {
 	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(1.0, 1.0, 1.0);
+	glColor3f(0.0, 0.0, 0.0);
 	glLoadIdentity(); /* clear the matrix */
 	/* viewing transformation */
 	gluLookAt(1.0, -1.0, 6.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
@@ -109,7 +109,7 @@ void desenharMalha(void) {
 
 	for (int i = 0; i < malhaPly.numFaces; ++i) {
 		glBegin(GL_LINE_LOOP);
-		glColor3f(1.0, 1.0, 1.0);
+		glColor3f(0.0, 0.0, 0.0);
 		for (int j = 0; j < 3; ++j) {
 			glVertex3f(malhaPly.v[malhaPly.f[i].v[j]].x,
 					malhaPly.v[malhaPly.f[i].v[j]].y,
