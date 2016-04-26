@@ -11,6 +11,7 @@
 #include <GL/glui.h>
 
 // Diretivas
+#include <cstdlib>
 #include <fstream> // Para a classe de arquivos
 #include <iostream>
 #include <cstring>
@@ -63,17 +64,18 @@ Face f1;
 void criarMalha(Malha *m, float v1x, float v1y, float v2x, float v2y, float v3x,
 		float v3y) {
 	m->f->v = new int[3];
+	vert = new Vertice[3];
 
 	// Ignorar eixo z
 	m->f = new Face[1];
-	m->v[1].x = v1x;
-//	m->f->v[1].y = v1y;
-//
-//	m->f->v2.x = v2x;
-//	m->f->v2.y = v2y;
-//
-//	m->f->v3.x = v3x;
-//	m->f->v3.y = v3y;
+	vert[0].x = v1x;
+	vert[0].y = v1y;
+
+	vert[1].x = v2x;
+	vert[1].y = v2y;
+
+	vert[2].x = v3x;
+	vert[2].y = v3y;
 
 	cout << "Malha criada." << endl;
 }
@@ -109,8 +111,9 @@ void desenharMalha(void) {
 		glBegin(GL_LINE_LOOP);
 		glColor3f(1.0, 1.0, 1.0);
 		for (int j = 0; j < 3; ++j) {
-//			desenhaCubo();
-			glVertex3f(malhaPly.v[malhaPly.f[i].v[j]].x, malhaPly.v[malhaPly.f[i].v[j]].y, malhaPly.v[malhaPly.f[i].v[j]].z);
+			glVertex3f(malhaPly.v[malhaPly.f[i].v[j]].x,
+					malhaPly.v[malhaPly.f[i].v[j]].y,
+					malhaPly.v[malhaPly.f[i].v[j]].z);
 		}
 		glEnd();
 	}
@@ -137,7 +140,7 @@ void tecladoMalha(unsigned char key, int x, int y) {
 		cout << x << endl;
 		x = 1.0f;
 
-//		f1.v1.x = x;
+		vert[0].x = x;
 
 		cout << "Incrementado malha em arquivo .ply..." << endl;
 		fout.write(reinterpret_cast<char *>(&f1), sizeof(Face));
@@ -157,7 +160,7 @@ void tecladoMalha(unsigned char key, int x, int y) {
 	case 'b':
 		x = 0.0f;
 
-//		f1.v1.x = x;
+		vert[0].x = x;
 
 		cout << "Decrementando malha em arquivo .ply..." << endl;
 		fout.write(reinterpret_cast<char *>(&f1), sizeof(Face));
@@ -188,18 +191,61 @@ enum AtributoPly {
 	NONE, VERTEX, FACE
 };
 
-enum VerticeCor {
+enum VerticeCoor {
 	XCOOR = 1, YCOOR, ZCOOR
 };
 
-void imprimirVertice(int numLinhas, int fim_cabecalho) {
+void imprimirVertice(int numLinhas, int fim_cabecalho, int verticeCoor) {
 	if (numLinhas - fim_cabecalho < 10)
-		cout << "P("
-				<< vert[numLinhas - fim_cabecalho - 1].x;
+		if (verticeCoor == XCOOR)
+			cout << "P(" << vert[numLinhas - fim_cabecalho - 1].x << ", ";
+		else if (verticeCoor == YCOOR)
+			cout << vert[numLinhas - fim_cabecalho - 1].y << ", ";
+		else if (verticeCoor == ZCOOR)
+			cout << vert[numLinhas - fim_cabecalho - 1].x << ")" << endl;
 }
 
-void imprimirFace() {
+void imprimirFace(int numLinhas, int fim_cabecalho, int linhaAtual, int numVertices, int faceVertice, int numVertPorFace) {
+	if (numLinhas - fim_cabecalho - numVertices <= 10) {
+		if (linhaAtual != numLinhas) {
+			cout << "F("
+					<< numLinhas - fim_cabecalho
+							- numVertices << ") = (";
+			linhaAtual = numLinhas;
+		}
+		cout
+				<< face[numLinhas
+						- (numVertices + fim_cabecalho) - 1].v[faceVertice
+						- 1];
+		if (faceVertice + 1 <= numVertPorFace)
+			cout << ", ";
+		else
+			cout << ")" << endl;
+	}
+}
 
+bool construirCabecalho(char *pch, int *fim_cabecalho, int *numLinhas,
+		int *verticeCoor, int *atributoPly, int *numVertices, int *numFaces) {
+
+	if (strcmp(pch, "end_header") == 0) {
+		fim_cabecalho = numLinhas;
+		*verticeCoor = XCOOR;
+	} else if (strcmp(pch, "vertex") == 0) {
+		*atributoPly = VERTEX;
+	} else if (strcmp(pch, "face") == 0) {
+		*atributoPly = FACE;
+	} else if (*atributoPly == VERTEX) {
+		*numVertices = atoi(pch);
+		vert = new Vertice[*numVertices];
+		*atributoPly = NONE;
+	} else if (*atributoPly == FACE) {
+		*numFaces = atoi(pch);
+		*atributoPly = NONE;
+		face = new Face[*numFaces];
+	} else
+		return false;
+
+	return true;
 }
 
 void lerArquivo(char *nomeArquivo) {
@@ -213,21 +259,24 @@ void lerArquivo(char *nomeArquivo) {
 	int numVertices = 0, numFaces = 0, numVertPorFace = 0;
 	int verticeCoor = NONE, faceVertice = NONE;
 	int linhaAtual;
-
+	char * pch;
 	ifstream finPly(nomeArquivo); // Cria arquivo para leitura em modo texto
 
 	// Seção de Comandos
+	if (!finPly) {
+		cerr << "Erro ao abrir o arquivo" << endl;
+		exit(EXIT_FAILURE);
+	}
+
 	while (!finPly.eof()) { // Enquanto não terminou o arquivo
 		finPly.getline(buff, MAX);
-		char * pch;
 		pch = strtok(buff, " ,\r\n");
 		while (pch != NULL) {
 			numPalavras++;
-//			cout << pch << endl;
+			// Construção do cabeçalho
 			if (strcmp(pch, "end_header") == 0) {
 				fim_cabecalho = numLinhas;
 				verticeCoor = XCOOR;
-
 			} else if (strcmp(pch, "vertex") == 0) {
 				atributoPly = VERTEX;
 			} else if (strcmp(pch, "face") == 0) {
@@ -240,27 +289,22 @@ void lerArquivo(char *nomeArquivo) {
 				numFaces = atoi(pch);
 				atributoPly = NONE;
 				face = new Face[numFaces];
-			} else if (fim_cabecalho > 0 // Lista e grava vértices na lista de vértices
+			} else
+			//if(!construirCabecalho(pch, &fim_cabecalho, &numLinhas, &verticeCoor, &atributoPly, &numVertices, &numFaces))
+			if (fim_cabecalho > 0 // Lista e grava vértices na lista de vértices
 			&& numLinhas < numVertices + fim_cabecalho + 1) {
 				if (strcmp(pch, "\r") != 0) {
 					if (verticeCoor == XCOOR) {
 						vert[numLinhas - fim_cabecalho - 1].x = atof(pch);
-						if (numLinhas - fim_cabecalho < 10)
-							cout << "P("
-									<< vert[numLinhas - fim_cabecalho - 1].x;
+						imprimirVertice(numLinhas, fim_cabecalho, XCOOR);
 						verticeCoor = YCOOR;
 					} else if (verticeCoor == YCOOR) {
 						vert[numLinhas - fim_cabecalho - 1].y = atof(pch);
-						if (numLinhas - fim_cabecalho < 10)
-							cout << ", "
-									<< vert[numLinhas - fim_cabecalho - 1].y;
+						imprimirVertice(numLinhas, fim_cabecalho, YCOOR);
 						verticeCoor = ZCOOR;
 					} else if (verticeCoor == ZCOOR) {
 						vert[numLinhas - fim_cabecalho - 1].z = atof(pch);
-						if (numLinhas - fim_cabecalho < 10)
-							cout << ", "
-									<< vert[numLinhas - fim_cabecalho - 1].z
-									<< ")" << endl;
+						imprimirVertice(numLinhas, fim_cabecalho, ZCOOR);
 						verticeCoor = XCOOR;
 					}
 				}
@@ -275,7 +319,8 @@ void lerArquivo(char *nomeArquivo) {
 							face[var].v = new int[numVertPorFace];
 						}
 						faceVertice = 1;
-					} else if (faceVertice <= numVertPorFace && faceVertice > 0) {
+					} else if (faceVertice <= numVertPorFace
+							&& faceVertice > 0) {
 						// Atribuir número de vértices para a face local ou atual
 						face[numLinhas - (numVertices + fim_cabecalho) - 1].numVertices =
 								numVertPorFace;
@@ -283,23 +328,7 @@ void lerArquivo(char *nomeArquivo) {
 						// Atribuir a posição do vértice na lista de vértices do arquivo ply
 						face[numLinhas - (numVertices + fim_cabecalho) - 1].v[faceVertice
 								- 1] = atoi(pch);
-
-						if (numLinhas - fim_cabecalho - numVertices <= 10) {
-							if (linhaAtual != numLinhas) {
-								cout << "F("
-										<< numLinhas - fim_cabecalho
-												- numVertices << ") = (";
-								linhaAtual = numLinhas;
-							}
-							cout
-									<< face[numLinhas
-											- (numVertices + fim_cabecalho) - 1].v[faceVertice
-											- 1];
-							if (faceVertice + 1 <= numVertPorFace)
-								cout << ", ";
-							else
-								cout << ")" << endl;
-						}
+						imprimirFace(numLinhas, fim_cabecalho, linhaAtual, numVertices, faceVertice, numVertPorFace);
 
 						if (faceVertice + 1 <= numVertPorFace)
 							faceVertice++;
@@ -310,8 +339,6 @@ void lerArquivo(char *nomeArquivo) {
 				}
 			}
 			numCaracteres += strlen(pch);
-//			if (numLinhas < 10)
-//				cout << "(" << strlen(pch) << " caracteres) " << pch << endl;
 			pch = strtok(NULL, " ");
 		}
 
