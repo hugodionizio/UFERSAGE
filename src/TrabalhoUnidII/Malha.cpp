@@ -62,7 +62,9 @@ Malha m1;
 Face f1;
 
 GLfloat angleMalha, fAspectMalha;
-GLdouble obsX=0, obsY=0, obsZ=200;
+GLdouble obsX = 0, obsY = 0, obsZ = 200;
+static int spinMalha = 0;
+float RMalha, GMalha, BMalha;
 
 void criarMalha(Malha *m, float v1x, float v1y, float v2x, float v2y, float v3x,
 		float v3y) {
@@ -136,20 +138,30 @@ void inicializarMalha(void) {
 }
 
 void desenharMalha(void) {
+	GLfloat position[] = { 0.0, 0.0, 1.5, 1.0 };
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glColor3f(1.0, 1.0, 1.0);
+	glPushMatrix();
+	gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+
+	glPushMatrix();
+	glRotated((GLdouble) spinMalha, 1.0, 0.0, 0.0);
+	glLightfv(GL_LIGHT0, GL_POSITION, position);
+
+	glTranslated(0.0, 0.0, 1.5);
+	glDisable(GL_LIGHTING);
+//	glColor3f(1.0, 1.0, 1.0);
 
 	//glLoadIdentity(); /* clear the matrix */
 	/* viewing transformation */
 	//gluLookAt(1.0, -1.0, 6.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-
 	// ??
 	//glScalef(0.18, 0.18, 0.18); /* modeling transformation */
 
 	for (int i = 0; i < malhaPly.numFaces; ++i) {
 		//glBegin(GL_LINE_LOOP);
 		glBegin(GL_TRIANGLES);
-		glColor3f(1.0, 1.0, 1.0);
+//		glColor3f(1.0, 1.0, 1.0);
 		for (int j = 0; j < 3; ++j) {
 			glVertex3f(malhaPly.v[malhaPly.f[i].v[j]].x,
 					malhaPly.v[malhaPly.f[i].v[j]].y,
@@ -157,7 +169,11 @@ void desenharMalha(void) {
 		}
 		glEnd();
 	}
+	glEnable(GL_LIGHTING);
+	glPopMatrix();
 
+	glutSolidTorus(0.275, 0.85, 8, 15);
+	glPopMatrix();
 	//glFlush();
 	glutSwapBuffers();
 }
@@ -258,70 +274,80 @@ void tecladoMalha(unsigned char key, int x, int y) {
 }
 
 // Função callback chamada para gerenciar eventos de teclado
-void GerenciaTeclado(unsigned char key, int x, int y)
-{
-    switch (key) {
-            case 'R':
-            case 'r':// muda a cor corrente para vermelho
-                     glColor3f(1.0f, 0.0f, 0.0f);
-                     break;
-            case 'G':
-            case 'g':// muda a cor corrente para verde
-                     glColor3f(0.0f, 1.0f, 0.0f);
-                     break;
-            case 'B':
-            case 'b':// muda a cor corrente para azul
-                     glColor3f(0.0f, 0.0f, 1.0f);
-                     break;
-            case 'C':
-        	case 'c': //muda a cor do objeto para ciano
-        			 glColor3f(0.0f, 1.0f, 1.0f);
-        			 break;
-        	case 'M':
-        	case 'm':
-        			 glColor3f(1.0f, 0.0f, 1.0f);
-        			 break;
-    }
-    glutPostRedisplay();
+void GerenciaTeclado(unsigned char key, int x, int y) {
+	switch (key) {
+	case 'R':
+	case 'r':	// muda a cor corrente para vermelho
+		glColor3f(1.0f, 0.0f, 0.0f);
+		break;
+	case 'G':
+	case 'g':	// muda a cor corrente para verde
+		glColor3f(0.0f, 1.0f, 0.0f);
+		break;
+	case 'B':
+	case 'b':	// muda a cor corrente para azul
+		glColor3f(0.0f, 0.0f, 1.0f);
+		break;
+	case 'C':
+	case 'c': //muda a cor do objeto para ciano
+		glColor3f(0.0f, 1.0f, 1.0f);
+		break;
+	case 'M':
+	case 'm':
+		glColor3f(1.0f, 0.0f, 1.0f);
+		break;
+
+	case '+':
+		spinMalha = (spinMalha + 30) % 360;
+		break;
+
+	case '-':
+		spinMalha = (spinMalha - 30) % 360;
+		break;
+
+//	case '':
+//		glColor3f(RMalha, GMalha, BMalha);
+	}
+	glutPostRedisplay();
 }
 
-void SpecialKeys(int key, int x, int y)
-        {
-		switch (key) {
-			case GLUT_KEY_LEFT :
-							obsX -=10;
-							break;
-			case GLUT_KEY_RIGHT :
-							obsX +=10;
-							break;
-			case GLUT_KEY_UP :
-							obsY +=10;
-							break;
-			case GLUT_KEY_DOWN :
-							obsY -=10;
-							break;
+void SpecialKeys(int key, int x, int y) {
+	switch (key) {
+	case GLUT_KEY_LEFT:
+		obsX -= 10;
+		break;
+	case GLUT_KEY_RIGHT:
+		obsX += 10;
+		break;
+	case GLUT_KEY_UP:
+		obsY += 10;
+		break;
+	case GLUT_KEY_DOWN:
+		obsY -= 10;
+		break;
 
-			case GLUT_KEY_HOME :
-							obsZ +=10;
-							break;
-			case GLUT_KEY_END :
-							obsZ -=10;
-							break;
-		}
-		glLoadIdentity();
-		gluLookAt(obsX,obsY,obsZ, 0,0,0, 0,1,0);
-        	glutPostRedisplay();
+	case GLUT_KEY_HOME:
+		obsZ += 10;
+		break;
+	case GLUT_KEY_END:
+		obsZ -= 10;
+		break;
+	}
+	glLoadIdentity();
+	gluLookAt(obsX, obsY, obsZ, 0, 0, 0, 0, 1, 0);
+	glutPostRedisplay();
 }
 
-void GerenciaMouseMalha(int button, int state, int x, int y)
-{
+void GerenciaMouseMalha(int button, int state, int x, int y) {
 	if (button == GLUT_LEFT_BUTTON)
 		if (state == GLUT_DOWN) {  // Zoom-in
-			if (angleMalha >= 10) angleMalha -= 5;
+			if (angleMalha >= 10)
+				angleMalha -= 5;
 		}
 	if (button == GLUT_RIGHT_BUTTON)
 		if (state == GLUT_DOWN) {  // Zoom-out
-			if (angleMalha <= 130) angleMalha += 5;
+			if (angleMalha <= 130)
+				angleMalha += 5;
 		}
 	EspecificaParametrosVisualizacaoMalha();
 	glutPostRedisplay();
@@ -345,17 +371,15 @@ void imprimirVertice(int numLinhas, int fim_cabecalho, int verticeCoor) {
 			cout << vert[numLinhas - fim_cabecalho - 1].x << ")" << endl;
 }
 
-void imprimirFace(int numLinhas, int fim_cabecalho, int linhaAtual, int numVertices, int faceVertice, int numVertPorFace) {
+void imprimirFace(int numLinhas, int fim_cabecalho, int linhaAtual,
+		int numVertices, int faceVertice, int numVertPorFace) {
 	if (numLinhas - fim_cabecalho - numVertices <= 10) {
 		if (linhaAtual != numLinhas) {
-			cout << "F("
-					<< numLinhas - fim_cabecalho
-							- numVertices << ") = (";
+			cout << "F(" << numLinhas - fim_cabecalho - numVertices << ") = (";
 			linhaAtual = numLinhas;
 		}
 		cout
-				<< face[numLinhas
-						- (numVertices + fim_cabecalho) - 1].v[faceVertice
+				<< face[numLinhas - (numVertices + fim_cabecalho) - 1].v[faceVertice
 						- 1];
 		if (faceVertice + 1 <= numVertPorFace)
 			cout << ", ";
@@ -468,7 +492,8 @@ void lerArquivo(char *nomeArquivo) {
 						// Atribuir a posição do vértice na lista de vértices do arquivo ply
 						face[numLinhas - (numVertices + fim_cabecalho) - 1].v[faceVertice
 								- 1] = atoi(pch);
-						imprimirFace(numLinhas, fim_cabecalho, linhaAtual, numVertices, faceVertice, numVertPorFace);
+						imprimirFace(numLinhas, fim_cabecalho, linhaAtual,
+								numVertices, faceVertice, numVertPorFace);
 
 						if (faceVertice + 1 <= numVertPorFace)
 							faceVertice++;
