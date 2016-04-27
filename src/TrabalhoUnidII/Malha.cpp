@@ -64,7 +64,7 @@ Face f1;
 GLfloat angleMalha, fAspectMalha;
 GLdouble obsX = 0, obsY = 0, obsZ = 200;
 static int spinMalha = 0;
-float RMalha, GMalha, BMalha;
+float xPos, yPos, zPos;
 
 void criarMalha(Malha *m, float v1x, float v1y, float v2x, float v2y, float v3x,
 		float v3y) {
@@ -148,8 +148,8 @@ void desenharMalha(void) {
 	glRotated((GLdouble) spinMalha, 1.0, 0.0, 0.0);
 	glLightfv(GL_LIGHT0, GL_POSITION, position);
 
-	glTranslated(0.0, 0.0, 1.5);
-	glDisable(GL_LIGHTING);
+//	glTranslated(0.0, 0.0, 1.5);
+//	glDisable(GL_LIGHTING);
 //	glColor3f(1.0, 1.0, 1.0);
 
 	//glLoadIdentity(); /* clear the matrix */
@@ -172,7 +172,6 @@ void desenharMalha(void) {
 	glEnable(GL_LIGHTING);
 	glPopMatrix();
 
-	glutSolidTorus(0.275, 0.85, 8, 15);
 	glPopMatrix();
 	//glFlush();
 	glutSwapBuffers();
@@ -303,6 +302,36 @@ void GerenciaTeclado(unsigned char key, int x, int y) {
 
 	case '-':
 		spinMalha = (spinMalha - 30) % 360;
+		break;
+
+	case 'a':
+		xPos++;
+		glTranslated(1.0, 0, 0);
+		break;
+
+	case 'A':
+		xPos--;
+		glTranslated(-1.0, 0, 0);
+		break;
+
+	case 's':
+		yPos++;
+		glTranslated(0, 1.0, 0);
+		break;
+
+	case 'S':
+		yPos--;
+		glTranslated(0, -1.0, 0);
+		break;
+
+	case 'd':
+		zPos++;
+		glTranslated(0, 0, 1.0);
+		break;
+
+	case 'D':
+		zPos--;
+		glTranslated(0, 0, -1.0);
 		break;
 
 //	case '':
