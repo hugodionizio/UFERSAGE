@@ -24,173 +24,34 @@
 
 using namespace std;
 
-typedef int (*PFunc)(int, char**); /* O tipo PFunc é ponteiro p/ função void */
-
 int main(int argc, char **argv) {
-	PFunc ptrf[] = {
-#ifdef __linux__
-			// Unidade I
-			//	Exercícios
-			mainAula01, mainMouse,
 
-			//	Exemplo (Professor Leandro Souza)
-			mainExemploCallbacks,
-
-			// Exemplos (Manssour)
-			mainPrimeiroPrograma, mainQuadrado, mainAnima, mainInteracao,
-			mainMenu, mainTeaPot3D, mainIluminacao,
-
-			// Examples (redbook)
-			mainChunkOpenGL, mainHello, mainDouble, mainLines, mainPolys,
-			mainVarray, mainMVArray, mainCube, mainModel, mainClip, mainPlanet,
-			mainRobot, mainUnProject, mainSmooth, mainLight, mainMoveLight,
-			mainMaterial, mainColorMat,
-
-			// Trabalho I - Unidade I
-			// Questão do Quadrado (Questão 2 - Parte 1)
-			mainQuestaoQuadrado,
-
-			// Questão da Rasterização (Questão 1 - Parte 2)
-			mainLinhaSimples, mainLinhaIncremental, mainLinhaBresenham,
-			mainCirculoEquacao, mainCirculoCoordPolar, mainCirculoBresenham,
-			mainParabolaEquacao, mainParabolaIncremental,
-			mainExpoenteIncremental,
-
-			// Questão do Menu (Questão 2 - Parte 2)
-			mainQuestaoMenu,
-
-			// Questão das Transformações (Questão 3 - Parte 2)
-			mainTransformacoes,
-
-			// Questão do Quadrado (Questão 4 - Parte 2)
-			mainProtecaoTela,
-			// Fim da Unidade I
-
-			// Unidade II
-			// Examples (redbook)
-			mainAlpha, mainAlpha3D, mainAARGB, mainAAIndex, mainFog,
-			mainFogIndex, mainPolyOff, mainTorus, mainList, mainStroke,
-			mainDrawf, mainFont, mainImage, mainChecker, mainTexSub, mainMipMap,
-			mainTexBind, mainTexGen,
-			mainStencil, // ???
-			mainDof,
-			// Fim da Unidade II
-
-			// Trabalho 2 - Unidade II
-			mainPly,
-			mainMalha,
-
-			// Unidade III
-			// Examples (redbook)
-			mainTess, mainQuadric, mainBezCurve, mainBezSurf, mainBezMesh,
-			mainTextureSurf, mainSurface, mainPickSquare, mainTrim, mainSelect,
-			mainPickDepth, mainFeedback, // ???
-			// Fim da Unidade III
-
-			// Trabalho 3 - Unidade III
-			mainBezier,
-
-			//	Adicionais
-			mainVortex
-#else
-			mainMalha
-
-			// Trabalho 3 - Unidade III
-			mainBezier,
-#endif
-			};
-
-	char *menu[] = {
-#ifdef __linux__
-			// Unidade I
-			//	Exercícios
-			"Aula01", "Mouse",
-
-			//	Exemplo (Professor Leandro Souza)
-			"ExemploCallbacks",
-
-			// Exemplos (Manssour)
-			"PrimeiroPrograma", "Quadrado", "Anima", "Interacao", "Menu",
-			"TeaPot3D", "Iluminacao",
-
-			// Examples (redbook)
-			"ChunkOpenGL", "Hello", "Double", "Lines", "Polys", "Varray",
-			"MVArray", "Cube", "Model", "Clip", "Planet", "Robot", "UnProject",
-			"Smooth", "Light", "MoveLight", "Material", "ColorMat",
-
-			// Trabalho I - Unidade I
-			// Questão do Quadrado (Questão 2 - Parte 1)
-			"QuestaoQuadrado",
-
-			// Questão da Rasterização (Questão 1 - Parte 2)
-			"LinhaSimples", "LinhaIncremental", "LinhaBresenham",
-			"CirculoEquacao", "CirculoCoordPolar", "CirculoBresenham",
-			"ParabolaEquacao", "ParabolaIncremental", "ExpoenteIncremental",
-
-			// Questão do Menu (Questão 2 - Parte 2)
-			"QuestaoMenu",
-
-			// Questão das Transformações (Questão 3 - Parte 2)
-			"Transformacoes",
-
-			// Questão do Quadrado (Questão 4 - Parte 2)
-			"ProtecaoTela",
-			// Fim da Unidade I
-
-			// Unidade II
-			// Examples (redbook)
-			"Alpha", "Alpha3D", "AARGB", "AAIndex", "Fog", "FogIndex",
-			"PolyOff", "Torus", "List", "Stroke", "Drawf", "Font", "Image",
-			"Checker", "TexSub", "MipMap", "TexBind", "TexGen", "Stencil",
-			"Dof",
-			// Fim da Unidade II
-
-			// Trabalho 2 - Unidade II
-			"Ply",
-#endif
-			"Malha",
+			cout << "Hello World!" << endl;
 
 #ifdef __linux__
-			// Unidade III
-			// Examples (redbook)
-			"Tess", "Quadric", "BezCurve", "BezSurf", "BezMesh", "TextureSurf",
-			"Surface", "PickSquare", "Trim", "Select", "PickDepth", "Feedback",
-			// Fim da Unidade III
-			"Bezier",
-
-			//	Adicionais
-			"Vortex"
-#else
-			"Bezier"
-#endif
-			};
-
-	cout << "Hello World!" << endl;
-
-#ifdef __linux__
-	cout << "Hello Linux!!" << endl;
+			cout << "Hello Linux!!" << endl;
 #endif
 
-	cout << "Hello OpenGL!!!" << endl;
+			cout << "Hello OpenGL!!!" << endl;
 
-	if (argc > 1) {
-		int i;
-		cout << "Executando " << argv[1] << "..." << endl;
-		for (i = 0; i < NUM_IMPLEMENTACOES; ++i) {
-			if (strcmp(argv[1], menu[i]) == 0) {
-				(*ptrf[i])(argc, argv);
-				break;
-			}
-		}
-		if (strcmp(argv[1], "help") == 0) {
-			for (int j = 0; j < NUM_IMPLEMENTACOES; ++j) {
-				cout << menu[j] << "\t";
-			}
-			cout << endl;
-		} else if (i == NUM_IMPLEMENTACOES)
-			cout << "Opção não encontrada." << endl;
-	} else
-		(*ptrf[VORTEX-1])(argc, argv);
+			if (argc > 1) {
+				int i;
+				cout << "Executando " << argv[1] << "..." << endl;
+				for (i = 0; i < NUM_IMPLEMENTACOES; ++i) {
+					if (lerPFunc(i, argc, argv)) {
+						executarPFunc(i, argc, argv);
+						break;
+					}
+				}
+				if (strcmp(argv[1], "help") == 0) {
+					for (int j = 0; j < NUM_IMPLEMENTACOES; ++j) {
+						cout << retornarPFunc(j) << "\t";
+					}
+					cout << endl;
+				} else if (i == NUM_IMPLEMENTACOES)
+				cout << "Opção não encontrada." << endl;
+			} else
+			executarPFunc((VORTEX-1), argc, argv);
 
 #ifdef __linux__
 // Unidade I
@@ -303,5 +164,5 @@ int main(int argc, char **argv) {
 //	mainVortex(argc, argv);
 #endif
 
-	return (0);
-}
+			return (0);
+		}

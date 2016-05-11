@@ -16,4 +16,10 @@ enum Implementacoes {
 	NUM_IMPLEMENTACOES
 };
 
+typedef int (*PFunc)(int, char**); /* O tipo PFunc é ponteiro p/ função void */
+
+void executarPFunc(int, int, char **);
+char *retornarPFunc(int pos);
+bool lerPFunc(int, int, char **);
+
 #endif /* SRC_MAIN_H_ */
