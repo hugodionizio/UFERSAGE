@@ -19,72 +19,12 @@
 #include <gl/glut.h>
 #endif
 #include "TrabalhoUnidII/TrabalhoUnidII.h"
+#include "TrabalhoUnidIII/TrabalhoUnidIII.h"
+#include "Main.h"
 
 using namespace std;
 
-typedef int (*PFunc)(int, char**); /* O tipo PFunc é ponteiro p/fção void */
-
-enum Implementacoes {
-#ifdef __linux__
-	// Unidade I
-	// Exercícios
-	AULA01,
-	MOUSE,
-
-	// Exemplo (Professor Leandro Souza)
-	EXEMPLOCALLBACKS,
-
-	// Exemplos (Manssour)
-	PRIMEIROPROGRAMA,
-	MENU = 7,
-
-	// Examples (redbook)
-
-	// Trabalho I - Unidade I
-	// Questão do Quadrado (Questão 2 - Parte 1)
-	QUESTAOQUADRADO = 28,
-
-	// Questão da Rasterização (Questão 1 - Parte 2)
-	LINHASIMPLES,
-	LINHAINCREMENTAL,
-	LINHABRESENHAM,
-	CIRCULOEQUACAO,
-	CIRCULOCOORDPOLAR,
-	CIRCULOBRESENHAM,
-	PARABOLAEQUACAO,
-	PARABOLAINCREMENTAL,
-	EXPOENTEINCREMENTAL,
-
-	// Questão do Menu (Questão 2 - Parte 2)
-	QUESTAOMENU,
-
-	// Questão das Transformações (Questão 3 - Parte 2)
-	TRANSFORMACOES,
-
-	// Questão do Quadrado (Questão 4 - Parte 2)
-	PROTECAOTELA,
-	// Fim da Unidade I
-
-	// Unidade II
-	// Examples (redbook)
-
-	// Fim da Unidade II
-
-	// Trabalho 2 - Unidade II
-	PLY = 61,
-#endif
-	MALHA,
-
-	// Unidade III
-	// Examples (redbook)
-	// Fim da Unidade III
-
-	// Adicionais
-#ifdef __linux__
-	VORTEX = 75,
-#endif
-	NUM_IMPLEMENTACOES
-};
+typedef int (*PFunc)(int, char**); /* O tipo PFunc é ponteiro p/ função void */
 
 int main(int argc, char **argv) {
 	PFunc ptrf[] = {
@@ -147,10 +87,16 @@ int main(int argc, char **argv) {
 			mainPickDepth, mainFeedback, // ???
 			// Fim da Unidade III
 
+			// Trabalho 3 - Unidade III
+			mainBezier,
+
 			//	Adicionais
 			mainVortex
 #else
 			mainMalha
+
+			// Trabalho 3 - Unidade III
+			mainBezier,
 #endif
 			};
 
@@ -210,9 +156,12 @@ int main(int argc, char **argv) {
 			"Tess", "Quadric", "BezCurve", "BezSurf", "BezMesh", "TextureSurf",
 			"Surface", "PickSquare", "Trim", "Select", "PickDepth", "Feedback",
 			// Fim da Unidade III
+			"Bezier",
 
 			//	Adicionais
 			"Vortex"
+#else
+			"Bezier"
 #endif
 			};
 
@@ -241,7 +190,7 @@ int main(int argc, char **argv) {
 		} else if (i == NUM_IMPLEMENTACOES)
 			cout << "Opção não encontrada." << endl;
 	} else
-		(*ptrf[MALHA])(argc, argv);
+		(*ptrf[VORTEX-1])(argc, argv);
 
 #ifdef __linux__
 // Unidade I

@@ -10,9 +10,9 @@
 
 #include "../Exemplos/Exemplos.h"
 
-enum Example {
+enum Example_I {
 	// Examples (redbook)
-	CHUNKOPENGL = NUM_EXEMPLOS + 1,
+	CHUNKOPENGL = NUM_EXEMPLOS,
 	HELLO,
 	DOUBLE,
 	LINES,
@@ -30,46 +30,7 @@ enum Example {
 	MOVELIGHT,
 	MATERIAL,
 	COLORMAT,
-	EXAMPLES_I,
-
-	// Unidade II
-	ALPHA,
-	ALPHA3D,
-	AARGB,
-	AAINDEX,
-	FOG,
-	FOGINDEX,
-	POLYOFF,
-	TORUS,
-	LIST,
-	STROKE,
-	DRAWF,
-	FONT,
-	IMAGE,
-	CHECKER,
-	TEXSUB,
-	MIPMAP,
-	TEXBIND,
-	TEXGEN,
-	STENCIL,
-	DOF,
-	EXAMPLES_II,
-
-	// Unidade III
-	TESS,
-	QUADRIC,
-	BEZCURVE,
-	BEZSURF,
-	BEZMESH,
-	TEXTURESURF,
-	SURFACE,
-	PICKSQUARE,
-	TRIM,
-	SELECT,
-	PICKDEPTH,
-	FEEDBACK,
-	EXAMPLES_III,
-	NUM_EXAMPLES
+	EXAMPLES_I
 };
 
 // Unidade I

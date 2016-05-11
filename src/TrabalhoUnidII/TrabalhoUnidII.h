@@ -8,10 +8,22 @@
 #ifndef TRABALHOUNIDII_H_
 #define TRABALHOUNIDII_H_
 
-#include "../Examples/examples.h" // Para incrementar MALHA_PLY com NUM_EXAMPLES
+#include "../Examples/examples_II.h" // Para incrementar MALHA_PLY com NUM_EXAMPLES
 
-enum TrabalhoII {
-	MALHA_PLY = NUM_EXAMPLES + 1, NUM_QUESTOES
+enum Trabalho_Unidade_II {
+#ifdef __linux__
+	// Unidade II
+	// Examples (redbook)
+
+	// Fim da Unidade II
+
+	// Trabalho 2 - Unidade II
+	PLY = EXAMPLES_II,
+#endif
+
+	MALHA_PLY,
+	MALHA = MALHA_PLY,
+	FIM_QUESTOES_TRABALHO_II
 };
 
 int mainMalha(int, char **);

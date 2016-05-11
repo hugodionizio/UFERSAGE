@@ -10,19 +10,29 @@
 
 enum Exemplo {
 	// Unidade I
+	// Exercícios
+	AULA01,
+	MOUSE,
+
+	// Exemplo (Professor Leandro Souza)
+	EXEMPLOCALLBACKS,
+
 	// Exemplos (Manssour)
 	PRIMEIRO_PROGRAMA,
+	QUADRADO,
 	ANIMA,
 	INTERACAO,
-	NUM_PRIM_EXEMPLOS,
-	QUADRADO,
-	TRIANGULO,
-	LOSANGO,
-	PRIMITIVAS,
+	MENU,
 	TEAPOT3D,
 	ILUMINACAO,
-	NUM_EXEMPLOS
+	NUM_PRIM_EXEMPLOS,
+	NUM_EXEMPLOS = NUM_PRIM_EXEMPLOS
 };
+
+enum {
+	TRIANGULO, LOSANGO, PENTAGONO, HEXAGONO, PRIMITIVAS
+};
+
 
 // Exercícios
 int mainAula01(int, char**);
